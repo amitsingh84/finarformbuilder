@@ -16,19 +16,14 @@
                 :index="index"
                 :items="newElements"
                 :id="index"
-                :elementId="element.id"
-                @send-data-id="showElementSetting"
+                @show-element-setting="showElementSetting"
               ></form-item-edit>
               <!-- <i class="fa fa-times close" @click="removeAt(index)">Delete</i> -->
             </div>
           </template>
         </draggable>
-        <div v-for="items of newElements" :key="items.id">
-          <div v-if="items.id==newId">
-        <elements-setting v-if="newId" :item="items" :id="newId"/></div>
-        </div>
-        <!-- <div class="element_setting" v-if="showElementSettings">
-          <h4>Element Setting{{ newId }}</h4>
+        <div class="element_setting" v-if="showElementSettings">
+          <h4>Element Setting{{newId}}</h4>
           <div class="Element_setting_option">
             <div class="inputLabel">
               <p>Label</p>
@@ -62,7 +57,7 @@
               >
             </div>
           </div>
-        </div> -->
+        </div>
       </form-block-right>
     </div>
     <form-block-left>
@@ -87,10 +82,7 @@
     </form-block-left>
     <div class="flex justify-between">
       <!-- <json-display class="w-64 mr-1" :value="elements" /> -->
-      
-
       <json-display class="w-64" :value="newElements" />
-      
     </div>
   </div>
 </template>
@@ -98,7 +90,6 @@
 <script>
 import draggable from "vuedraggable";
 import { elements } from "../api/config";
-import ElementsSetting from '../components/ElementsSetting.vue';
 import FormBlockLeft from "../components/FormBlockLeft.vue";
 import FormBlockRight from "../components/FormBlockRight.vue";
 import FormItemEdit from "../components/FormItemEdit.vue";
@@ -110,7 +101,6 @@ export default {
     JsonDisplay,
     FormBlockLeft,
     FormBlockRight,
-    ElementsSetting,
   },
   data() {
     return {
@@ -121,7 +111,7 @@ export default {
       uID: 0,
       elements,
       showElementSettings: false,
-      newId: null,
+      newId:0
     };
   },
   computed: {
@@ -134,59 +124,53 @@ export default {
   },
   methods: {
     showElementSetting(userId) {
-      for (let value of this.newElements) {
-        // console.log("value",value.id);
-        // console.log("value",userId);
-        
-        if (value.id == userId) {
-          this.newId = userId;
-          // console.log(value.id);
-          // this.showElementSettings = !this.showElementSettings;
-          // console.log(this.showElementSettings);
+      for(let value of this.newElements){
+        console.log("value",value.id);
+        this.newId=userId;
+       {if(value.id === userId + 1){
+// console.log("elementId",elementt.id);
+// console.log("userId",userId);
+// console.log(this.showElementSettings);
+this.newId=userId
+  if(this.showElementSettings==true){
+    alert(3)
+    return this.showElementSettings=false
+  }
+  else{
+   console.log(value.id,userId+1);
+   console.log(this.showElementSettings);
+    return this.showElementSettings=true
+  }
+       
         }
-
-        //        {if(value.id === userId){
-        // // console.log("elementId",elementt.id);
-        // // console.log("userId",userId);
-        // // console.log(this.showElementSettings);
-        // this.newId=userId
-        //   if(this.showElementSettings==true){
-        //     alert(3)
-        //     return this.showElementSettings=false
-        //   }
-        //   else{
-        //    console.log(value.id,userId+1);
-        //    console.log(this.showElementSettings);
-        //     return this.showElementSettings=true
-        //   }
-
-        //         }
-        //         else{
-        //           this.showElementSettings=false
-        //         }
-        //         }
+        else{
+          this.showElementSettings=false
+        }
+        }
+       
       }
       // console.log(this.newElements.length)
-      //       this.newElements.find(
-      //         (elementt) =>
-      //         {if(elementt.id === userId + 1){
-      // // console.log("elementId",elementt.id);
-      // // console.log("userId",userId);
-      // // console.log(this.showElementSettings);
-      // this.newId=userId
-      //   if(this.showElementSettings){
-      //     return this.showElementSettings=false
-      //   }
-      //   else{
-      //     return this.showElementSettings=true
-      //   }
-
-      //         }
-      //         else{
-      //           this.showElementSettings=false
-      //         }
-      //         }
-      //       );
+//       this.newElements.find(
+//         (elementt) => 
+//         {if(elementt.id === userId + 1){
+// // console.log("elementId",elementt.id);
+// // console.log("userId",userId);
+// // console.log(this.showElementSettings);
+// this.newId=userId
+//   if(this.showElementSettings){
+//     return this.showElementSettings=false
+//   }
+//   else{
+//     return this.showElementSettings=true
+//   }
+       
+//         }
+//         else{
+//           this.showElementSettings=false
+//         }
+//         }
+//       );
+       
     },
     onClone(item) {
       this.elIndex++;
@@ -199,7 +183,6 @@ export default {
           container: true,
           prefix: item.prefix,
           isRequired: item.isRequired,
-          label:item.label
         };
         //  this.uID=this.elIndex
         //  console.log(this.uID);
@@ -212,7 +195,6 @@ export default {
           container: true,
           prefix: item.prefix,
           isRequired: item.isRequired,
-          label:item.label
         };
       }
       if (item.name == "Email Address") {

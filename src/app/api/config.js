@@ -7,17 +7,18 @@ export const elements = [
     isRequired: false,
     id: 0,
     uID: 0,
-    icon: "../../app/assets/imgs/h.png"
+    icon: "../../app/assets/imgs/h.png",
+    label:"Full Name"
   },
   {
     type: "input",
     name: "name",
     container: true,
-    row: true,
-    items: [],
+    row: true, 
     id: 0, 
     prefix: false,
     isRequired: false,
+    label:"Full Name",
   },
   {
     type: "email",

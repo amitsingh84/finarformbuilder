@@ -5,7 +5,7 @@
         <heading-input />
       </div>
       <div class="edit_option" v-else-if="item.name == 'name'">
-        <name-input :item="item" :id="id" @show-element-setting="showElementSetting"/>
+        <name-input :item="item" :elementId="elementId" @send-data-id="sendDataId"/>
       </div>
       <div class="edit_option" v-else-if="item.name == 'Email Address'">
         <email-input />
@@ -24,7 +24,7 @@ import HeadingInput from "./HeadingInput.vue";
 import NameInput from "./NameInput.vue";
 import NumberInput from "./NumberInput.vue";
 export default {
-  props: ["item", "id"],
+  props: ["item", "elementId"],
 
   name: "FormItemEdit",
   components: { NameInput, HeadingInput, EmailInput, NumberInput },
@@ -32,9 +32,9 @@ export default {
     return {};
   },
   methods: {
-    showElementSetting(){
+    sendDataId(){
       // alert(this.id)
-      this.$emit('show-element-setting',this.id)
+      this.$emit('send-data-id',this.elementId)
        
     }
   },

@@ -1,10 +1,9 @@
 <template>
   <div>
-    <form-block-right>
     <div class="inputNameStyle">
-      <p><label for="">Full Name</label></p>
+      <p><label for="">{{item.label}}</label></p>
       <div class="inputFullNameRow">
-        <select name="selectprfix" id="selecttitle" v-if="prefix">
+        <select name="selectprfix" id="selecttitle" v-if="item.prefix">
           <option value="mr">Mr</option>
           <option value="mrs">Mrs</option>
         </select>
@@ -25,10 +24,9 @@
           class="cursorPointerStyle"
         />
       </div>
-      <div class="showElementSetting" @click="showProperties">click</div>
+      <div class="showElementSetting" @click="showDataId">click</div>
     </div>
-    </form-block-right>
-    <form-block-left>
+
     <!-- <div class="element_setting" v-if="showElementSettings">
       <h4>Element Setting</h4>
       <div class="Element_setting_option">
@@ -62,37 +60,45 @@
         </div>
       </div>
     </div> -->
-    </form-block-left>
   </div>
 </template>
 <script>
-import FormBlockLeft from './FormBlockLeft.vue';
-import FormBlockRight from './FormBlockRight.vue';
-"use Strict";
+"use strict";
 export default {
-  components: { FormBlockLeft,FormBlockRight },
   data() {
     return{
-      prefix: false,
+      // prefix: false,
       items: this.item,
       showElementSettings:false,
     };
   },
-  props: ["item","id"],
+  props: ["item","elementId"],
 
   methods: {
-    showPrefix() {
-      this.prefix = !this.prefix;
-      this.items.prefix = this.prefix;
-    },
-    showProperties(){
-      // alert(this.id)
-      this.$emit('show-element-setting',this.id)
-      // this.showElementSettings=!this.showElementSettings
+    // showPrefix() {
+    //   this.prefix = !this.prefix;
+    //   this.items.prefix = this.prefix;
+    // },
+    showDataId(){
+      this.$emit('send-data-id',this.elementId)
+      console.log(this.elementId);
+      setTimeout(() => {
+        
+        let newtitle=document.getElementById('element_setting')
+        console.log(newtitle);
+        newtitle.classList.add("active");
+      }, 1);
     }
+    // showProperties(){
+    //   // alert(this.id)
+    //   this.$emit('show-element-setting',this.id)
+    //   // this.showElementSettings=!this.showElementSettings
+    // }
   },
+  
   mounted() {
     console.log(this.item);
+    
   },
 };
 </script>
@@ -114,37 +120,39 @@ export default {
 }
 .inputNameStyle {
   border-radius: 7px;
-    border: 1px solid;
-    padding: 10px 30px;
-    cursor: move;
-    position: relative;
-    margin: 10px 0;
-    padding-bottom: 24px;
+  border: 1px solid;
+  padding: 10px 30px;
+  cursor: move;
+  position: relative;
+  margin: 10px 0;
+  padding-bottom: 24px;
 }
 .inputNameStyle p {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 7px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 7px;
 }
 .inputFullNameRow input {
-    height: 35px;
-    padding-left: 10px; 
-    border-radius: 7px;
-    border: 1px solid #000;
-    box-shadow: none;
-    outline: none;
+  height: 35px;
+  padding-left: 10px;
+  border-radius: 7px;
+  border: 1px solid #000;
+  box-shadow: none;
+  outline: none;
 }
-.prefixStyle input,.requiredStyle input {
-   height: 20px;
-   cursor: pointer;
+.prefixStyle input,
+.requiredStyle input {
+  height: 20px;
+  cursor: pointer;
 }
-.prefixStyle input:checked,.requiredStyle input:checked {
-    background-color: #192a6b;
+.prefixStyle input:checked,
+.requiredStyle input:checked {
+  background-color: #192a6b;
 }
 .inputNameStyle .cursorPointerStyle {
   cursor: move;
 }
-select#selecttitle{
+select#selecttitle {
   border-radius: 7px;
   border: 1px solid #000;
   cursor: pointer;
@@ -160,16 +168,16 @@ select#selecttitle{
     color: #fff;
 } */
 .showElementSetting {
-    position: absolute;
-    right: -11px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #000;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    color: #000;
-    cursor: pointer;
+  position: absolute;
+  right: -11px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #000;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  color: #000;
+  cursor: pointer;
 }
 /* .element_setting h4 {
     text-align: center;
@@ -212,6 +220,6 @@ select#selecttitle{
 } */
 
 .inputLablAlign > div button {
-    flex: 1;
+  flex: 1;
 }
 </style>
