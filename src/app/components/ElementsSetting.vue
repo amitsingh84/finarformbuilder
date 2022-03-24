@@ -6,7 +6,11 @@
       <div class="Element_setting_option">
         <div class="inputLabel">
           <p>Label</p>
-          <input type="text" v-model="enterLable" />
+          <input
+            type="text"
+            @input="enterLable"
+            :value="item.label == 'Full Name' ? '' : item.label"
+          />
         </div>
         <div class="inputLablAlign">
           <p>Label Align</p>
@@ -27,7 +31,7 @@
             @click="showPrefix"
             :checked="item.prefix"
           />
-          
+
           <label class="form-check-label" for="prefixStyles">Show Prefix</label>
         </div>
       </div>
@@ -41,23 +45,23 @@ export default {
     return {
       showHideData: false,
       prefix: false,
-      enterLable: "",
-      newItem:this.item
+      newItem: this.item,
     };
   },
   props: ["id", "item"],
-  watch: {
-    enterLable() {
-      
-          this.newItem.label=this.enterLable
-           
-        
-    },
-  },
+  // watch: {
+  //   tt() {
+  //     this.newItem.label = this.enterLable;
+  //   },
+  // },
   methods: {
+    enterLable(e) {
+      this.newItem.label = e.target.value;
+    },
+
     showPrefix() {
-          this.prefix = !this.prefix;
-          this.newItem.prefix = this.prefix;
+      this.prefix = !this.prefix;
+      this.newItem.prefix = this.prefix;
     },
     closeBtn() {
       let title = document.getElementById("element_setting");
