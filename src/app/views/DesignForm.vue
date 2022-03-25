@@ -1,6 +1,11 @@
 <template>
   <div class="designForm">
+     <div class="previewForm"><button @click="showPrview">Preview</button></div>
+
+      <show-all-forms :items="newElements" v-if="showHidePreview" @close-page="pageClose" />
+      <div v-if="!showHidePreview">
     <div class="desingFormBlockRight">
+     
       <form-block-right>
         <draggable
           class="content_block"
@@ -18,6 +23,7 @@
                 :id="index"
                 :elementId="element.id"
                 @send-data-id="showElementSetting"
+                @delete-data-id="deleteElementData"
               ></form-item-edit>
               <!-- <i class="fa fa-times close" @click="removeAt(index)">Delete</i> -->
             </div>
@@ -25,7 +31,7 @@
         </draggable>
         <div v-for="items of newElements" :key="items.id">
           <div v-if="items.id==newId">
-        <elements-setting v-if="newId" :item="items" :id="newId"/></div>
+        <elements-setting :item="items" :id="newId"/></div>
         </div>
         <!-- <div class="element_setting" v-if="showElementSettings">
           <h4>Element Setting{{ newId }}</h4>
@@ -90,7 +96,7 @@
       
 
       <json-display class="w-64" :value="newElements" />
-      
+      </div>
     </div>
   </div>
 </template>
@@ -103,6 +109,7 @@ import FormBlockLeft from "../components/FormBlockLeft.vue";
 import FormBlockRight from "../components/FormBlockRight.vue";
 import FormItemEdit from "../components/FormItemEdit.vue";
 import JsonDisplay from "./JsonDisplay.vue";
+import ShowAllForms from './ShowAllForms.vue';
 export default {
   components: {
     draggable,
@@ -111,6 +118,7 @@ export default {
     FormBlockLeft,
     FormBlockRight,
     ElementsSetting,
+    ShowAllForms,
   },
   data() {
     return {
@@ -122,6 +130,7 @@ export default {
       elements,
       showElementSettings: false,
       newId: null,
+      showHidePreview:false
     };
   },
   computed: {
@@ -133,6 +142,15 @@ export default {
     },
   },
   methods: {
+    showPrview(){
+      if(this.newElements.length >= 1){
+        this.showHidePreview=true
+      }
+      console.log(this.showHidePreview);
+    },
+    pageClose(){
+ this.showHidePreview=false
+    },
     showElementSetting(userId) {
       for (let value of this.newElements) {
         // console.log("value",value.id);
@@ -187,6 +205,19 @@ export default {
       //         }
       //         }
       //       );
+    },
+    deleteElementData(userId){
+
+
+
+ let index = this.newElements.map(x => {
+   console.log(x);
+  return x.id;
+}).indexOf(userId)
+  // console.log(index);
+  this.newElements.splice(index, 1);
+// console.log(this.newElements);
+
     },
     onClone(item) {
       this.elIndex++;

@@ -5,7 +5,7 @@
         <heading-input />
       </div>
       <div class="edit_option" v-else-if="item.name == 'name'">
-        <name-input :item="item" :elementId="elementId" @send-data-id="sendDataId"/>
+        <name-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
       <div class="edit_option" v-else-if="item.name == 'Email Address'">
         <email-input />
@@ -36,6 +36,9 @@ export default {
       // alert(this.id)
       this.$emit('send-data-id',this.elementId)
        
+    },
+    deleteDataId(){
+       this.$emit('delete-data-id',this.elementId)
     }
   },
   
