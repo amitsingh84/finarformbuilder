@@ -33,7 +33,7 @@
               name="last name"
               id="lname"
               placeholder="Last Name"
-               
+                
               class="cursorPointerStyle"
               :required=item.isRequired
             />
