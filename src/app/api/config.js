@@ -1,21 +1,33 @@
 export const elements = [
   {
-    type: "input",
-    name: "heading",
-    container: true,
-    prefix: false,
-    isRequired: false,
-    id: 0,
-    uID: 0,
-    icon: "../../app/assets/imgs/h.png",
-    label:"Full Name"
+      type: "select",
+      isRequired: false,
+      label: "Select",
+      className: "form-control",
+      name: "select",
+      access: false,
+      multiple: false,
+      icon: "../../app/assets/imgs/h.png",
+      defalulValueLabel:'Select',
+      values: [
+        {
+          label: "Option 1",
+          value: "option-1",
+          selected: true
+        },
+        {
+          label: "Option 1",
+          value: "option-1",
+          selected: true
+        },
+        
+      ]
   },
   {
     type: "input",
     name: "name",
     container: true,
     row: true, 
-    id: 0, 
     prefix: false,
     isRequired: false,
     label:"Full Name",
@@ -24,24 +36,21 @@ export const elements = [
     type: "email",
     name: "Email Address",
     container: true,
-    items: [],
-    id: 0,
+    items: [], 
   },
   {
     type: "tel",
     name: "Phone Number",
     container: true,
     row: true,
-    items: [],
-    id: 0,
+    items: [], 
   },
   {
     type: "input",
     name: "Address",
     container: true,
     row: true,
-    items: [],
-    id: 0,
+    items: [], 
   },
 
   {
@@ -49,8 +58,7 @@ export const elements = [
     name: "Label",
     container: true,
     row: true,
-    items: [],
-    id: 0,
+    items: [], 
   },
 
   {
@@ -58,8 +66,7 @@ export const elements = [
     name: "Single Choise",
     container: true,
     row: true,
-    items: [],
-    id: 0,
+    items: [], 
   },
 
   {
@@ -67,8 +74,7 @@ export const elements = [
     name: "Check Box",
     container: true,
     row: true,
-    items: [],
-    id: 0,
+    items: [], 
   },
 
 ]

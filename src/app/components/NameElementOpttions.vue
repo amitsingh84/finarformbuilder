@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div id="element_setting" v-if="id" class="element_setting active">
+   
+    <div id="element_setting" class="element_setting active">
       <button @click="closeBtn">close</button>
       <h4>Element Setting{{ id }}</h4>
       <div class="Element_setting_option">
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-  </div>
+   
 </template>
 <script>
 "use strict";

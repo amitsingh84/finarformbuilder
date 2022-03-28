@@ -1,101 +1,70 @@
 <template>
   <div class="designForm">
-     <div class="previewForm"><button @click="showPrview">Preview</button></div>
+    <div class="previewForm"><button @click="showPrview">Preview</button></div>
 
-      <show-all-forms :items="newElements" v-if="showHidePreview" @close-page="pageClose" />
-      <div v-if="!showHidePreview">
-    <div class="desingFormBlockRight">
-     
-      <form-block-right>
-        <draggable
-          class="content_block"
-          :list="newElements"
-          item-key="id"
-          group="elements"
-          v-bind="dragOptions"
-        >
-          <template #item="{ element, index }">
-            <div>
-              <form-item-edit
-                :item="element"
-                :index="index"
-                :items="newElements"
-                :id="index"
-                :elementId="element.id"
-                @send-data-id="showElementSetting"
-                @delete-data-id="deleteElementData"
-              ></form-item-edit>
-              <!-- <i class="fa fa-times close" @click="removeAt(index)">Delete</i> -->
-            </div>
-          </template>
-        </draggable>
-        <div v-for="items of newElements" :key="items.id">
-          <div v-if="items.id==newId">
-        <elements-setting :item="items" :id="newId"/></div>
-        </div>
-        <!-- <div class="element_setting" v-if="showElementSettings">
-          <h4>Element Setting{{ newId }}</h4>
-          <div class="Element_setting_option">
-            <div class="inputLabel">
-              <p>Label</p>
-              <input type="text" />
-            </div>
-            <div class="inputLablAlign">
-              <p>Label Align</p>
+    <show-all-forms
+      :items="newElements"
+      v-if="showHidePreview"
+      @close-page="pageClose"
+    />
+    <div v-if="!showHidePreview">
+      <div class="desingFormBlockRight">
+        <form-block-right>
+          <draggable
+            class="content_block"
+            :list="newElements"
+            item-key="id"
+            group="elements"
+            v-bind="dragOptions"
+          >
+            <template #item="{ element, index }">
               <div>
-                <button>Left</button><button>Center</button
-                ><button>Right</button>
+                <form-item-edit
+                  :item="element"
+                  :index="index"
+                  :items="newElements"
+                  :id="index"
+                  :elementId="element.id"
+                  @send-data-id="showElementSetting"
+                  @delete-data-id="deleteElementData"
+                ></form-item-edit>
+                <!-- <i class="fa fa-times close" @click="removeAt(index)">Delete</i> -->
               </div>
-            </div>
-
-            <div class="form-check form-switch requiredStyle">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="checkrequired"
-              />
-              <p class="form-check-label" for="checkrequired">Required</p>
-            </div>
-            <div class="form-check form-switch prefixStyle">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="prefixStyles"
-                @click="showPrefix"
-              />
-              <label class="form-check-label" for="prefixStyles"
-                >Show Prefix</label
-              >
+            </template>
+          </draggable>
+          <div v-for="items of newElements" :key="items.id">
+            <div v-if="items.id == newId">
+                <name-element-opttions v-if="items.name == 'name'" :item="items" :id="newId" />
+                <select-element-setting v-if="items.name == 'select'" :item="items" :id="newId"/>
             </div>
           </div>
-        </div> -->
-      </form-block-right>
-    </div>
-    <form-block-left>
-      <div class="designFormBlockElement">
-        <h4>Form Element</h4>
-        <draggable
-          class="dragArea list-group"
-          :list="elements"
-          :group="{ name: 'elements', pull: 'clone', put: false }"
-          item-key="id"
-          :clone="onClone"
-          :sort="false"
-        >
-          <template #item="{ element }">
-            <div class="list-group-item">
-              <span><img src="../../app/assets/imgs/h.png" alt="icon" /></span
-              >{{ element.name }}
-            </div>
-          </template>
-        </draggable>
+        </form-block-right>
       </div>
-    </form-block-left>
-    <div class="flex justify-between">
-      <!-- <json-display class="w-64 mr-1" :value="elements" /> -->
-      
+      <form-block-left>
+        <div class="designFormBlockElement">
+          <h4>Form Element</h4>
+          <draggable
+            class="dragArea list-group"
+            :list="elements"
+            :group="{ name: 'elements', pull: 'clone', put: false }"
+            item-key="id"
+            :clone="onClone"
+            :sort="false"
+          >
+            <template #item="{ element }">
+              <div class="list-group-item">
+                <span><img src="../../app/assets/imgs/h.png" alt="icon" /></span
+                >{{ element.name }}
+              </div>
+            </template>
+          </draggable>
+        </div>
+      </form-block-left>
+      <div class="flex justify-between">
+        <!-- <json-display class="w-64 mr-1" :value="elements" /> -->
 
-      <json-display class="w-64" :value="newElements" />
+        <json-display class="w-64" :value="newElements" />
+        <json-display class="w-64" :value="elements" />
       </div>
     </div>
   </div>
@@ -104,12 +73,14 @@
 <script>
 import draggable from "vuedraggable";
 import { elements } from "../api/config";
-import ElementsSetting from '../components/ElementsSetting.vue';
+// import ElementsSetting from "../components/ElementsSetting.vue";
 import FormBlockLeft from "../components/FormBlockLeft.vue";
 import FormBlockRight from "../components/FormBlockRight.vue";
 import FormItemEdit from "../components/FormItemEdit.vue";
+import NameElementOpttions from "../components/NameElementOpttions.vue";
+import SelectElementSetting from '../components/SelectElementSetting.vue';
 import JsonDisplay from "./JsonDisplay.vue";
-import ShowAllForms from './ShowAllForms.vue';
+import ShowAllForms from "./ShowAllForms.vue";
 export default {
   components: {
     draggable,
@@ -117,8 +88,9 @@ export default {
     JsonDisplay,
     FormBlockLeft,
     FormBlockRight,
-    ElementsSetting,
     ShowAllForms,
+    NameElementOpttions,
+    SelectElementSetting,
   },
   data() {
     return {
@@ -130,7 +102,7 @@ export default {
       elements,
       showElementSettings: false,
       newId: null,
-      showHidePreview:false
+      showHidePreview: false,
     };
   },
   computed: {
@@ -142,20 +114,20 @@ export default {
     },
   },
   methods: {
-    showPrview(){
-      if(this.newElements.length >= 1){
-        this.showHidePreview=true
+    showPrview() {
+      if (this.newElements.length >= 1) {
+        this.showHidePreview = true;
       }
       console.log(this.showHidePreview);
     },
-    pageClose(){
- this.showHidePreview=false
+    pageClose() {
+      this.showHidePreview = false;
     },
     showElementSetting(userId) {
       for (let value of this.newElements) {
         // console.log("value",value.id);
         // console.log("value",userId);
-        
+
         if (value.id == userId) {
           this.newId = userId;
           // console.log(value.id);
@@ -206,44 +178,36 @@ export default {
       //         }
       //       );
     },
-    deleteElementData(userId){
-
-
-
- let index = this.newElements.map(x => {
-   console.log(x);
-  return x.id;
-}).indexOf(userId)
-  // console.log(index);
-  this.newElements.splice(index, 1);
-// console.log(this.newElements);
-
+    deleteElementData(userId) {
+      let index = this.newElements
+        .map((x) => {
+          console.log(x);
+          return x.id;
+        })
+        .indexOf(userId);
+      // console.log(index);
+      this.newElements.splice(index, 1);
+      // console.log(this.newElements);
     },
     onClone(item) {
       this.elIndex++;
       console.log(this.newElements);
-      if (item.name == "heading") {
-        return {
-          type: item.type,
+      if (item.name == "select") {
+        return { 
           name: item.name,
           id: this.elIndex,
-          container: true,
-          prefix: item.prefix,
-          isRequired: item.isRequired,
-          label:item.label
+          label: item.label,
+          values:item.values,
+          defalulValueLabel:item.defalulValueLabel
         };
         //  this.uID=this.elIndex
         //  console.log(this.uID);
         //  this.elements.push(this.uID)
       } else if (item.name == "name") {
         return {
-          type: item.type,
           name: item.name,
           id: this.elIndex,
-          container: true,
-          prefix: item.prefix,
-          isRequired: item.isRequired,
-          label:item.label
+          label: item.label,
         };
       }
       if (item.name == "Email Address") {

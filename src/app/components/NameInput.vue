@@ -69,8 +69,8 @@ export default {
   data() {
     return{
       // prefix: false,
-      items: this.item,
-      showElementSettings:false,
+      // items: this.item,
+      // showElementSettings:false,
     };
   },
   props: ["item","elementId"],

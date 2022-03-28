@@ -1,8 +1,8 @@
 <template>
   <div class="form_edit_">
     <div class="row">
-      <div class="edit_option" v-if="item.name == 'heading'">
-        <heading-input />
+      <div class="edit_option" v-if="item.name == 'select'" >
+        <select-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
       <div class="edit_option" v-else-if="item.name == 'name'">
         <name-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
@@ -20,14 +20,15 @@
 
 <script>
 import EmailInput from "./EmailInput.vue";
-import HeadingInput from "./HeadingInput.vue";
+// import HeadingInput from "./HeadingInput.vue";
 import NameInput from "./NameInput.vue";
 import NumberInput from "./NumberInput.vue";
+import SelectInput from './SelectInput.vue';
 export default {
   props: ["item", "elementId"],
 
   name: "FormItemEdit",
-  components: { NameInput, HeadingInput, EmailInput, NumberInput },
+  components: { NameInput, EmailInput, NumberInput, SelectInput },
   data() {
     return {};
   },
