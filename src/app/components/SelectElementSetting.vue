@@ -92,45 +92,49 @@ export default {
       this.newItem.defalulValueLabel = e.target.value;
     },
     closeBtn() {
+      this.$emit('display-element')
       let title = document.getElementById("element_setting");
       title.classList.remove("active");
-      console.log("title", title);
+      //console.log("title", title);
     },
     // showElementSetting() {
     //   let newtitle = document.getElementById("element_setting");
     //   newtitle.classList.add("active");
-    //   console.log("title", newtitle);
+    //   //console.log("title", newtitle);
     // },
     addOptions() {
-      console.log("add");
-      console.log(this.newItem);
+      //console.log("add");
+      //console.log(this.newItem);
     },
     textToArr(e) {
       this.listArr = e.target.value.split("\n");
-      console.log(this.listArr);
+      //console.log(this.listArr);
       // this.newItem.values[0].label.push(1)
       for (let index = 0; index < this.listArr.length; index++) {
+        if(this.listArr[index]){
+
+          this.newItem.values[index].label = this.listArr[index];
+        }
         // if(this.listArr.hasOwnProperty(index)){
-        //   console.log(1);
+        //   //console.log(1);
         // }
-        this.newItem.values[index].label = "";
         
         // this.newItem.values[index].value = "";
         // this.newItem.values[index].selected = true;
-        // console.log(this.newItem.values[index]);
-        // console.log(this.listArr[index]);
+        // //console.log(this.newItem.values[index]);
+        // //console.log(this.listArr[index]);
 
         // this.newItem.values[index].label.push(this.listArr[index])
 
-        console.log("tt",this.listArr.length);
-        // console.log(this.listArr.values.length);
+        //console.log("tt",this.listArr.length);
+        // //console.log(this.listArr.values.length);
       }
       // this.listArr.map((item,index)=>{
       //   // this.newItem.values[index].selected=item
       //   this.newItem.values[index].label=item
-      //   console.log(this.newItem.values[index]);
-      //   console.log(this.newItem);
-      //   console.log(item,index);
+      //   //console.log(this.newItem.values[index]);
+      //   //console.log(this.newItem);
+      //   //console.log(item,index);
       // }
       // )
     },

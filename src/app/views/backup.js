@@ -125,20 +125,20 @@ export default {
   methods: {
     showElementSetting(userId) {
       for(let value of this.newElements){
-        console.log("value",value.id);
+        //console.log("value",value.id);
         this.newId=userId;
        {if(value.id === userId + 1){
-// console.log("elementId",elementt.id);
-// console.log("userId",userId);
-// console.log(this.showElementSettings);
+// //console.log("elementId",elementt.id);
+// //console.log("userId",userId);
+// //console.log(this.showElementSettings);
 this.newId=userId
   if(this.showElementSettings==true){
     alert(3)
     return this.showElementSettings=false
   }
   else{
-   console.log(value.id,userId+1);
-   console.log(this.showElementSettings);
+   //console.log(value.id,userId+1);
+   //console.log(this.showElementSettings);
     return this.showElementSettings=true
   }
        
@@ -149,13 +149,13 @@ this.newId=userId
         }
        
       }
-      // console.log(this.newElements.length)
+      // //console.log(this.newElements.length)
 //       this.newElements.find(
 //         (elementt) => 
 //         {if(elementt.id === userId + 1){
-// // console.log("elementId",elementt.id);
-// // console.log("userId",userId);
-// // console.log(this.showElementSettings);
+// // //console.log("elementId",elementt.id);
+// // //console.log("userId",userId);
+// // //console.log(this.showElementSettings);
 // this.newId=userId
 //   if(this.showElementSettings){
 //     return this.showElementSettings=false
@@ -174,7 +174,7 @@ this.newId=userId
     },
     onClone(item) {
       this.elIndex++;
-      console.log(this.newElements);
+      //console.log(this.newElements);
       if (item.name == "heading") {
         return {
           type: item.type,
@@ -185,7 +185,7 @@ this.newId=userId
           isRequired: item.isRequired,
         };
         //  this.uID=this.elIndex
-        //  console.log(this.uID);
+        //  //console.log(this.uID);
         //  this.elements.push(this.uID)
       } else if (item.name == "name") {
         return {

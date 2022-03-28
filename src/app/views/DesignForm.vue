@@ -1,6 +1,7 @@
 <template>
   <div class="designForm">
-    <div class="previewForm"><button @click="showPrview">Preview</button></div>
+   
+    
 
     <show-all-forms
       :items="newElements"
@@ -9,8 +10,14 @@
     />
     <div v-if="!showHidePreview">
       <div class="desingFormBlockRight">
+      <div class="previewForm"><button v-if="newElements.length" @click="showPrview">Preview</button></div>
         <form-block-right>
+          
+          <div     sytle="position: relative;"  v-if="!newElements.length">
+          <p class="blankElement">checkDrag your first question here from the left.</p>  
+          </div>
           <draggable
+           
             class="content_block"
             :list="newElements"
             item-key="id"
@@ -18,8 +25,9 @@
             v-bind="dragOptions"
           >
             <template #item="{ element, index }">
-              <div>
+              <div  v-if="newElements.length">
                 <form-item-edit
+
                   :item="element"
                   :index="index"
                   :items="newElements"
@@ -34,8 +42,8 @@
           </draggable>
           <div v-for="items of newElements" :key="items.id">
             <div v-if="items.id == newId">
-                <name-element-opttions v-if="items.name == 'name'" :item="items" :id="newId" />
-                <select-element-setting v-if="items.name == 'select'" :item="items" :id="newId"/>
+                <name-element-opttions @display-element="dispalyElement" v-if="items.name == 'name'" :item="items" :id="newId" />
+                <select-element-setting @display-element="dispalyElement" v-if="items.name == 'select'" :item="items" :id="newId"/>
             </div>
           </div>
         </form-block-right>
@@ -50,6 +58,8 @@
             item-key="id"
             :clone="onClone"
             :sort="false"
+             v-if="newTest"
+             
           >
             <template #item="{ element }">
               <div class="list-group-item">
@@ -77,7 +87,7 @@ import { elements } from "../api/config";
 import FormBlockLeft from "../components/FormBlockLeft.vue";
 import FormBlockRight from "../components/FormBlockRight.vue";
 import FormItemEdit from "../components/FormItemEdit.vue";
-import NameElementOpttions from "../components/NameElementOpttions.vue";
+import NameElementOpttions from "../components/nameElement/NameElementOpttions.vue";
 import SelectElementSetting from '../components/SelectElementSetting.vue';
 import JsonDisplay from "./JsonDisplay.vue";
 import ShowAllForms from "./ShowAllForms.vue";
@@ -103,6 +113,7 @@ export default {
       showElementSettings: false,
       newId: null,
       showHidePreview: false,
+      newTest:true
     };
   },
   computed: {
@@ -118,35 +129,39 @@ export default {
       if (this.newElements.length >= 1) {
         this.showHidePreview = true;
       }
-      console.log(this.showHidePreview);
+      //console.log(this.showHidePreview);
     },
     pageClose() {
       this.showHidePreview = false;
     },
+    dispalyElement(){ 
+this.newTest=true
+    },
     showElementSetting(userId) {
       for (let value of this.newElements) {
-        // console.log("value",value.id);
-        // console.log("value",userId);
+        // //console.log("value",value.id);
+        // //console.log("value",userId);
 
         if (value.id == userId) {
           this.newId = userId;
-          // console.log(value.id);
+          this.newTest=false
+          // //console.log(value.id);
           // this.showElementSettings = !this.showElementSettings;
-          // console.log(this.showElementSettings);
+          // //console.log(this.showElementSettings);
         }
 
         //        {if(value.id === userId){
-        // // console.log("elementId",elementt.id);
-        // // console.log("userId",userId);
-        // // console.log(this.showElementSettings);
+        // // //console.log("elementId",elementt.id);
+        // // //console.log("userId",userId);
+        // // //console.log(this.showElementSettings);
         // this.newId=userId
         //   if(this.showElementSettings==true){
         //     alert(3)
         //     return this.showElementSettings=false
         //   }
         //   else{
-        //    console.log(value.id,userId+1);
-        //    console.log(this.showElementSettings);
+        //    //console.log(value.id,userId+1);
+        //    //console.log(this.showElementSettings);
         //     return this.showElementSettings=true
         //   }
 
@@ -156,13 +171,13 @@ export default {
         //         }
         //         }
       }
-      // console.log(this.newElements.length)
+      // //console.log(this.newElements.length)
       //       this.newElements.find(
       //         (elementt) =>
       //         {if(elementt.id === userId + 1){
-      // // console.log("elementId",elementt.id);
-      // // console.log("userId",userId);
-      // // console.log(this.showElementSettings);
+      // // //console.log("elementId",elementt.id);
+      // // //console.log("userId",userId);
+      // // //console.log(this.showElementSettings);
       // this.newId=userId
       //   if(this.showElementSettings){
       //     return this.showElementSettings=false
@@ -181,17 +196,18 @@ export default {
     deleteElementData(userId) {
       let index = this.newElements
         .map((x) => {
-          console.log(x);
+          //console.log(x);
           return x.id;
         })
         .indexOf(userId);
-      // console.log(index);
+      // //console.log(index);
       this.newElements.splice(index, 1);
-      // console.log(this.newElements);
+      this.newTest=true
+      // //console.log(this.newElements);
     },
     onClone(item) {
       this.elIndex++;
-      console.log(this.newElements);
+      //console.log(this.newElements);
       if (item.name == "select") {
         return { 
           name: item.name,
@@ -201,7 +217,7 @@ export default {
           defalulValueLabel:item.defalulValueLabel
         };
         //  this.uID=this.elIndex
-        //  console.log(this.uID);
+        //  //console.log(this.uID);
         //  this.elements.push(this.uID)
       } else if (item.name == "name") {
         return {
@@ -246,7 +262,7 @@ export default {
   padding: 0;
 }
 .content_block {
-  height: calc(100vh - 178px);
+  height: calc(100vh - 264px);
 }
 .list-group-item img {
   width: 48px;
@@ -316,5 +332,45 @@ export default {
   z-index: 99;
   background: #6868ac;
   color: #fff;
+}
+.desingFormBlockRight {
+    width: 68%;
+    padding: 10px 0 10px 17px;
+}
+.previewForm { 
+    height: 48px;
+}
+.previewForm button {
+    background: #192a6b;
+    border: none;
+    color: #fff;
+    padding: 10px 24px;
+    font-weight: 600;
+    border-radius: 7px;
+}
+/*-------------------not sure css--------------*/
+.creaetNewFormBtn {
+    text-align: center;
+}
+.desingFormBlockRightt::-webkit-scrollbar {
+    display: none;
+}
+.desingFormBlockRightt {
+    border: 1px solid;
+    border-radius: 7px;
+    height: calc(100vh - 233px);
+    padding: 10px;
+    padding-right: 40px;
+    overflow-y: scroll;
+}
+p.blankElement{
+    opacity: .7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 40%;
+    margin: auto;
+    text-align: center;
 }
 </style>

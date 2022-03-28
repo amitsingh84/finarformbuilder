@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="inputNameStyle">
-      <p><label for="">{{item.label}}</label></p>
+      <p :style="!item.align?'text-align:left;': `text-align:${item.align}`">
+        <label >{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
+      </p>
       <div class="inputFullNameRow">
         <select name="selectprfix" id="selecttitle" v-if="item.prefix">
           <option value="mr">Mr</option>
@@ -14,6 +16,7 @@
           id="fname"
           type="text"
           readonly
+          :required=item.isRequired
         />
         <input
           type="text"
@@ -22,88 +25,63 @@
           placeholder="Last Name"
           readonly
           class="cursorPointerStyle"
+          :required=item.isRequired
         />
       </div>
-      <div class="showElementSetting" @click="showDataId">click</div>
-      <div class="showElementSettingg" @click="deleteDataId">delete{{elementId}}</div>
+      <div>
+        <show-delete-setting
+          @delete-data-id="deleteDataId"
+          @send-data-id="showDataId"
+        />
+      </div>
     </div>
 
-    <!-- <div class="element_setting" v-if="showElementSettings">
-      <h4>Element Setting</h4>
-      <div class="Element_setting_option">
-        <div class="inputLabel">
-          <p>Label</p>
-          <input type="text" />
-        </div>
-        <div class="inputLablAlign">
-          <p>Label Align</p>
-          <div>
-
-          <button>Left</button><button>Center</button><button>Right</button>
-          </div>
-        </div>
-
-        <div class="form-check form-switch requiredStyle">
-          <input class="form-check-input" type="checkbox" id="checkrequired" />
-          <p class="form-check-label" for="checkrequired"
-            >Required</p>
-        </div>
-        <div class="form-check form-switch prefixStyle">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="prefixStyles"
-            @click="showPrefix"
-          />
-          <label class="form-check-label" for="prefixStyles"
-            >Show Prefix</label
-          >
-        </div>
-      </div>
-    </div> -->
+  
   </div>
 </template>
 <script>
-"use strict";
+import ShowDeleteSetting from "../ShowDeleteSetting.vue";
+("use strict");
 export default {
+  components: { ShowDeleteSetting },
   data() {
-    return{
+    return {
       // prefix: false,
       // items: this.item,
       // showElementSettings:false,
     };
   },
-  props: ["item","elementId"],
+  props: ["item", "elementId"],
 
   methods: {
     // showPrefix() {
     //   this.prefix = !this.prefix;
     //   this.items.prefix = this.prefix;
     // },
-    deleteDataId(){
-      this.$emit('delete-data-id',this.elementId)
+    deleteDataId() {
+      this.$emit("delete-data-id", this.elementId);
     },
-    showDataId(){
-      this.$emit('send-data-id',this.elementId)
-      console.log(this.elementId);
+    showDataId() {
+      this.$emit("send-data-id", this.elementId);
+      //console.log(this.elementId);
       setTimeout(() => {
-        
-        let newtitle=document.getElementById('element_setting')
-        console.log(newtitle);
+        let newtitle = document.getElementById("element_setting");
+        //console.log(newtitle);
         newtitle.classList.add("active");
       }, 1);
     },
-    
+alignData(){
+  console.log('text-align:left', this.item.align);
+}
     // showProperties(){
     //   // alert(this.id)
     //   this.$emit('show-element-setting',this.id)
     //   // this.showElementSettings=!this.showElementSettings
     // }
   },
-  
+
   mounted() {
-    console.log(this.item);
-    
+    //console.log(this.item);
   },
 };
 </script>
@@ -126,7 +104,7 @@ export default {
 .inputNameStyle {
   border-radius: 7px;
   border: 1px solid;
-  padding: 10px 30px;
+  padding: 10px 30px 10px 10px;
   cursor: move;
   position: relative;
   margin: 10px 0;
@@ -172,7 +150,7 @@ select#selecttitle {
     background: #6868ac;
     color: #fff;
 } */
-.showElementSetting {
+/* .showElementSetting {
   position: absolute;
   right: -11px;
   top: 70%;
@@ -183,18 +161,72 @@ select#selecttitle {
   height: 30px;
   color: #000;
   cursor: pointer;
-}
-.showElementSettingg {
-  position: absolute;
-  right: -11px;
-  top: 40%;
-  transform: translateY(-50%);
-  background: #000;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
+} */
+.showElementSettingg,
+.showElementSetting {
+  /* position: absolute;
+    right: -11px;
+    top: 40%;
+    transform: translateY(-50%);
+    background: #49515a;
+    border-radius: 18px;
+    min-width: 34px;
+    height: 34px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     padding: 0 8px; */
+  align-items: center;
+  background: #49515a;
+  border: 0;
+  border-radius: 18px;
   color: #fff;
+  display: flex;
+  height: 36px;
+  justify-content: center;
+  margin-bottom: 3px;
+  min-width: 36px;
+  padding: 0 8px;
+  white-space: nowrap;
+  /* position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    right: -5%; */
   cursor: pointer;
+}
+
+.showElementSettingg::before,
+.showElementSetting::before {
+  content: "";
+  display: flex;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  filter: invert(1);
+  background-size: contain;
+}
+.showElementSettingg::before {
+  background-image: url(../../../assets/imgs/trash.png);
+}
+.showElementSetting::before {
+  background-image: url(../../../assets/imgs/gear.png);
+}
+.showElementSettingg img,
+.showElementSetting img {
+  width: 18px;
+  filter: invert(1);
+}
+.showElementSettingg span,
+.showElementSetting span {
+  font-size: 10px;
+  /* margin-left: 6px; */
+  display: none;
+}
+.showElementSettingg:hover span,
+.showElementSetting:hover span {
+  /* display: inline-block; */
 }
 /* .element_setting h4 {
     text-align: center;
@@ -238,5 +270,22 @@ select#selecttitle {
 
 .inputLablAlign > div button {
   flex: 1;
+}
+.buttonStyle {
+  background-color: transparent;
+  border-radius: 4px;
+  bottom: auto;
+  box-shadow: none;
+  height: auto;
+  left: auto;
+  min-width: 36px;
+  position: absolute;
+  right: -18px;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: top 0.15s ease, transform 0.15s ease;
+  width: 36px;
+  z-index: 2;
 }
 </style>

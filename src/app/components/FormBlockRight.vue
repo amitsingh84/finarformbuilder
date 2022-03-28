@@ -1,5 +1,5 @@
 <template>
-    <div class="desingFormBlockRight">
+    <div class="desingFormBlockRightt">
         <slot></slot>
     </div>
 </template>
@@ -9,7 +9,5 @@ export default {
 }
 </script>
 <style scoped>
-.desingFormBlockRight {
-    width: 68%;
-}
+
 </style>

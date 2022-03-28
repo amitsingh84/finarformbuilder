@@ -66,12 +66,12 @@ export default {
     closeBtn() {
       let title = document.getElementById("element_setting");
       title.classList.remove("active");
-      console.log("title", title);
+      //console.log("title", title);
     },
     // showElementSetting() {
     //   let newtitle = document.getElementById("element_setting");
     //   newtitle.classList.add("active");
-    //   console.log("title", newtitle);
+    //   //console.log("title", newtitle);
     // },
   },
 };

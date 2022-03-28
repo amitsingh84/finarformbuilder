@@ -21,7 +21,7 @@
 <script>
 import EmailInput from "./EmailInput.vue";
 // import HeadingInput from "./HeadingInput.vue";
-import NameInput from "./NameInput.vue";
+import NameInput from "./nameElement/NameInput.vue";
 import NumberInput from "./NumberInput.vue";
 import SelectInput from './SelectInput.vue';
 export default {
