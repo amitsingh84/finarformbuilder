@@ -46,15 +46,7 @@
             @input="textToArr"
           ></textarea>
           <p v-for="(item, index) in listArr" :key="index">{{ item }}</p>
-          <!-- <p>Value 1</p>
-          <p>
-            <label >Label</label>
-            <input type="text">
-          </p>
-          <p>
-            <label >Value</label>
-            <input type="text">
-          </p> -->
+            
         </div>
       </div>
     </div>
@@ -69,6 +61,11 @@ export default {
       prefix: false,
       newItem: this.item,
       listArr: ["value1"], 
+      listData:{
+        "label": "",
+        "value": "",
+        "selected": true
+      }
     };
   },
 
@@ -78,11 +75,7 @@ export default {
     },
   },
   props: ["id", "item"],
-  // watch: {
-  //   tt() {
-  //     this.newItem.label = this.enterLable;
-  //   },
-  // },
+   
   methods: {
     enterLable(e) {
       this.newItem.label = e.target.value;
@@ -107,13 +100,37 @@ export default {
     },
     textToArr(e) {
       this.listArr = e.target.value.split("\n");
-      console.log(this.listArr);
+      // this.listData = e.target.value.split("\n");
+
+      this.listArr.forEach((item, index)=>{
+        if(item){
+         
+         if(!this.newItem.values[index]){
+
+           this.newItem.values.push(this.listData)
+         }
+         else{
+            this.newItem.values[index].label=this.listArr[index]
+            this.newItem.values[index].value=this.listArr[index]
+         }
+        console.log(index);
+        console.log(this.listArr[index]);
+      }
+       
+      
+      // for (const index,iterator in  this.listArr) {
+      //   // v-for="(line,lineNumber) of stringWithNewlines.split('\n')"
+      //   console.log("test",iterator);
+      //   console.log(index);
+      //   this.newItem.values[0].label = ""
+      // }
+      // console.log(this.listArr);
       // this.newItem.values[0].label.push(1)
-      for (let index = 0; index < this.listArr.length; index++) {
+      // for (let index = 0; index < this.listArr.length; index++) {
         // if(this.listArr.hasOwnProperty(index)){
         //   console.log(1);
         // }
-        this.newItem.values[index].label = "";
+        // this.newItem.values[index].label = "";
         
         // this.newItem.values[index].value = "";
         // this.newItem.values[index].selected = true;
@@ -122,9 +139,9 @@ export default {
 
         // this.newItem.values[index].label.push(this.listArr[index])
 
-        console.log("tt",this.listArr.length);
+        // console.log("tt",this.listArr.length);
         // console.log(this.listArr.values.length);
-      }
+      // }
       // this.listArr.map((item,index)=>{
       //   // this.newItem.values[index].selected=item
       //   this.newItem.values[index].label=item
@@ -133,9 +150,11 @@ export default {
       //   console.log(item,index);
       // }
       // )
-    },
-  },
-};
+    },)
+  }
+  }
+}
+
 </script>
 <style scoped>
 .element_setting h4 {

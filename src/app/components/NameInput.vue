@@ -22,7 +22,7 @@
           placeholder="Last Name"
           readonly
           class="cursorPointerStyle"
-        />
+        /> 
       </div>
       <div class="showElementSetting" @click="showDataId">click</div>
       <div class="showElementSettingg" @click="deleteDataId">delete{{elementId}}</div>
