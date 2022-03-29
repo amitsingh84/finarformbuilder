@@ -1,8 +1,5 @@
 <template>
   <div class="designForm">
-   
-    
-
     <show-all-forms
       :items="newElements"
       v-if="showHidePreview"
@@ -10,14 +7,16 @@
     />
     <div v-if="!showHidePreview">
       <div class="desingFormBlockRight">
-      <div class="previewForm"><button v-if="newElements.length" @click="showPrview">Preview</button></div>
+        <div class="previewForm">
+          <button v-if="newElements.length" @click="showPrview">Preview</button>
+        </div>
         <form-block-right>
-          
-          <div     sytle="position: relative;"  v-if="!newElements.length">
-          <p class="blankElement">checkDrag your first question here from the left.</p>  
+          <div sytle="position: relative;" v-if="!newElements.length">
+            <p class="blankElement">
+              checkDrag your first question here from the left.
+            </p>
           </div>
           <draggable
-           
             class="content_block"
             :list="newElements"
             item-key="id"
@@ -25,9 +24,8 @@
             v-bind="dragOptions"
           >
             <template #item="{ element, index }">
-              <div  v-if="newElements.length">
+              <div v-if="newElements.length">
                 <form-item-edit
-
                   :item="element"
                   :index="index"
                   :items="newElements"
@@ -42,8 +40,48 @@
           </draggable>
           <div v-for="items of newElements" :key="items.id">
             <div v-if="items.id == newId">
-                <name-element-opttions @display-element="dispalyElement" v-if="items.name == 'name'" :item="items" :id="newId" />
-                <select-element-setting @display-element="dispalyElement" v-if="items.name == 'select'" :item="items" :id="newId"/>
+              <name-element-opttions
+                @display-element="dispalyElement"
+                v-if="items.name == 'name'"
+                :item="items"
+                :id="newId"
+              />
+              <select-element-setting
+                @display-element="dispalyElement"
+                v-if="items.name == 'select'"
+                :item="items"
+                :id="newId"
+              />
+              <email-element-opttions
+                @display-element="dispalyElement"
+                v-if="items.name == 'Email Address'"
+                :item="items"
+                :id="newId"
+              />
+              <number-element-options
+                @display-element="dispalyElement"
+                v-if="items.name == 'Phone Number'"
+                :item="items"
+                :id="newId"
+              />
+              <address-element-options
+                @display-element="dispalyElement"
+                v-if="items.name == 'Address'"
+                :item="items"
+                :id="newId"
+              />
+              <heading-element-options
+                @display-element="dispalyElement"
+                v-if="items.name == 'Heading'"
+                :item="items"
+                :id="newId"
+              />
+              <check-box-element-options
+                @display-element="dispalyElement"
+                v-if="items.name == 'Single Box'"
+                :item="items"
+                :id="newId"
+              />
             </div>
           </div>
         </form-block-right>
@@ -58,8 +96,7 @@
             item-key="id"
             :clone="onClone"
             :sort="false"
-             v-if="newTest"
-             
+            v-if="newTest"
           >
             <template #item="{ element }">
               <div class="list-group-item">
@@ -74,7 +111,6 @@
         <!-- <json-display class="w-64 mr-1" :value="elements" /> -->
 
         <json-display class="w-64" :value="newElements" />
-        <json-display class="w-64" :value="elements" />
       </div>
     </div>
   </div>
@@ -88,9 +124,14 @@ import FormBlockLeft from "../components/FormBlockLeft.vue";
 import FormBlockRight from "../components/FormBlockRight.vue";
 import FormItemEdit from "../components/FormItemEdit.vue";
 import NameElementOpttions from "../components/nameElement/NameElementOpttions.vue";
-import SelectElementSetting from '../components/SelectElementSetting.vue';
+import EmailElementOpttions from "../components/emailElement/EmailElementOptions.vue";
+import SelectElementSetting from "../components/SelectElementSetting.vue";
 import JsonDisplay from "./JsonDisplay.vue";
 import ShowAllForms from "./ShowAllForms.vue";
+import NumberElementOptions from '../components/numberElement/NumberElementOptions.vue';
+import AddressElementOptions from '../components/addressElement/AddressElementOptions.vue';
+import HeadingElementOptions from '../components/Heading/HeadingElementOptions.vue';
+import CheckBoxElementOptions from '../components/checkBox/CheckBoxElementOptions.vue';
 export default {
   components: {
     draggable,
@@ -101,6 +142,11 @@ export default {
     ShowAllForms,
     NameElementOpttions,
     SelectElementSetting,
+    EmailElementOpttions,
+    NumberElementOptions,
+    AddressElementOptions,
+    HeadingElementOptions,
+    CheckBoxElementOptions,
   },
   data() {
     return {
@@ -113,7 +159,7 @@ export default {
       showElementSettings: false,
       newId: null,
       showHidePreview: false,
-      newTest:true
+      newTest: true,
     };
   },
   computed: {
@@ -133,65 +179,26 @@ export default {
     },
     pageClose() {
       this.showHidePreview = false;
+      //  this.newTest = false;
+      // setTimeout(() => {
+      //   let newtitle = document.getElementById("element_setting");
+      //   //console.log(newtitle);
+      //   newtitle.classList.remove("active");
+      // }, 1);
     },
-    dispalyElement(){ 
-this.newTest=true
+    dispalyElement() {
+      this.newTest = true;
     },
     showElementSetting(userId) {
       for (let value of this.newElements) {
-        // //console.log("value",value.id);
-        // //console.log("value",userId);
-
+        
         if (value.id == userId) {
           this.newId = userId;
-          this.newTest=false
-          // //console.log(value.id);
-          // this.showElementSettings = !this.showElementSettings;
-          // //console.log(this.showElementSettings);
+          this.newTest = false;
         }
 
-        //        {if(value.id === userId){
-        // // //console.log("elementId",elementt.id);
-        // // //console.log("userId",userId);
-        // // //console.log(this.showElementSettings);
-        // this.newId=userId
-        //   if(this.showElementSettings==true){
-        //     alert(3)
-        //     return this.showElementSettings=false
-        //   }
-        //   else{
-        //    //console.log(value.id,userId+1);
-        //    //console.log(this.showElementSettings);
-        //     return this.showElementSettings=true
-        //   }
-
-        //         }
-        //         else{
-        //           this.showElementSettings=false
-        //         }
-        //         }
+       
       }
-      // //console.log(this.newElements.length)
-      //       this.newElements.find(
-      //         (elementt) =>
-      //         {if(elementt.id === userId + 1){
-      // // //console.log("elementId",elementt.id);
-      // // //console.log("userId",userId);
-      // // //console.log(this.showElementSettings);
-      // this.newId=userId
-      //   if(this.showElementSettings){
-      //     return this.showElementSettings=false
-      //   }
-      //   else{
-      //     return this.showElementSettings=true
-      //   }
-
-      //         }
-      //         else{
-      //           this.showElementSettings=false
-      //         }
-      //         }
-      //       );
     },
     deleteElementData(userId) {
       let index = this.newElements
@@ -202,19 +209,19 @@ this.newTest=true
         .indexOf(userId);
       // //console.log(index);
       this.newElements.splice(index, 1);
-      this.newTest=true
+      this.newTest = true;
       // //console.log(this.newElements);
     },
     onClone(item) {
       this.elIndex++;
       //console.log(this.newElements);
       if (item.name == "select") {
-        return { 
+        return {
           name: item.name,
           id: this.elIndex,
           label: item.label,
-          values:item.values,
-          defalulValueLabel:item.defalulValueLabel
+          values: item.values,
+          defalulValueLabel: item.defalulValueLabel,
         };
         //  this.uID=this.elIndex
         //  //console.log(this.uID);
@@ -234,6 +241,7 @@ this.newTest=true
           container: true,
           prefix: item.prefix,
           isRequired: item.isRequired,
+          label: item.label,
         };
       }
       if (item.name == "Phone Number") {
@@ -244,6 +252,48 @@ this.newTest=true
           container: true,
           prefix: item.prefix,
           isRequired: item.isRequired,
+          label: item.label
+        };
+      }
+       if (item.name == "Address") {
+        return {
+          type: item.type,
+          name: item.name,
+          id: this.elIndex,
+          isRequired: item.isRequired,
+          label: item.label
+        };
+      }
+       if (item.name == "Heading") {
+        return {
+          type: item.type,
+          name: item.name,
+          id: this.elIndex,
+          isRequired: item.isRequired,
+          label: item.label,
+          description:item.description
+        };
+      }
+      if (item.name == "Single Box") {
+        return {
+          type: item.type,
+          name: item.name,
+          id: this.elIndex,
+          isRequired: item.isRequired,
+          label: item.label,
+          values:item.values,
+          isSelected:item.isSelected
+        };
+      }
+      if (item.name == "Multiple Box") {
+        return {
+          type: item.type,
+          name: item.name,
+          id: this.elIndex,
+          isRequired: item.isRequired,
+          label: item.label,
+          values:item.values,
+          isSelected:item.isSelected
         };
       }
     },
@@ -277,6 +327,8 @@ this.newTest=true
 
 .designForm {
   position: relative;
+  overflow-y: scroll;
+    height: calc(100vh - 80px);
 }
 
 /*-------new style----------*/
@@ -334,43 +386,43 @@ this.newTest=true
   color: #fff;
 }
 .desingFormBlockRight {
-    width: 68%;
-    padding: 10px 0 10px 17px;
+  width: 68%;
+  padding: 10px 0 10px 17px;
 }
-.previewForm { 
-    height: 48px;
+.previewForm {
+  height: 48px;
 }
 .previewForm button {
-    background: #192a6b;
-    border: none;
-    color: #fff;
-    padding: 10px 24px;
-    font-weight: 600;
-    border-radius: 7px;
+  background: #192a6b;
+  border: none;
+  color: #fff;
+  padding: 10px 24px;
+  font-weight: 600;
+  border-radius: 7px;
 }
 /*-------------------not sure css--------------*/
 .creaetNewFormBtn {
-    text-align: center;
+  text-align: center;
 }
 .desingFormBlockRightt::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 .desingFormBlockRightt {
-    border: 1px solid;
-    border-radius: 7px;
-    height: calc(100vh - 233px);
-    padding: 10px;
-    padding-right: 40px;
-    overflow-y: scroll;
+  border: 1px solid;
+  border-radius: 7px;
+  height: calc(100vh - 233px);
+  padding: 10px;
+  padding-right: 40px;
+  overflow-y: scroll;
 }
-p.blankElement{
-    opacity: .7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 40%;
-    margin: auto;
-    text-align: center;
+p.blankElement {
+  opacity: 0.7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 40%;
+  margin: auto;
+  text-align: center;
 }
 </style>

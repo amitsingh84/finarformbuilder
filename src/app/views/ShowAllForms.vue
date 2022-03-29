@@ -12,7 +12,7 @@
         <div class="nameForm">
           
           <p class="nameLabel" :style="`text-align:${item.align}`">
-            <label for="">{{ item.label }}</label>
+            <label for="">{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
           </p>
           <div class="inputFullNameRow">
             <select name="selectprfix" id="selecttitle" v-if="item.prefix">
@@ -41,8 +41,86 @@
         </div>
       </div>
       <div v-else-if="item.name == 'heading'">Heading</div>
-      <div v-else-if="item.name == 'Email Address'">email</div>
-      <div v-else>Number</div>
+      <div v-else-if="item.name == 'Email Address'">
+        <div class="emailForm">
+          
+          <p class="nameLabel" :style="`text-align:${item.align}`">
+            <label for="">{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
+          </p>
+          <div class="inputFullNameRow">
+            <select name="selectprfix" id="selecttitle" v-if="item.prefix">
+              <option value="mr">Mr</option>
+              <option value="mrs">Mrs</option>
+            </select>
+            <input
+              class="input cursorPointerStyle"
+              name="first name"
+              placeholder="Enter Email"
+              id="email"
+              type="email"
+              :required=item.isRequired
+            />
+             
+          </div>
+        </div>
+
+      </div>
+      <div v-else-if="item.name == 'Phone Number'">
+         <div class="nameForm">
+          
+          <p class="nameLabel" :style="`text-align:${item.align}`">
+            <label for="">{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
+          </p>
+          <div class="inputFullNameRow">
+             
+            <input
+              class="input cursorPointerStyle"
+              name="Enter Number"
+              placeholder="Enter Number"
+              id="number"
+              type="tel"
+              
+              :required=item.isRequired
+            />
+             
+          </div>
+        </div>
+      </div>
+      <div v-else-if="item.name == 'Address'">
+         <div class="nameForm">
+          
+          <p class="nameLabel" :style="`text-align:${item.align}`">
+            <label for="">{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
+          </p>
+          <div class="inputFullNameRow">
+             <textarea class="input cursorPointerStyle"
+              name="Enter Number"
+              placeholder="Enter Number"
+              id="number"
+              :required=item.isRequired
+               rows="4" 
+               style="width:100%"></textarea>
+           
+             
+          </div>
+        </div>
+      </div>
+      <div v-else-if="item.name == 'Heading'">
+         <div class="nameForm">
+          
+
+
+
+
+
+
+          <div class="nameLabel" :style="`text-align:${item.align}`">
+            <h1 for="">{{ item.label }} <sup v-if="item.isRequired">*</sup></h1>
+          <p>{{item.description}}</p>
+          </div>
+          
+        </div>
+      </div>
     </div>
     <button type="submit">Submit</button>
     </div>
@@ -79,6 +157,11 @@ SubmitData(){
     border: 1px solid;
     margin: 17px;
     border-radius: 7px;
+    overflow-y: scroll;
+    height: calc(100vh - 188px);
+}
+.previewFromBlockStyle::-webkit-scrollbar{
+  width: 0;
 }
 
 p.nameLabel {

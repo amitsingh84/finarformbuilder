@@ -10,7 +10,7 @@
         <input
           type="text"
           @input="enterLable"
-          :value="item.label == 'Full Name' ? '' : item.label"
+          :value="item.label == 'Address' ? '' : item.label"
         />
       </div>
       <div class="inputLablAlign">
@@ -32,16 +32,7 @@
         />
         <p class="form-check-label" for="checkrequired">Required</p>
       </div>
-      <div class="form-check form-switch prefixStyle">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="prefixStyles"
-          @click="showPrefix"
-          :checked="item.prefix"
-        />
-        <label class="form-check-label" for="prefixStyles">Show Prefix</label>
-      </div>
+       
     </div>
   </div>
 </template>

@@ -6,11 +6,11 @@
     <h4>Element Setting{{ id }}</h4>
     <div class="Element_setting_option">
       <div class="inputLabel">
-        <p>Label</p>
+        <p>Heading</p>
         <input
           type="text"
           @input="enterLable"
-          :value="item.label == 'Full Name' ? '' : item.label"
+          :value="item.label == 'Heading' ? '' : item.label"
         />
       </div>
       <div class="inputLablAlign">
@@ -22,26 +22,16 @@
         </div>
       </div>
 
-      <div class="form-check form-switch requiredStyle">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="checkrequired"
-          @click="checkRequired"
-          :checked="item.isRequired"
+      
+      <div class="inputLabel">
+           <p>Description</p>
+         <input
+          type="text"
+          @input="descLable"
+          :value="item.description == 'Description' ? '' : item.description"
         />
-        <p class="form-check-label" for="checkrequired">Required</p>
       </div>
-      <div class="form-check form-switch prefixStyle">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="prefixStyles"
-          @click="showPrefix"
-          :checked="item.prefix"
-        />
-        <label class="form-check-label" for="prefixStyles">Show Prefix</label>
-      </div>
+       
     </div>
   </div>
 </template>
@@ -65,7 +55,9 @@ export default {
     enterLable(e) {
       this.newItem.label = e.target.value;
     },
- 
+ descLable(e){
+this.newItem.description=e.target.value
+ },
     showPrefix() {
       // this.prefix = !this.prefix;
       this.newItem.prefix = !this.newItem.prefix;

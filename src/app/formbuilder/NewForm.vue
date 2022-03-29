@@ -47,7 +47,7 @@ export default {
 .blockSide{
   margin-left: 13rem;
     height: calc(100vh - 80px);
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 .topHeader{
   background-color: #192a6b;
@@ -57,7 +57,7 @@ export default {
     color: #fff;
     position: sticky;
     top: 0;
-    z-index: 9999;
+    z-index: 0;
 }
 .creaetNewFormBtn button {
     background: transparent;
@@ -68,9 +68,13 @@ export default {
 .creaetNewFormBtn { 
     text-align: center;
     background: #192a6b;
+    transform: translateY(-44px);
+    z-index: 999;
+    height: 0;
 }
 .creaetNewFormBtn button.active {
     background: #a9a9cf;
     color: #192a6b;
+    
 }
 </style>

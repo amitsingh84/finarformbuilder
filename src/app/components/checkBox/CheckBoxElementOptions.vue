@@ -10,19 +10,20 @@
         <input
           type="text"
           @input="enterLable"
-          :value="item.label == 'Full Name' ? '' : item.label"
+          :value="item.label == 'radio' ? '' : item.label"
         />
       </div>
-      <div class="inputLablAlign">
+      <!-- <div class="inputLablAlign">
         <p>Label Align</p>
         <div>
           <button @click="checkAlign" value="left">Left</button
           ><button @click="checkAlign" value="center">Center</button
           ><button value="right" @click="checkAlign">Right</button>
         </div>
-      </div>
+      </div> -->
 
       <div class="form-check form-switch requiredStyle">
+          
         <input
           class="form-check-input"
           type="checkbox"
@@ -32,16 +33,21 @@
         />
         <p class="form-check-label" for="checkrequired">Required</p>
       </div>
-      <div class="form-check form-switch prefixStyle">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="prefixStyles"
-          @click="showPrefix"
-          :checked="item.prefix"
-        />
-        <label class="form-check-label" for="prefixStyles">Show Prefix</label>
-      </div>
+       <!-- <textarea 
+            @input="enterText"
+            :value="arrToText"
+          ></textarea> -->
+          <div class="inputLablAlign">
+              <p>Edit Check Box</p>
+              <button @click="addFeild"> Add</button>
+              {{newItem.values}}
+              <div v-for="(item,index) in newItem.values" :key="item">
+              <!-- <input type="text" @input="textInput" :value="item"/>  -->
+              <input type="text" @input="textInput" :name="item[index]" :value="item"/> 
+          </div>
+
+          </div>
+           
     </div>
   </div>
 </template>
@@ -53,6 +59,7 @@ export default {
       showHideData: false,
       prefix: false,
       newItem: this.item,
+      test:'',
     };
   },
   props: ["id", "item"],
@@ -61,11 +68,47 @@ export default {
   //     this.newItem.label = this.enterLable;
   //   },
   // },
+  computed:{
+    //   arrToText() {
+    //       console.log(this.test.join("\n"));
+    //   return this.test.join("\n");
+    // },
+  },
   methods: {
+      textInput(e){
+        //   this.test=e.target.value;
+          console.log(e.target);
+      },
+      addFeild(){
+          this.newItem.values.push(this.test)
+      },
     enterLable(e) {
       this.newItem.label = e.target.value;
     },
- 
+//  enterText(e){
+//      this.test=e.target.value.split("\n")
+//      this.newItem.values.forEach((item, index)=>{
+//         if(item){
+//          this.newItem.values[index]=item;
+//          this.newItem.values.push(this.test)
+//         //  if()
+          
+//         //  if(!this.newItem.values[index]){
+//         //    this.newItem.values.push(this.test)
+//         //  }
+//         //  else{
+//         //     this.newItem.values[index]=this.test[index]
+//         //     // this.newItem.values[index].value=this.listArr[index]
+//         //  }
+//         // console.log(index);
+//         // console.log(this.test[index]);
+//       }
+//       else{
+//           this.newItem.values[index]=""
+//       }
+//      console.log(this.newItem)
+//  })
+//  },
     showPrefix() {
       // this.prefix = !this.prefix;
       this.newItem.prefix = !this.newItem.prefix;

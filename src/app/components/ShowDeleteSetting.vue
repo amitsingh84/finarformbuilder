@@ -17,8 +17,8 @@ export default {
       this.$emit('delete-data-id',this.elementId)
     },
     showDataId(){
+      console.log(this.elementId);
       this.$emit('send-data-id',this.elementId)
-    //   //console.log(this.elementId);
       setTimeout(() => {
         
         let newtitle=document.getElementById('element_setting')

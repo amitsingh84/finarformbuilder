@@ -10,7 +10,7 @@
         <input
           type="text"
           @input="enterLable"
-          :value="item.label == 'Full Name' ? '' : item.label"
+          :value="item.label == 'Phone Number' ? '' : item.label"
         />
       </div>
       <div class="inputLablAlign">
