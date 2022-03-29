@@ -37,44 +37,51 @@ export const elements = [
     name: "Email Address",
     container: true,
     items: [], 
+    label:"Email Address",
   },
   {
     type: "tel",
     name: "Phone Number",
     container: true,
     row: true,
-    items: [], 
+    label:"Phone Number"
   },
   {
-    type: "input",
+    type: "textarea",
     name: "Address",
     container: true,
     row: true,
-    items: [], 
+    label:"Address"
   },
 
   {
-    type: "row",
-    name: "Label",
-    container: true,
-    row: true,
-    items: [], 
+    type: "input",
+    name: "Heading", 
+    label:"Heading",
+    description:"Description"
   },
 
   {
-    type: "row",
-    name: "Single Choise",
-    container: true,
-    row: true,
-    items: [], 
+    type: "radio",
+    name: "Single Box",
+     label:"radio",
+     values:[
+        'Male',
+        'Female'
+      ]
   },
 
   {
-    type: "row",
-    name: "Check Box",
-    container: true,
-    row: true,
-    items: [], 
+    type: "checkbox",
+    name: "Multiple Box",
+     lable:"checkbox",
+     values:[
+       'one',
+       'two',
+       'three',
+       'four'
+
+     ]
   },
 
 ]
