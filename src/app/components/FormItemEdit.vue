@@ -8,10 +8,19 @@
         <name-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
       <div class="edit_option" v-else-if="item.name == 'Email Address'">
-        <email-input />
+        <email-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
       <div class="edit_option" v-else-if="item.name == 'Phone Number'">
-        <number-input />
+        <number-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
+      </div>
+       <div class="edit_option" v-else-if="item.name == 'Address'">
+        <address-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
+      </div>
+       <div class="edit_option" v-else-if="item.name == 'Heading'">
+        <heading-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
+      </div>
+       <div class="edit_option" v-else-if="item.name == 'Single Box'">
+        <check-box-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
       <div v-else><p>not input</p></div>
     </div>
@@ -19,16 +28,19 @@
 </template>
 
 <script>
-import EmailInput from "./EmailInput.vue";
+import AddressInput from './addressElement/AddressInput.vue';
+import CheckBoxInput from './checkBox/CheckBoxInput.vue';
+import EmailInput from './emailElement/EmailInput.vue';
+import HeadingInput from './Heading/HeadingInput.vue';
 // import HeadingInput from "./HeadingInput.vue";
 import NameInput from "./nameElement/NameInput.vue";
-import NumberInput from "./NumberInput.vue";
+import NumberInput from './numberElement/NumberInput.vue';
 import SelectInput from './SelectInput.vue';
 export default {
   props: ["item", "elementId"],
 
   name: "FormItemEdit",
-  components: { NameInput, EmailInput, NumberInput, SelectInput },
+  components: { NameInput,   SelectInput, EmailInput, NumberInput, AddressInput, HeadingInput, CheckBoxInput },
   data() {
     return {};
   },
