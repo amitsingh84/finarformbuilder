@@ -23,7 +23,7 @@ export default {
         
         let newtitle=document.getElementById('element_setting')
         //console.log(newtitle);
-        newtitle.classList.add("active");
+       newtitle.classList.add("active");
       }, 1);
     },
   },

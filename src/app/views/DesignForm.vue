@@ -125,7 +125,7 @@ import FormBlockRight from "../components/FormBlockRight.vue";
 import FormItemEdit from "../components/FormItemEdit.vue";
 import NameElementOpttions from "../components/nameElement/NameElementOpttions.vue";
 import EmailElementOpttions from "../components/emailElement/EmailElementOptions.vue";
-import SelectElementSetting from "../components/SelectElementSetting.vue";
+import SelectElementSetting from "../components/selectElement/SelectElementSetting.vue";
 import JsonDisplay from "./JsonDisplay.vue";
 import ShowAllForms from "./ShowAllForms.vue";
 import NumberElementOptions from '../components/numberElement/NumberElementOptions.vue';
@@ -179,6 +179,15 @@ export default {
     },
     pageClose() {
       this.showHidePreview = false;
+       this.newTest = true;
+      
+      // setTimeout(() => {
+        
+      //  let title = document.getElementById("element_setting");
+      // title.classList.remove("active");
+     
+      // }, 1);
+      
       //  this.newTest = false;
       // setTimeout(() => {
       //   let newtitle = document.getElementById("element_setting");

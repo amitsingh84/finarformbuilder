@@ -4,15 +4,18 @@
       <label>{{ item.label }}</label>
 
       <select class="form-select" aria-label="Default select example">
-        <option selected>
+        <option selected >
           {{
             item.defalulValueLabel == "Select"
               ? "Select"
               : item.defalulValueLabel
           }}
         </option>
-        <option v-for="item of item.values" :key="item.value" value="1">
-          {{ item.label }}
+        <option v-for="(itemm,index) in item.values" :key="index" value="1" :hidden="item.defalulValueLabel==itemm.value">
+          
+
+           {{itemm.value }}
+          
         </option>
       </select>
       <div>
@@ -26,7 +29,7 @@
 </template>
 
 <script>
-import ShowDeleteSetting from './ShowDeleteSetting.vue';
+import ShowDeleteSetting from '../ShowDeleteSetting.vue';
 "use strict";
 
 // import ShowDeleteSetting from './ShowDeleteSetting.vue';

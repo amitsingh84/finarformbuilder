@@ -33,17 +33,14 @@
         />
         <p class="form-check-label" for="checkrequired">Required</p>
       </div>
-       <!-- <textarea 
-            @input="enterText"
-            :value="arrToText"
-          ></textarea> -->
+       
           <div class="inputLablAlign">
               <p>Edit Check Box</p>
               <button @click="addFeild"> Add</button>
-              {{newItem.values}}
-              <div v-for="(item,index) in newItem.values" :key="item">
-              <!-- <input type="text" @input="textInput" :value="item"/>  -->
-              <input type="text" @input="textInput" :name="item[index]" :value="item"/> 
+              
+              <div v-for="(item,index) in newItem.values" :key="index">
+              <!-- <input type="text" @input="inputData" :index="index" :value="item"/>  -->
+              <input type="text" v-model="this.newItem.values[index]" :name="item" /> 
           </div>
 
           </div>
@@ -60,59 +57,21 @@ export default {
       prefix: false,
       newItem: this.item,
       test:'',
+      
+       
     };
   },
   props: ["id", "item"],
-  // watch: {
-  //   tt() {
-  //     this.newItem.label = this.enterLable;
-  //   },
-  // },
-  computed:{
-    //   arrToText() {
-    //       console.log(this.test.join("\n"));
-    //   return this.test.join("\n");
-    // },
-  },
+   
   methods: {
-      textInput(e){
-        //   this.test=e.target.value;
-          console.log(e.target);
-      },
       addFeild(){
           this.newItem.values.push(this.test)
       },
     enterLable(e) {
       this.newItem.label = e.target.value;
     },
-//  enterText(e){
-//      this.test=e.target.value.split("\n")
-//      this.newItem.values.forEach((item, index)=>{
-//         if(item){
-//          this.newItem.values[index]=item;
-//          this.newItem.values.push(this.test)
-//         //  if()
-          
-//         //  if(!this.newItem.values[index]){
-//         //    this.newItem.values.push(this.test)
-//         //  }
-//         //  else{
-//         //     this.newItem.values[index]=this.test[index]
-//         //     // this.newItem.values[index].value=this.listArr[index]
-//         //  }
-//         // console.log(index);
-//         // console.log(this.test[index]);
-//       }
-//       else{
-//           this.newItem.values[index]=""
-//       }
-//      console.log(this.newItem)
-//  })
-//  },
-    showPrefix() {
-      // this.prefix = !this.prefix;
-      this.newItem.prefix = !this.newItem.prefix;
-    },
+//  
+     
     closeBtn() {
       this.$emit("display-element");
       let title = document.getElementById("element_setting");
@@ -122,11 +81,7 @@ export default {
     checkRequired() {
       this.newItem.isRequired = !this.newItem.isRequired;
     },
-    // showElementSetting() {
-    //   let newtitle = document.getElementById("element_setting");
-    //   newtitle.classList.add("active");
-    //   //console.log("title", newtitle);
-    // },
+     
     checkAlign(e) {
       console.log(e);
       console.log(this.newItem);

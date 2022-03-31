@@ -121,6 +121,30 @@
           
         </div>
       </div>
+       <div v-else-if="item.name == 'select'">
+         <div class="nameForm">
+          
+          <p class="nameLabel" :style="`text-align:${item.align}`">
+            <label for="">{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
+          </p>
+          <div >
+            <select >
+<option selected >
+          {{
+            item.defalulValueLabel == "Select"
+              ? "Select"
+              : item.defalulValueLabel
+          }}
+        </option>
+            <option v-for="(itemm,index) in item.values" :key="index" value="1" :hidden="item.defalulValueLabel==itemm.value">
+           {{itemm.value }}
+          </option>
+            </select>
+           
+             
+          </div>
+        </div>
+      </div>
     </div>
     <button type="submit">Submit</button>
     </div>

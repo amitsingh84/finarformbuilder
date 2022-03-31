@@ -35,7 +35,7 @@ import HeadingInput from './Heading/HeadingInput.vue';
 // import HeadingInput from "./HeadingInput.vue";
 import NameInput from "./nameElement/NameInput.vue";
 import NumberInput from './numberElement/NumberInput.vue';
-import SelectInput from './SelectInput.vue';
+import SelectInput from './selectElement/SelectInput.vue';
 export default {
   props: ["item", "elementId"],
 

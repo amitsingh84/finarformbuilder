@@ -13,12 +13,12 @@ export const elements = [
         {
           label: "Option 1",
           value: "option-1",
-          selected: true
+         isDefault:false
         },
         {
           label: "Option 1",
           value: "option-1",
-          selected: true
+         isDefault:false
         },
         
       ]

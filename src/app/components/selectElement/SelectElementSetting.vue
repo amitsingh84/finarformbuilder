@@ -29,32 +29,28 @@
           name="selectdefaul"
           @input="enterDefalutLable"
           :value="
-            item.defalulValueLabel == 'Select' ? '' : item.defalulValueLabel
+            item.defalulValueLabel == 'Select' ? 'Select' : item.defalulValueLabel
           "
         />
+        
       </div>
       <div>
-        <p>Value</p>
+        <p>Add place holder</p>
+        <input type="checkbox" name="checkDefault" :checked="needDefault" @click="CheckIfWantDefault">
+      </div>
+      <div>
+        <p>Ned Defalut</p>
         <button @click="addOptions">Add</button>
         <div>
-          <textarea
-            name="textarea"
-            id=""
-            cols="30"
-            rows="4"
-            :value="arrToText"
-            @input="textToArr"
-          ></textarea>
-          <p v-for="(item, index) in listArr" :key="index">{{ item }}</p>
-          <!-- <p>Value 1</p>
-          <p>
-            <label >Label</label>
-            <input type="text">
-          </p>
-          <p>
-            <label >Value</label>
-            <input type="text">
-          </p> -->
+          <p>Value</p>
+           <div v-for="(item,index) in newItem.values" :key="index">
+              <!-- <input type="text" @input="inputData" :index="index" :value="item"/>  -->
+              <input type="text" v-model="this.newItem.values[index].value" :name="item" /> 
+              <button @click="deleteItem(index)">delete{{index}}</button>
+              
+              <input v-if="needDefault" type="radio" name="default" @click="isDataDefault(item,index)" :checked="item.value==newItem.defalulValueLabel">
+          </div>
+          
         </div>
       </div>
     </div>
@@ -67,8 +63,12 @@ export default {
     return {
       showHideData: false,
       prefix: false,
-      newItem: this.item,
-      listArr: ["value1"], 
+      newItem: this.item, 
+      needDefault:true,
+      test:{ 
+        value:"",
+        isDefault:false
+      }
     };
   },
 
@@ -84,6 +84,35 @@ export default {
   //   },
   // },
   methods: {
+    CheckIfWantDefault(){
+      this.needDefault=!this.needDefault
+      if(this.needDefault==false){
+        this.newItem.defalulValueLabel="select"
+      }
+    },
+    isDataDefault(t,i){
+      this.newItem.defalulValueLabel=t.value
+      console.log(t,i);
+
+      // for (const valueData of this.newItem.values) {
+        
+
+      //     if(this.newItem.values[i].value==valueData.value){
+      //       this.newItem.values[i].isDefault=true
+      //      console.log(valueData);   
+      //     }
+      //     else{
+      //       valueData.isDefault=false
+      //     }
+        
+      //   // else{
+      //   //   this.newItem.values[i].isDefault=false
+      //   // }
+      // }
+    },
+    deleteItem(i){
+      this.newItem.values.splice(i,1)
+    },
     enterLable(e) {
       this.newItem.label = e.target.value;
     },
@@ -97,47 +126,16 @@ export default {
       title.classList.remove("active");
       //console.log("title", title);
     },
-    // showElementSetting() {
-    //   let newtitle = document.getElementById("element_setting");
-    //   newtitle.classList.add("active");
-    //   //console.log("title", newtitle);
-    // },
+    
     addOptions() {
-      //console.log("add");
-      //console.log(this.newItem);
-    },
-    textToArr(e) {
-      this.listArr = e.target.value.split("\n");
-      //console.log(this.listArr);
-      // this.newItem.values[0].label.push(1)
-      for (let index = 0; index < this.listArr.length; index++) {
-        if(this.listArr[index]){
-
-          this.newItem.values[index].label = this.listArr[index];
-        }
-        // if(this.listArr.hasOwnProperty(index)){
-        //   //console.log(1);
-        // }
-        
-        // this.newItem.values[index].value = "";
-        // this.newItem.values[index].selected = true;
-        // //console.log(this.newItem.values[index]);
-        // //console.log(this.listArr[index]);
-
-        // this.newItem.values[index].label.push(this.listArr[index])
-
-        //console.log("tt",this.listArr.length);
-        // //console.log(this.listArr.values.length);
+       
+      this.newItem.values.push(this.test)
+      this.test={ 
+        value:"",
+        isDefault:false
       }
-      // this.listArr.map((item,index)=>{
-      //   // this.newItem.values[index].selected=item
-      //   this.newItem.values[index].label=item
-      //   //console.log(this.newItem.values[index]);
-      //   //console.log(this.newItem);
-      //   //console.log(item,index);
-      // }
-      // )
     },
+     
   },
 };
 </script>
