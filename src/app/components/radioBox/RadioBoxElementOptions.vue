@@ -10,7 +10,7 @@
         <input
           type="text"
           @input="enterLable"
-          :value="item.label == 'radio' ? '' : item.label"
+          :value="item.label == 'checkbox' ? '' : item.label"
         />
       </div>
       <!-- <div class="inputLablAlign">
@@ -23,6 +23,7 @@
       </div> -->
 
       <div class="form-check form-switch requiredStyle">
+          
         <input
           class="form-check-input"
           type="checkbox"
@@ -32,21 +33,18 @@
         />
         <p class="form-check-label" for="checkrequired">Required</p>
       </div>
+       
+          <div class="inputLablAlign">
+              <p>Edit Check Box</p>
+              <button @click="addFeild"> Add</button>
+              
+              <div v-for="(item,index) in newItem.values" :key="index">
+              <!-- <input type="text" @input="inputData" :index="index" :value="item"/>  -->
+              <input type="text" v-model="this.newItem.values[index]" :name="item" /> 
+          </div>
 
-      <div class="inputLablAlign">
-        <p>Edit Check Box</p>
-        <button @click="addFeild">Add</button>
-
-        <div v-for="(item, index) in newItem.values" :key="index">
-          <!-- <input type="text" @input="inputData" :index="index" :value="item"/>  -->
-          <input
-            type="text"
-            v-model="this.newItem.values[index]"
-            :name="item"
-          />
-          <button @click="closeProp(item, index)">close</button>
-        </div>
-      </div>
+          </div>
+           
     </div>
   </div>
 </template>
@@ -58,23 +56,22 @@ export default {
       showHideData: false,
       prefix: false,
       newItem: this.item,
-      test: "",
+      test:'',
+      
+       
     };
   },
   props: ["id", "item"],
-
+   
   methods: {
-    addFeild() {
-      this.newItem.values.push(this.test);
-    },
+      addFeild(){
+          this.newItem.values.push(this.test)
+      },
     enterLable(e) {
       this.newItem.label = e.target.value;
     },
-    //
-    closeProp(item, i) {
-      console.log(item, i);
-      this.newItem.values.splice(i, 1);
-    },
+//  
+     
     closeBtn() {
       this.$emit("display-element");
       let title = document.getElementById("element_setting");
@@ -84,7 +81,7 @@ export default {
     checkRequired() {
       this.newItem.isRequired = !this.newItem.isRequired;
     },
-
+     
     checkAlign(e) {
       console.log(e);
       console.log(this.newItem);
@@ -162,7 +159,7 @@ export default {
   transform: translateX(0);
 }
 .closeBtn img {
-  width: 34px;
+  width:34px;
   background: #fff;
   padding: 10px;
   cursor: pointer;

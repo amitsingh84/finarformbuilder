@@ -82,6 +82,10 @@
                 :item="items"
                 :id="newId"
               />
+              <radio-box-element-options @display-element="dispalyElement"
+                v-if="items.name == 'Multiple Box'"
+                :item="items"
+                :id="newId"/>
             </div>
           </div>
         </form-block-right>
@@ -132,6 +136,7 @@ import NumberElementOptions from '../components/numberElement/NumberElementOptio
 import AddressElementOptions from '../components/addressElement/AddressElementOptions.vue';
 import HeadingElementOptions from '../components/Heading/HeadingElementOptions.vue';
 import CheckBoxElementOptions from '../components/checkBox/CheckBoxElementOptions.vue';
+import RadioBoxElementOptions from '../components/radioBox/RadioBoxElementOptions.vue';
 export default {
   components: {
     draggable,
@@ -147,6 +152,7 @@ export default {
     AddressElementOptions,
     HeadingElementOptions,
     CheckBoxElementOptions,
+    RadioBoxElementOptions,
   },
   data() {
     return {

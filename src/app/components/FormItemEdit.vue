@@ -22,6 +22,9 @@
        <div class="edit_option" v-else-if="item.name == 'Single Box'">
         <check-box-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
+       <div class="edit_option" v-else-if="item.name == 'Multiple Box'">
+        <check-box-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
+      </div>
       <div v-else><p>not input</p></div>
     </div>
   </div>

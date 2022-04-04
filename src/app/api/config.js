@@ -74,7 +74,7 @@ export const elements = [
   {
     type: "checkbox",
     name: "Multiple Box",
-     lable:"checkbox",
+     label:"checkbox",
      values:[
        'one',
        'two',

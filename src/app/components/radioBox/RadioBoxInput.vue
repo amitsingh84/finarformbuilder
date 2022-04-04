@@ -10,13 +10,12 @@
             
           <input
             class="form-check-input"
-            type="radio"
+            type="checkbox"
             :value="data"
             id="flexCheckDefault"
             @input="checkBoxData"
             :checked="data.isSelected"
            readonly
-           name="t"
           />
           <label class="form-check-label" for="flexCheckDefault">
             {{data}}
@@ -139,9 +138,8 @@ select#selecttitle {
   outline: none;
 }
 .inputNameStyle.inputCheckbox input {
-    border-radius: 50%;
+    border-radius: unset;
     height: 15px;
-    width:15px
 }
 /* .element_setting {
     position: absolute;
