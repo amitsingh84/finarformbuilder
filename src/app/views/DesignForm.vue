@@ -42,13 +42,13 @@
             <div v-if="items.id == newId">
               <name-element-opttions
                 @display-element="dispalyElement"
-                v-if="items.name == 'name'"
+                v-if="items.name == 'Full Name'"
                 :item="items"
                 :id="newId"
               />
-              <select-element-setting
+              <DropdownElementSetting
                 @display-element="dispalyElement"
-                v-if="items.name == 'select'"
+                v-if="items.name == 'Dropdown'"
                 :item="items"
                 :id="newId"
               />
@@ -129,7 +129,7 @@ import FormBlockRight from "../components/FormBlockRight.vue";
 import FormItemEdit from "../components/FormItemEdit.vue";
 import NameElementOpttions from "../components/nameElement/NameElementOpttions.vue";
 import EmailElementOpttions from "../components/emailElement/EmailElementOptions.vue";
-import SelectElementSetting from "../components/selectElement/SelectElementSetting.vue";
+import DropdownElementSetting from "../components/dropdownElement/DropdownElementSetting.vue";
 import JsonDisplay from "./JsonDisplay.vue";
 import ShowAllForms from "./ShowAllForms.vue";
 import NumberElementOptions from '../components/numberElement/NumberElementOptions.vue';
@@ -146,7 +146,7 @@ export default {
     FormBlockRight,
     ShowAllForms,
     NameElementOpttions,
-    SelectElementSetting,
+    DropdownElementSetting,
     EmailElementOpttions,
     NumberElementOptions,
     AddressElementOptions,
@@ -180,12 +180,14 @@ export default {
     showPrview() {
       if (this.newElements.length >= 1) {
         this.showHidePreview = true;
+        // window.open("/form",'_blank');
       }
       //console.log(this.showHidePreview);
     },
     pageClose() {
       this.showHidePreview = false;
        this.newTest = true;
+       
       
       // setTimeout(() => {
         
@@ -230,7 +232,7 @@ export default {
     onClone(item) {
       this.elIndex++;
       //console.log(this.newElements);
-      if (item.name == "select") {
+      if (item.name == "Dropdown") {
         return {
           name: item.name,
           id: this.elIndex,
@@ -241,7 +243,7 @@ export default {
         //  this.uID=this.elIndex
         //  //console.log(this.uID);
         //  this.elements.push(this.uID)
-      } else if (item.name == "name") {
+      } else if (item.name == "Full Name") {
         return {
           name: item.name,
           id: this.elIndex,
@@ -403,6 +405,8 @@ export default {
 .desingFormBlockRight {
   width: 68%;
   padding: 10px 0 10px 17px;
+  height: calc(100vh - 89px); 
+    overflow-y: scroll;
 }
 .previewForm {
   height: 48px;
@@ -422,8 +426,11 @@ export default {
 .desingFormBlockRightt::-webkit-scrollbar {
   display: none;
 }
+.desingFormBlockRight::-webkit-scrollbar {
+  display: none;
+}
 .desingFormBlockRightt {
-  border: 1px solid;
+  /* border: 1px solid; */
   border-radius: 7px;
   height: calc(100vh - 233px);
   padding: 10px;

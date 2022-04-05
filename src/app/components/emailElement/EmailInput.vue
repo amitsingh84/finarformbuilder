@@ -9,7 +9,7 @@
         <input
           class="input cursorPointerStyle"
           name="Enter Email"
-          placeholder="Enter Email"
+          :placeholder="!item.placeholder || item.placeholder==''?'Enter Email':item.placeholder"
           id="email"
           type="text"
           readonly
@@ -29,8 +29,8 @@
   </div>
 </template>
 <script>
+"use strict";
 import ShowDeleteSetting from "../ShowDeleteSetting.vue";
-("use strict");
 export default {
   components: { ShowDeleteSetting },
   data() {
@@ -38,6 +38,7 @@ export default {
       // prefix: false,
       // items: this.item,
       // showElementSettings:false,
+      
     };
   },
   props: ["item", "elementId"],
@@ -92,17 +93,26 @@ alignData(){
 }
 .inputNameStyle {
   border-radius: 7px;
-  border: 1px solid;
-  padding: 10px 30px 10px 10px;
+  /* border: 1px solid; */
+   padding: 14px 30px;
   cursor: move;
   position: relative;
-  margin: 10px 0;
-  padding-bottom: 24px;
+  margin: 4px 0;
+  /* padding-bottom: 24px; */
+}
+.buttonStyle{
+  display: none;
 }
 .inputNameStyle p {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 7px;
+}
+.inputNameStyle:hover{
+  background-color: #bfb6b645;
+}
+.inputNameStyle:hover .buttonStyle{
+  display: unset;
 }
 .inputFullNameRow input {
   height: 35px;

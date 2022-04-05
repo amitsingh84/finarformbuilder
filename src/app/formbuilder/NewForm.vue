@@ -1,8 +1,8 @@
 <template>
   <div class="createNewForm">
     <div class="topHeader"></div>
-     <div class="controllerSidenave">a</div>
-    <div class="blockSide">
+     <!-- <div class="controllerSidenave">a</div> -->
+    <div class="">
     <div class="creaetNewFormBtn">
       <button @click="setSelectedComponent('create-form')" :class="selectedComponent=='create-form'? 'active':''">Setting</button>
       <button @click="setSelectedComponent('design-form')" :class="selectedComponent=='design-form'? 'active':''">Design</button>

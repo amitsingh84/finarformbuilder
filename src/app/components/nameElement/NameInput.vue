@@ -46,18 +46,13 @@ export default {
   components: { ShowDeleteSetting },
   data() {
     return {
-      // prefix: false,
-      // items: this.item,
-      // showElementSettings:false,
+      
     };
   },
   props: ["item", "elementId"],
 
   methods: {
-    // showPrefix() {
-    //   this.prefix = !this.prefix;
-    //   this.items.prefix = this.prefix;
-    // },
+     
     deleteDataId() {
       this.$emit("delete-data-id", this.elementId);
     },
@@ -103,12 +98,12 @@ alignData(){
 }
 .inputNameStyle {
   border-radius: 7px;
-  border: 1px solid;
-  padding: 10px 30px 10px 10px;
+  /* border: 1px solid; */
+   padding: 14px 30px;
   cursor: move;
   position: relative;
-  margin: 10px 0;
-  padding-bottom: 24px;
+  margin: 4px 0;
+  /* padding-bottom: 24px; */
 }
 .inputNameStyle p {
   font-size: 18px;
@@ -119,7 +114,7 @@ alignData(){
   height: 35px;
   padding-left: 10px;
   border-radius: 7px;
-  border: 1px solid #000;
+  border: 1px solid #ced4da;
   box-shadow: none;
   outline: none;
 }
@@ -135,9 +130,18 @@ alignData(){
 .inputNameStyle .cursorPointerStyle {
   cursor: move;
 }
+.buttonStyle{
+  display: none;
+}
+.inputNameStyle:hover{
+  background-color: #bfb6b645;
+}
+.inputNameStyle:hover .buttonStyle{
+  display: unset;
+}
 select#selecttitle {
   border-radius: 7px;
-  border: 1px solid #000;
+  border: 1px solid #ced4da;
   cursor: pointer;
   outline: none;
 }

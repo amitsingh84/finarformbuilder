@@ -1,10 +1,10 @@
 <template>
   <div class="form_edit_">
     <div class="row">
-      <div class="edit_option" v-if="item.name == 'select'" >
-        <select-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
+      <div class="edit_option" v-if="item.name == 'Dropdown'" >
+        <Dropdown-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
-      <div class="edit_option" v-else-if="item.name == 'name'">
+      <div class="edit_option" v-else-if="item.name == 'Full Name'">
         <name-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
       <div class="edit_option" v-else-if="item.name == 'Email Address'">
@@ -38,12 +38,12 @@ import HeadingInput from './Heading/HeadingInput.vue';
 // import HeadingInput from "./HeadingInput.vue";
 import NameInput from "./nameElement/NameInput.vue";
 import NumberInput from './numberElement/NumberInput.vue';
-import SelectInput from './selectElement/SelectInput.vue';
+import DropdownInput from './dropdownElement/DropdownInput.vue';
 export default {
   props: ["item", "elementId"],
 
   name: "FormItemEdit",
-  components: { NameInput,   SelectInput, EmailInput, NumberInput, AddressInput, HeadingInput, CheckBoxInput },
+  components: { NameInput,   DropdownInput, EmailInput, NumberInput, AddressInput, HeadingInput, CheckBoxInput },
   data() {
     return {};
   },

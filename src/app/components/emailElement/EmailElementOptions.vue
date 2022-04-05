@@ -3,47 +3,96 @@
     <div class="closeBtn">
       <img @click="closeBtn" src="../../../assets/imgs/close.png" alt="" />
     </div>
-    <h4>Element Setting{{ id }}</h4>
-    <div class="Element_setting_option">
+    <h4>{{ item.name }}</h4>
+    <element-properties accordionHeaderId="1">
+      <template v-slot:elementHeading>QUICK SETUP</template>
       <div class="inputLabel">
         <p>Label</p>
+        <input type="text" v-model="this.newItem.label" />
+      </div>
+      <div class="inputLabel">
+        <p>Insturctions</p>
         <input
           type="text"
-          @input="enterLable"
-          :value="item.label ==='Email Address' ? '' : item.label"
+          name="nameDesc"
+          id="nameDesc"
+          v-model="this.newItem.Insturctions"
         />
       </div>
-      <div class="inputLablAlign">
+      <div class="form-check form-switch requiredStyle">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="checkrequired"
+          v-model="this.newItem.isRequired"
+        />
+        <p class="form-check-label" for="checkrequired">Required</p>
+      </div>
+      <div class="inputLabel">
+        <p>Placeholder Value</p>
+        <input type="text" v-model="this.newItem.placeholder" />
+      </div>
+    </element-properties>
+    <element-properties accordionHeaderId="2">
+      <template v-slot:elementHeading>VALIDATION</template>
+      <div class="inputLabel validationStyle">
+        <div>
+          <p>Min no. of characters:</p>
+          <input type="number" v-model="this.newItem.emailMininumChar" />
+        </div>
+        <div>
+          <p>Max no. of characters:</p>
+          <input type="number" v-model="this.newItem.emailMaxChar" />
+        </div>
+      </div>
+    </element-properties>
+  <element-properties accordionHeaderId="3">
+      <template v-slot:elementHeading>PREFILL</template>
+      <div class="inputLabel">
+        <p>Label</p>
+        <input type="text" v-model="this.newItem.label" />
+      </div>
+      
+    </element-properties>
+      <element-properties accordionHeaderId="4">
+      <template v-slot:elementHeading>OPTIONS</template>
+      <div class="inputLabel">
+        <p>Label</p>
+        <input type="text" v-model="this.newItem.label" />
+      </div>
+      
+    </element-properties>
+    <!-- <div class="Element_setting_option"> -->
+
+    <!-- <div class="inputLablAlign">
         <p>Label Align</p>
         <div>
           <button @click="checkAlign" value="left">Left</button
           ><button @click="checkAlign" value="center">Center</button
           ><button value="right" @click="checkAlign">Right</button>
         </div>
-      </div>
+      </div> -->
 
-      <div class="form-check form-switch requiredStyle">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="checkrequired"
-          @click="checkRequired"
-          :checked="item.isRequired"
-        />
-        <p class="form-check-label" for="checkrequired">Required</p>
-      </div>
-      
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 <script>
-"use strict";
+import ElementProperties from "../../slots/ElementProperties.vue";
+("use strict");
 export default {
+  components: { ElementProperties },
   data() {
     return {
       showHideData: false,
       prefix: false,
       newItem: this.item,
+      instructionsLabel: "",
+      label: "",
+      isRequired: false,
+      defalulValueLabel: "",
+      placeholder: "",
+      emailMaxChar:'',
+      emailMininumChar:''
     };
   },
   props: ["id", "item"],
@@ -56,7 +105,7 @@ export default {
     enterLable(e) {
       this.newItem.label = e.target.value;
     },
- 
+
     showPrefix() {
       // this.prefix = !this.prefix;
       this.newItem.prefix = !this.newItem.prefix;
@@ -96,15 +145,14 @@ export default {
 .inputLabel p,
 .inputLablAlign p {
   margin-bottom: 5px;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .inputLabel input {
   width: 100%;
   height: 30px;
-  border-radius: 7px;
   border: none;
+  padding-left: 10px;
 }
 
 .inputLabel,
@@ -150,9 +198,15 @@ export default {
   color: #fff;
   display: block;
   transform: translateX(0);
+  height: calc(100vh - 80px);
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.element_setting.active::-webkit-scrollbar {
+  display: none;
 }
 .closeBtn img {
-  width:34px;
+  width: 34px;
   background: #fff;
   padding: 10px;
   cursor: pointer;

@@ -2,13 +2,13 @@ export const elements = [
   {
       type: "select",
       isRequired: false,
-      label: "Select",
+      label: "Dropdown",
       className: "form-control",
-      name: "select",
+      name: "Dropdown",
       access: false,
       multiple: false,
       icon: "../../app/assets/imgs/h.png",
-      defalulValueLabel:'Select',
+      defalulValueLabel:'Dropdown',
       values: [
         {
           label: "Option 1",
@@ -16,8 +16,8 @@ export const elements = [
          isDefault:false
         },
         {
-          label: "Option 1",
-          value: "option-1",
+          label: "Option 2",
+          value: "option-2",
          isDefault:false
         },
         
@@ -25,7 +25,7 @@ export const elements = [
   },
   {
     type: "input",
-    name: "name",
+    name: "Full Name",
     container: true,
     row: true, 
     prefix: false,
@@ -38,6 +38,7 @@ export const elements = [
     container: true,
     items: [], 
     label:"Email Address",
+    placeholder:"Email Address"
   },
   {
     type: "tel",
