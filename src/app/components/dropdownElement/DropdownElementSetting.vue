@@ -132,11 +132,10 @@ export default {
     },
 
     addOptions() {
-      this.newItem.values.push(this.test);
-      this.test = {
-        value: "",
-        isDefault: false,
-      };
+      if(this.newItem.values){
+        this.newItem.values.push(this.test);
+         
+      }
     },
   },
 };

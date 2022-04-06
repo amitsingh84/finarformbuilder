@@ -118,8 +118,9 @@ export default {
     addFeild(id) {
       //  let newData= this.newItem.values.find(element => element);
       // console.log(this.newItem.indexOf(this.newItem));
-      this.newItem.values.push(this.test)
+      // this.newItem[1].values.push(this.test)
       console.log(id);
+      console.log(this.newItem);
     },
     enterLable(e) {
       this.newItem.label = e.target.value;

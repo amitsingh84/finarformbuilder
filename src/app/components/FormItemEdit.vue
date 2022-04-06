@@ -25,6 +25,12 @@
        <div class="edit_option" v-else-if="item.name == 'Multiple Box'">
         <check-box-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
+      <div class="edit_option" v-else-if="item.name == 'Message'">
+        <message-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
+      </div>
+      <div class="edit_option" v-else-if="item.name == 'Date'">
+        <date-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
+      </div>
       <div v-else><p>not input</p></div>
     </div>
   </div>
@@ -40,11 +46,13 @@ import NameInput from "./nameElement/NameInput.vue";
 import NumberInput from './numberElement/NumberInput.vue';
 import DropdownInput from './dropdownElement/DropdownInput.vue';
 import RadioBoxInput from './radioBox/RadioBoxInput.vue';
+import MessageInput from './messageElement/MessageInput.vue';
+import DateInput from './dateElement/DateInput.vue';
 export default {
   props: ["item", "elementId"],
 
   name: "FormItemEdit",
-  components: { NameInput,   DropdownInput, EmailInput, NumberInput, AddressInput, HeadingInput, CheckBoxInput, RadioBoxInput },
+  components: { NameInput,   DropdownInput, EmailInput, NumberInput, AddressInput, HeadingInput, CheckBoxInput, RadioBoxInput, MessageInput, DateInput },
   data() {
     return {};
   },

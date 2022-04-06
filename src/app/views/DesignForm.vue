@@ -13,7 +13,7 @@
         <form-block-right>
           <div sytle="position: relative;" v-if="!newElements.length">
             <p class="blankElement">
-              checkDrag your first question here from the left.
+               Drag your first question here from the right.
             </p>
           </div>
           <draggable
@@ -86,6 +86,14 @@
                 v-if="items.name == 'Multiple Box'"
                 :item="items"
                 :id="newId"/>
+                <message-element-options @display-element="dispalyElement"
+                v-if="items.name == 'Message'"
+                :item="items"
+                :id="newId"/>
+                 <date-element-options @display-element="dispalyElement"
+                v-if="items.name == 'Date'"
+                :item="items"
+                :id="newId"/>
             </div>
           </div>
         </form-block-right>
@@ -137,6 +145,8 @@ import AddressElementOptions from '../components/addressElement/AddressElementOp
 import HeadingElementOptions from '../components/Heading/HeadingElementOptions.vue';
 import CheckBoxElementOptions from '../components/checkBox/CheckBoxElementOptions.vue';
 import RadioBoxElementOptions from '../components/radioBox/RadioBoxElementOptions.vue';
+import MessageElementOptions from '../components/messageElement/MessageElementOptions.vue';
+import DateElementOptions from '../components/dateElement/DateElementOptions.vue';
 export default {
   components: {
     draggable,
@@ -153,10 +163,11 @@ export default {
     HeadingElementOptions,
     CheckBoxElementOptions,
     RadioBoxElementOptions,
+    MessageElementOptions,
+    DateElementOptions,
   },
   data() {
-    return {
-      view: false,
+    return {view: false,
       newElements: [],
       draggable: false,
       elIndex: 0,
@@ -303,6 +314,28 @@ export default {
         };
       }
       if (item.name == "Multiple Box") {
+        return {
+          type: item.type,
+          name: item.name,
+          id: this.elIndex,
+          isRequired: item.isRequired,
+          label: item.label,
+          values:item.values,
+          isSelected:item.isSelected
+        };
+      }
+      if (item.name == "Message") {
+        return {
+          type: item.type,
+          name: item.name,
+          id: this.elIndex,
+          isRequired: item.isRequired,
+          label: item.label,
+          values:item.values,
+          isSelected:item.isSelected
+        };
+      }
+      if (item.name == "Date") {
         return {
           type: item.type,
           name: item.name,

@@ -13,12 +13,12 @@ export const elements = [
         {
           label: "Option 1",
           value: "option-1",
-         isDefault:false
+         
         },
         {
           label: "Option 2",
           value: "option-2",
-         isDefault:false
+         
         },
         
       ]
@@ -84,5 +84,23 @@ export const elements = [
 
      ]
   },
-
+  {
+    type: "textarea",
+    name: "Message",
+     label:"Message",
+     
+  },
+  {
+    type: "date",
+    name: "Date",
+     label:"Date",
+     dateFormate: "mm/dd/yy"
+     
+  },
+  {
+    type: "time",
+    name: "Time",
+     label:"Time",
+     
+  },
 ]
