@@ -3,17 +3,86 @@
     <div class="closeBtn">
       <img @click="closeBtn" src="../../../assets/imgs/close.png" alt="" />
     </div>
-    <h4>Element Setting{{ id }}</h4>
-    <div class="Element_setting_option">
+    <h4>{{ item.name }}</h4>
+    <element-properties accordionHeaderId="1">
+      <template v-slot:elementHeading>QUICK SETUP</template>
       <div class="inputLabel">
         <p>Label</p>
+        <input type="text" v-model="this.newItem.label" />
+      </div>
+      <div class="inputLabel">
+        <p>Insturctions</p>
         <input
           type="text"
-          @input="enterLable"
-          :value="item.label == 'checkbox' ? '' : item.label"
+          name="nameDesc"
+          id="nameDesc"
+          v-model="this.newItem.Insturctions"
         />
       </div>
-      <!-- <div class="inputLablAlign">
+      <div class="form-check form-switch requiredStyle">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="checkrequired"
+          v-model="this.newItem.isRequired"
+        />
+        <p class="form-check-label" for="checkrequired">Required</p>
+      </div>
+    </element-properties>
+    <element-properties accordionHeaderId="2">
+      <template v-slot:elementHeading>EDIT CHOICES</template>
+
+      <div class="mb-3 defaultCheckboxtStyle">
+        <p>Defalut Choice</p>
+        <input
+          type="checkbox"
+          name="checkDefault"
+           v-model="this.newItem.needDefault"
+          :checked="needDefault"
+          @click="CheckIfWantDefault"
+        />
+      </div>
+      <div class="mb-3 optionSelectionStyle">
+        <div  v-if="newItem.id==item.id">
+          <p>Select choise</p>
+          <div
+            class="optionSelectBoxStyle"
+            v-for="(item, index) in newItem.values"
+            :key="index"
+          >
+            <!-- <input type="text" @input="inputData" :index="index" :value="item"/>  -->
+            <div class="inputWithDeleteStyle">
+              <input
+                type="text"
+                v-model="this.newItem.values[index]"
+                :name="item"
+              />
+              <button class="deleteStyle" @click="deleteItem(index, id)">
+                X
+              </button>
+            </div>
+            <input
+              v-if="needDefault"
+              type="radio"
+              name="default"
+              @click="isDataDefault(item, index)"
+              :checked="item.value == newItem.defalulValueLabel"
+            />
+          </div>
+          <button class="AddButtonStyle" @click="addFeild(id)">+</button>
+        </div>
+      </div>
+      <div class="mb-3 defaultCheckboxtStyle">
+        <p>Other Choice</p>
+        <input
+          type="checkbox"
+          name="checkDefault"
+          @click="CheckIfOtherChoise"
+        />
+      </div>
+    </element-properties>
+
+    <!-- <div class="inputLablAlign">
         <p>Label Align</p>
         <div>
           <button @click="checkAlign" value="left">Left</button
@@ -21,57 +90,46 @@
           ><button value="right" @click="checkAlign">Right</button>
         </div>
       </div> -->
-
-      <div class="form-check form-switch requiredStyle">
-          
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="checkrequired"
-          @click="checkRequired"
-          :checked="item.isRequired"
-        />
-        <p class="form-check-label" for="checkrequired">Required</p>
-      </div>
-       
-          <div class="inputLablAlign">
-              <p>Edit Check Box</p>
-              <button @click="addFeild"> Add</button>
-              
-              <div v-for="(item,index) in newItem.values" :key="index">
-              <!-- <input type="text" @input="inputData" :index="index" :value="item"/>  -->
-              <input type="text" v-model="this.newItem.values[index]" :name="item" /> 
-          </div>
-
-          </div>
-           
-    </div>
   </div>
 </template>
 <script>
 "use strict";
+import ElementProperties from "../../slots/ElementProperties.vue";
 export default {
+  components: { ElementProperties },
   data() {
     return {
       showHideData: false,
       prefix: false,
       newItem: this.item,
-      test:'',
-      
-       
+      test: "",
+      needDefault: true,
     };
   },
   props: ["id", "item"],
-   
+
   methods: {
-      addFeild(){
-          this.newItem.values.push(this.test)
-      },
+    CheckIfWantDefault() {
+      this.needDefault = !this.needDefault;
+      if (this.needDefault == false) {
+        this.newItem.defalulValueLabel = "select";
+      }
+    },
+    addFeild(id) {
+      //  let newData= this.newItem.values.find(element => element);
+      // console.log(this.newItem.indexOf(this.newItem));
+      this.newItem.values.push(this.test)
+      console.log(id);
+    },
     enterLable(e) {
       this.newItem.label = e.target.value;
     },
-//  
-     
+    deleteItem(index, id) {
+      console.log("id", id);
+      if (this.newItem.id == id) {
+        this.newItem.values.splice(index, 1);
+      }
+    },
     closeBtn() {
       this.$emit("display-element");
       let title = document.getElementById("element_setting");
@@ -81,11 +139,14 @@ export default {
     checkRequired() {
       this.newItem.isRequired = !this.newItem.isRequired;
     },
-     
+
     checkAlign(e) {
       console.log(e);
       console.log(this.newItem);
       this.newItem.align = e.target.value;
+    },
+    CheckIfOtherChoise() {
+      this.newItem.values.push("Others");
     },
   },
 };
@@ -103,68 +164,17 @@ export default {
 .inputLabel p,
 .inputLablAlign p {
   margin-bottom: 5px;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .inputLabel input {
   width: 100%;
   height: 30px;
-  border-radius: 7px;
   border: none;
 }
 
 .inputLabel,
 .inputLablAlign {
   margin-bottom: 17px;
-}
-.inputLablAlign button {
-  border: none;
-  padding: 10px 17px;
-  border-radius: 2px;
-  background: #192a6b;
-  font-weight: 600;
-  color: #fff;
-}
-.inputLablAlign > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.inputLablAlign > div button {
-  flex: 1;
-}
-.element_setting {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 0;
-  z-index: 99;
-  background: #6868ac;
-  color: #fff;
-  transition: 0.3s;
-  display: none;
-  transform: translateX(-30%);
-}
-.element_setting.active {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 30%;
-  z-index: 99;
-  background: #6868ac;
-  color: #fff;
-  display: block;
-  transform: translateX(0);
-}
-.closeBtn img {
-  width:34px;
-  background: #fff;
-  padding: 10px;
-  cursor: pointer;
-}
-.closeBtn {
-  text-align: right;
 }
 </style>

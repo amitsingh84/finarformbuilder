@@ -5,6 +5,7 @@
 
 <script>
 
+  import "./assets/styles/styles.css";
 export default {
   name: 'App',
   components: {

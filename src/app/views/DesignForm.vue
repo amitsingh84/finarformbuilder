@@ -76,13 +76,13 @@
                 :item="items"
                 :id="newId"
               />
-              <check-box-element-options
+              <radio-box-element-options
                 @display-element="dispalyElement"
-                v-if="items.name == 'Single Box'"
+                v-if="items.name == 'Single Choise'"
                 :item="items"
                 :id="newId"
               />
-              <radio-box-element-options @display-element="dispalyElement"
+              <check-box-element-options @display-element="dispalyElement"
                 v-if="items.name == 'Multiple Box'"
                 :item="items"
                 :id="newId"/>
@@ -291,7 +291,7 @@ export default {
           description:item.description
         };
       }
-      if (item.name == "Single Box") {
+      if (item.name == "Single Choise") {
         return {
           type: item.type,
           name: item.name,

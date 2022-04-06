@@ -83,7 +83,6 @@ alignData(){
 }
 .inputNameStyle {
   border-radius: 7px;
-  border: 1px solid;
   padding: 10px 30px 10px 10px;
   cursor: move;
   position: relative;
@@ -99,7 +98,7 @@ alignData(){
   height: 35px;
   padding-left: 10px;
   border-radius: 7px;
-  border: 1px solid #000;
+  border: 1px solid #ced4da;
   box-shadow: none;
   outline: none;
 }
@@ -115,9 +114,19 @@ alignData(){
 .inputNameStyle .cursorPointerStyle {
   cursor: move;
 }
+ 
+.buttonStyle{
+  display: none;
+}
+.inputNameStyle:hover{
+  background-color: #bfb6b645;
+}
+.inputNameStyle:hover .buttonStyle{
+  display: unset;
+}
 select#selecttitle {
   border-radius: 7px;
-  border: 1px solid #000;
+  border: 1px solid #ced4da;
   cursor: pointer;
   outline: none;
 }

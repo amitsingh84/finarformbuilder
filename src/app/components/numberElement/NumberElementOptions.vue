@@ -3,51 +3,59 @@
     <div class="closeBtn">
       <img @click="closeBtn" src="../../../assets/imgs/close.png" alt="" />
     </div>
-    <h4>Element Setting{{ id }}</h4>
-    <div class="Element_setting_option">
+    <h4>{{ item.name }}</h4>
+      <element-properties accordionHeaderId="1">
+      <template v-slot:elementHeading>QUICK SETUP</template>
       <div class="inputLabel">
         <p>Label</p>
+        <input type="text" v-model="this.newItem.label" />
+      </div>
+      <div class="inputLabel">
+        <p>Insturctions</p>
         <input
           type="text"
-          @input="enterLable"
-          :value="item.label == 'Phone Number' ? '' : item.label"
+          name="nameDesc"
+          id="nameDesc"
+          v-model="this.newItem.Insturctions"
         />
       </div>
-      <div class="inputLablAlign">
-        <p>Label Align</p>
-        <div>
-          <button @click="checkAlign" value="left">Left</button
-          ><button @click="checkAlign" value="center">Center</button
-          ><button value="right" @click="checkAlign">Right</button>
-        </div>
-      </div>
-
       <div class="form-check form-switch requiredStyle">
         <input
           class="form-check-input"
           type="checkbox"
           id="checkrequired"
-          @click="checkRequired"
-          :checked="item.isRequired"
+          v-model="this.newItem.isRequired"
         />
         <p class="form-check-label" for="checkrequired">Required</p>
       </div>
-      <div class="form-check form-switch prefixStyle">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="prefixStyles"
-          @click="showPrefix"
-          :checked="item.prefix"
-        />
-        <label class="form-check-label" for="prefixStyles">Show Prefix</label>
+      <div class="inputLabel">
+        <p>Placeholder Value</p>
+        <input type="text" v-model="this.newItem.placeholder" />
       </div>
-    </div>
+    </element-properties>
+     
+      
+      
+      
+     <element-properties accordionHeaderId="4">
+      <template v-slot:elementHeading>OPTIONS</template>
+      <div class="optionsLabelStyle">
+        <p>Hide field:</p>
+        <input type="checkbox" v-model="this.newItem.hideField" />
+      </div>
+      <div class="optionsLabelStyle">
+        <p>Readonly field:</p>
+        <input type="checkbox" v-model="this.newItem.readonlyField" />
+      </div>
+    </element-properties>
+    
   </div>
 </template>
 <script>
+import ElementProperties from '../../slots/ElementProperties.vue';
 "use strict";
 export default {
+  components: { ElementProperties },
   data() {
     return {
       showHideData: false,
@@ -93,6 +101,12 @@ export default {
 };
 </script>
 <style scoped>
+.optionsLabelStyle p {
+    flex: 1;
+}
+.optionsLabelStyle {
+    display: flex;
+}
 .element_setting h4 {
   text-align: center;
   padding: 10px 0;
@@ -105,15 +119,15 @@ export default {
 .inputLabel p,
 .inputLablAlign p {
   margin-bottom: 5px;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  /* font-weight: 600; */
 }
 
 .inputLabel input {
   width: 100%;
   height: 30px;
-  border-radius: 7px;
   border: none;
+  padding-left: 10px;
 }
 
 .inputLabel,
@@ -159,6 +173,12 @@ export default {
   color: #fff;
   display: block;
   transform: translateX(0);
+  height: calc(100vh - 80px);
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.element_setting.active::-webkit-scrollbar {
+  display: none;
 }
 .closeBtn img {
   width:34px;

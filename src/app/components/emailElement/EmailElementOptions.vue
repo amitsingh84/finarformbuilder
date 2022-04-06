@@ -46,21 +46,24 @@
         </div>
       </div>
     </element-properties>
-  <element-properties accordionHeaderId="3">
+  <!-- <element-properties accordionHeaderId="3">
       <template v-slot:elementHeading>PREFILL</template>
       <div class="inputLabel">
         <p>Label</p>
         <input type="text" v-model="this.newItem.label" />
       </div>
       
-    </element-properties>
+    </element-properties> -->
       <element-properties accordionHeaderId="4">
       <template v-slot:elementHeading>OPTIONS</template>
-      <div class="inputLabel">
-        <p>Label</p>
-        <input type="text" v-model="this.newItem.label" />
+      <div class="optionsLabelStyle">
+        <p>Hide field:</p>
+        <input type="checkbox" v-model="this.newItem.hideField" />
       </div>
-      
+      <div class="optionsLabelStyle">
+        <p>Readonly field:</p>
+        <input type="checkbox" v-model="this.newItem.readonlyField" />
+      </div>
     </element-properties>
     <!-- <div class="Element_setting_option"> -->
 
@@ -92,7 +95,9 @@ export default {
       defalulValueLabel: "",
       placeholder: "",
       emailMaxChar:'',
-      emailMininumChar:''
+      emailMininumChar:'',
+      readonlyField:false,
+      hideField:false
     };
   },
   props: ["id", "item"],
@@ -133,6 +138,12 @@ export default {
 };
 </script>
 <style scoped>
+.optionsLabelStyle p {
+    flex: 1;
+}
+.optionsLabelStyle {
+    display: flex;
+}
 .element_setting h4 {
   text-align: center;
   padding: 10px 0;

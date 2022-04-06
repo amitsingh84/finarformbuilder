@@ -1,19 +1,73 @@
 <template>
   <div>
     <div class="inputNameStyle">
-      <p :style="!item.align?'text-align:left;': `text-align:${item.align}`">
+      <p v-if="item.label">
         <label >{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
-      <div class="inputFullNameRow">
-        <textarea name="Enter Address"
-          placeholder="Enter Address"
-          id="adderss"
+      <p class="instructionStyle" v-if="item.Insturctions ">
+       {{ item.Insturctions }}
+      </p>
+      <div class="inputFullNameRow inputAddressRow">
+         <input
+          class="input cursorPointerStyle"
+          name="Stree Address"
+          placeholder="Stree Address"
+          id="sAddrss"
           type="text"
           readonly
-          :required=item.isRequired rows="4"
-          style="width:100%"
-          ></textarea>
+          :required=item.isStreetRequired
+        />
+          <input
+          class="input cursorPointerStyle"
+          name="Stree Address line 2"
+          placeholder="Stree Address Line 2"
+          id="sAddrssl2"
+          type="text"
+          readonly
+          :required=item.isStreet2Required
+        />
+        <div class="inputRowStyle">
+           <input
+          class="input cursorPointerStyle"
+          name="City"
+          placeholder="City"
+          id="City"
+          type="text"
+          readonly
+          :required=item.isCityRequired
+        />
          
+           <input
+          class="input cursorPointerStyle"
+          name="State"
+          placeholder="State"
+          id="State"
+          type="text"
+          readonly
+          :required=item.isStateRequired
+        />
+        </div>
+        <div class="inputRowStyle">
+           <input
+          class="input cursorPointerStyle"
+          name="Zip code"
+          placeholder="Zip code"
+          id="Zip code"
+          type="text"
+          readonly
+          :required=item.isZipCodeRequired
+        />
+         
+           <input
+          class="input cursorPointerStyle"
+          name="Country"
+          placeholder="Country"
+          id="Country"
+          type="text"
+          readonly
+          :required=item.isCountryRequired
+        />
+        </div>
       <div>
         <show-delete-setting
           @delete-data-id="deleteDataId"
@@ -72,24 +126,26 @@ alignData(){
 };
 </script>
 <style scoped>
+.inputNameStyle p.instructionStyle {
+    font-weight: 400;
+    font-size: 15px;
+    margin-bottom: 0;
+}
 .content_block {
   height: calc(100vh - 100px);
 }
 .inputFullNameRow {
   display: flex;
   gap: 18px;
+  flex-direction: column;
 }
 
-.inputFullNameRow > select {
-  flex: 0.1;
+ .inputFullNameRow.inputAddressRow {
+    padding-top: 17px;
 }
-
-.inputFullNameRow input {
-  flex: 1;
-}
+ 
 .inputNameStyle {
   border-radius: 7px;
-  border: 1px solid;
   padding: 10px 30px 10px 10px;
   cursor: move;
   position: relative;
@@ -99,15 +155,27 @@ alignData(){
 .inputNameStyle p {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 7px;
+  margin-bottom: 0;
+}
+textarea#adderss {
+    border: 1px solid #ced4da;
+    padding-left: 10px;
 }
 .inputFullNameRow input {
   height: 35px;
   padding-left: 10px;
   border-radius: 7px;
-  border: 1px solid #000;
   box-shadow: none;
   outline: none;
+  border: 1px solid #ced4da;
+}
+
+.inputRowStyle {
+    display: flex;
+    gap: 17px;
+}
+.inputRowStyle input {
+    flex: 1;
 }
 .prefixStyle input,
 .requiredStyle input {
@@ -121,9 +189,18 @@ alignData(){
 .inputNameStyle .cursorPointerStyle {
   cursor: move;
 }
+.buttonStyle{
+  display: none;
+}
+.inputNameStyle:hover{
+  background-color: #bfb6b645;
+}
+.inputNameStyle:hover .buttonStyle{
+  display: unset;
+}
 select#selecttitle {
   border-radius: 7px;
-  border: 1px solid #000;
+  border: 1px solid #ced4da;
   cursor: pointer;
   outline: none;
 }

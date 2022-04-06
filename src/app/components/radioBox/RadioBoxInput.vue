@@ -1,27 +1,30 @@
 <template>
   <div>
     <div class="inputNameStyle inputCheckbox">
-      <p :style="!item.align ? 'text-align:left;' : `text-align:${item.align}`">
-        <label>{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
+      <p>
+        <label>{{ item.label=='radio'?'Single Choise':item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
-      <div class="inputFullNameRow">
+      
 
-        <div class="form-check" v-for="(data,i) in item.values" :key="i">
-            
+        <div class="form-check" >
+            <div class="formCheckStyle row">
+              <div class="col-md-6" v-for="(data,i) in item.values" :key="i">
           <input
             class="form-check-input"
-            type="checkbox"
+            type="radio"
             :value="data"
-            id="flexCheckDefault"
+            :id="`flexCheckDefault_${i}`"
             @input="checkBoxData"
             :checked="data.isSelected"
-           readonly
+            name="Single Choise"
+            disabled
           />
-          <label class="form-check-label" for="flexCheckDefault">
+          <label class="form-check-label" :for="`flexCheckDefault_${i}`" disabled>
             {{data}}
           </label>
-        </div>
-
+          </div>
+       
+</div>
         <div>
           <show-delete-setting
             @delete-data-id="deleteDataId"
@@ -94,24 +97,24 @@ console.log(e.target.value);
   flex: 0.1;
 }
 
-.inputFullNameRow input {
+.inputFullNameRow input { 
   flex: 1;
 }
 .inputNameStyle {
   border-radius: 7px;
-  border: 1px solid;
-  padding: 10px 30px 10px 10px;
+  /* border: 1px solid; */
+   padding: 14px 30px;
   cursor: move;
   position: relative;
-  margin: 10px 0;
-  padding-bottom: 24px;
+  margin: 4px 0;
+  /* padding-bottom: 24px; */
 }
 .inputNameStyle p {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 7px;
 }
-.inputFullNameRow input {
+.inputFullNameRow input[type="text"] {
   height: 35px;
   padding-left: 10px;
   border-radius: 7px;
@@ -128,19 +131,7 @@ console.log(e.target.value);
 .requiredStyle input:checked {
   background-color: #192a6b;
 }
-.inputNameStyle .cursorPointerStyle {
-  cursor: move;
-}
-select#selecttitle {
-  border-radius: 7px;
-  border: 1px solid #000;
-  cursor: pointer;
-  outline: none;
-}
-.inputNameStyle.inputCheckbox input {
-    border-radius: unset;
-    height: 15px;
-}
+
 /* .element_setting {
     position: absolute;
     right: 0;
@@ -221,52 +212,8 @@ select#selecttitle {
 .showElementSettingg span,
 .showElementSetting span {
   font-size: 10px;
-  /* margin-left: 6px; */
   display: none;
 }
-.showElementSettingg:hover span,
-.showElementSetting:hover span {
-  /* display: inline-block; */
-}
-/* .element_setting h4 {
-    text-align: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #fff;
-    margin-bottom: 19px;
-}
-.Element_setting_option {
-    padding: 0 30px 30px 30px;
-}
-.inputLabel p,.inputLablAlign p {
-    margin-bottom: 5px;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
- 
-
-.inputLabel input {
-    width: 100%;
-    height: 30px;
-    border-radius: 7px;
-    border: none;
-}
-
-.inputLabel,.inputLablAlign {
-    margin-bottom: 17px;
-}
-.inputLablAlign button {
-    border: none; 
-    padding: 10px 17px;
-    border-radius: 2px;
-    background: #192a6b;
-    font-weight: 600;
-    color: #fff;
-}
-.inputLablAlign > div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-} */
 
 .inputLablAlign > div button {
   flex: 1;
@@ -288,4 +235,23 @@ select#selecttitle {
   width: 36px;
   z-index: 2;
 }
+.inputNameStyle .cursorPointerStyle {
+  cursor: move;
+}
+.buttonStyle{
+  display: none;
+}
+.inputNameStyle:hover{
+  background-color: #bfb6b645;
+}
+.inputNameStyle:hover .buttonStyle{
+  display: unset;
+}
+select#selecttitle {
+  border-radius: 7px;
+  border: 1px solid #ced4da;
+  cursor: pointer;
+  outline: none;
+}
+ 
 </style>

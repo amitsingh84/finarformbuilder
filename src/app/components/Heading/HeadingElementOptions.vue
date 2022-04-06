@@ -3,17 +3,22 @@
     <div class="closeBtn">
       <img @click="closeBtn" src="../../../assets/imgs/close.png" alt="" />
     </div>
-    <h4>Element Setting{{ id }}</h4>
-    <div class="Element_setting_option">
+    <h4>{{ item.name }}</h4>
+    <element-properties accordionHeaderId="1">
+      <template v-slot:elementHeading>QUICK SETUP</template>
       <div class="inputLabel">
         <p>Heading</p>
-        <input
+        <input type="text" v-model="this.newItem.label" />
+      </div>
+       <div class="inputLabel">
+           <p>Sub Heading</p>
+         <input
           type="text"
-          @input="enterLable"
-          :value="item.label == 'Heading' ? '' : item.label"
+          v-model="this.newItem.description"
+          
         />
       </div>
-      <div class="inputLablAlign">
+        <div class="inputLablAlign">
         <p>Label Align</p>
         <div>
           <button @click="checkAlign" value="left">Left</button
@@ -21,23 +26,26 @@
           ><button value="right" @click="checkAlign">Right</button>
         </div>
       </div>
-
-      
-      <div class="inputLabel">
-           <p>Description</p>
-         <input
-          type="text"
-          @input="descLable"
-          :value="item.description == 'Description' ? '' : item.description"
+     
+      <div class="form-check form-switch requiredStyle">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="checkrequired"
+          v-model="this.newItem.isRequired"
         />
+        <p class="form-check-label" for="checkrequired">Required</p>
       </div>
-       
-    </div>
+      
+    </element-properties>
+    
   </div>
 </template>
 <script>
+import ElementProperties from '../../slots/ElementProperties.vue';
 "use strict";
 export default {
+  components: { ElementProperties },
   data() {
     return {
       showHideData: false,
@@ -97,15 +105,14 @@ this.newItem.description=e.target.value
 .inputLabel p,
 .inputLablAlign p {
   margin-bottom: 5px;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .inputLabel input {
   width: 100%;
   height: 30px;
-  border-radius: 7px;
   border: none;
+  padding-left: 10px;
 }
 
 .inputLabel,
@@ -151,6 +158,12 @@ this.newItem.description=e.target.value
   color: #fff;
   display: block;
   transform: translateX(0);
+  height: calc(100vh - 80px);
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.element_setting.active::-webkit-scrollbar {
+  display: none;
 }
 .closeBtn img {
   width:34px;

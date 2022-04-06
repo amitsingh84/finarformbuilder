@@ -118,7 +118,7 @@ alignData(){
   height: 35px;
   padding-left: 10px;
   border-radius: 7px;
-  border: 1px solid #000;
+  border: 1px solid #ced4da;
   box-shadow: none;
   outline: none;
 }

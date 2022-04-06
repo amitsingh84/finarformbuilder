@@ -19,8 +19,8 @@
        <div class="edit_option" v-else-if="item.name == 'Heading'">
         <heading-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
-       <div class="edit_option" v-else-if="item.name == 'Single Box'">
-        <check-box-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
+       <div class="edit_option" v-else-if="item.name == 'Single Choise'">
+        <radio-box-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
        <div class="edit_option" v-else-if="item.name == 'Multiple Box'">
         <check-box-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
@@ -39,11 +39,12 @@ import HeadingInput from './Heading/HeadingInput.vue';
 import NameInput from "./nameElement/NameInput.vue";
 import NumberInput from './numberElement/NumberInput.vue';
 import DropdownInput from './dropdownElement/DropdownInput.vue';
+import RadioBoxInput from './radioBox/RadioBoxInput.vue';
 export default {
   props: ["item", "elementId"],
 
   name: "FormItemEdit",
-  components: { NameInput,   DropdownInput, EmailInput, NumberInput, AddressInput, HeadingInput, CheckBoxInput },
+  components: { NameInput,   DropdownInput, EmailInput, NumberInput, AddressInput, HeadingInput, CheckBoxInput, RadioBoxInput },
   data() {
     return {};
   },

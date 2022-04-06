@@ -64,8 +64,8 @@ export const elements = [
 
   {
     type: "radio",
-    name: "Single Box",
-     label:"radio",
+    name: "Single Choise",
+     label:"Single Choise",
      values:[
         'Male',
         'Female'
