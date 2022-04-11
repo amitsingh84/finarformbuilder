@@ -8,16 +8,16 @@
     <element-properties accordionHeaderId="1">
       <template v-slot:elementHeading>QUICK SETUP</template>
       <div class="inputLabel">
-        <p>Label</p>
+        <p class="subHeding">Label</p>
         <input type="text" v-model="this.newItem.label" />
       </div>
       <div class="inputLabel">
-        <p>Insturctions</p>
+        <p class="subHeding">instructions</p>
         <input
           type="text"
           name="nameDesc"
           id="nameDesc"
-          v-model="this.newItem.Insturctions"
+          v-model="this.newItem.instructions"
         />
       </div>
       <div class="form-check form-switch requiredStyle">
@@ -33,7 +33,7 @@
     <element-properties accordionHeaderId="2">
       <template v-slot:elementHeading>EDIT CHOICES</template>
       <div>
-        <p>Add place holder</p>
+        <p class="subHeding">Add place holder</p>
         <input
           type="text"
           name="selectdefaul"
@@ -41,7 +41,7 @@
         />
       </div>
       <div class="defaultCheckboxtStyle">
-        <p>Defalut Choice</p>
+        <p class="subHeding">Defalut Choice</p>
         <input
           type="checkbox"
           name="checkDefault"
@@ -51,7 +51,7 @@
       </div>
       <div class="optionSelectionStyle">
         <div>
-          <p>Select choise</p>
+          <p class="subHeding">Select Choice</p>
           <div
             class="optionSelectBoxStyle"
             v-for="(item, index) in newItem.values"
@@ -105,7 +105,13 @@ export default {
   },
 
   props: ["id", "item"],
-
+//  beforeUpdate()
+//   {
+//     if(this.newItem.values)
+//       {
+//         this.newItem.values.destroy()
+//       }
+//   },
   methods: {
     CheckIfWantDefault() {
       this.needDefault = !this.needDefault;
@@ -121,14 +127,11 @@ export default {
       this.newItem.values.splice(i, 1);
     },
 
-    // enterDefalutLable(e) {
-    //   this.newItem.defalulValueLabel = e.target.value;
-    // },
+     
     closeBtn() {
       this.$emit("display-element");
       let title = document.getElementById("element_setting");
       title.classList.remove("active");
-      //console.log("title", title);
     },
 
     addOptions() {
@@ -150,75 +153,8 @@ export default {
 .Element_setting_option {
   padding: 0 30px 30px 30px;
 }
-.inputLabel p,
-.inputLablAlign p {
-  margin-bottom: 5px;
-  font-size: 1.1rem;
-  /* font-weight: 600; */
-}
-
-.inputLabel input {
-  width: 100%;
-  height: 30px;
-  /* border-radius: 7px; */
-  border: none;
-  padding-left: 10px;
-  color: #333;
-}
-
-.inputLabel,
-.inputLablAlign {
-  margin-bottom: 17px;
-}
-.inputLablAlign button {
-  border: none;
-  padding: 10px 17px;
-  border-radius: 2px;
-  background: #192a6b;
-  font-weight: 600;
-  color: #fff;
-}
-.inputLablAlign > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.inputLablAlign > div button {
-  flex: 1;
-}
-.element_setting {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 0;
-  z-index: 99;
-  background: #6868ac;
-  color: #fff;
-  transition: 0.3s;
-  display: none;
-  transform: translateX(-30%);
-}
-.element_setting.active {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 30%;
-  z-index: 99;
-  background: #6868ac;
-  color: #fff;
-  display: block;
-  transform: translateX(0);
-  height: calc(100vh - 80px);
-    overflow: hidden;
-    overflow-y: scroll;
-}
-.element_setting.active::-webkit-scrollbar {
-  display: none;
-}
-.defaultCheckboxtStyle p {
-  margin-bottom: 0;
-}
+  
+ 
 .defaultCheckboxtStyle {
   display: flex;
   align-items: center;
@@ -228,57 +164,5 @@ export default {
 input[type="text"] {
   width: 100%;
 }
-
-button.deleteStyle {
-  position: absolute;
-  right: 0;
-  background: transparent;
-  border: none;
-  font-weight: 600;
-  color: gray;
-  font-family: cursive;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.inputWithDeleteStyle {
-  position: relative;
-}
-.optionSelectBoxStyle div {
-  flex: 1;
-  margin-bottom: 10px
-}
-.optionSelectBoxStyle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 7px;
-}
-p {
-  margin-bottom: 4px;
-}
-.defaultCheckboxtStyle input {
-  outline: 1px solid #fff;
-}
-button.AddButtonStyle {
-  margin-top: 12px;
-  width: 100%;
-  background: #192a6b;
-  border: none;
-  padding: 0;
-  font-size: 30px;
-  font-weight: 800;
-  font-family: cursive;
-  color: #fff;
-  line-height: 37px;
-}
-.closeBtn img {
-  width:34px;
-  background: #fff;
-  padding: 10px;
-  cursor: pointer;
-}
-.closeBtn {
-  text-align: right;
-}
+  
 </style>

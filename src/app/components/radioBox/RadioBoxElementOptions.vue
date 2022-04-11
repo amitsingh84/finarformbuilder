@@ -11,12 +11,12 @@
         <input type="text" v-model="this.newItem.label" />
       </div>
       <div class="inputLabel">
-        <p>Insturctions</p>
+        <p>instructions</p>
         <input
           type="text"
           name="nameDesc"
           id="nameDesc"
-          v-model="this.newItem.Insturctions"
+          v-model="this.newItem.instructions"
         />
       </div>
       <div class="form-check form-switch requiredStyle">
@@ -44,7 +44,7 @@
       </div>
       <div class="mb-3 optionSelectionStyle">
         <div  v-if="newItem.id==item.id">
-          <p>Select choise</p>
+          <p>Select Choice</p>
           <div
             class="optionSelectBoxStyle"
             v-for="(item, index) in newItem.values"
@@ -77,7 +77,7 @@
         <input
           type="checkbox"
           name="checkDefault"
-          @click="CheckIfOtherChoise"
+          @click="CheckIfOtherChoice"
         />
       </div>
     </element-properties>
@@ -146,7 +146,7 @@ export default {
       console.log(this.newItem);
       this.newItem.align = e.target.value;
     },
-    CheckIfOtherChoise() {
+    CheckIfOtherChoice() {
       this.newItem.values.push("Others");
     },
   },

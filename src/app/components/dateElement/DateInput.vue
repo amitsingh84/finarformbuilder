@@ -1,31 +1,20 @@
 <template>
   <div>
     <div class="inputNameStyle">
-      <p :style="!item.align?'text-align:left;': `text-align:${item.align}`">
-        <label >{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
+      <p :style="!item.align ? 'text-align:left;' : `text-align:${item.align}`">
+        <label>{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
       <div class="inputFullNameRow">
-         
-        <!-- <input
-          class="input cursorPointerStyle"
-          name="Date"
-          placeholder="Date"
-          :id="`date${id}`"
-          type="date"
-          readonly
-          :required=item.isRequired
-          min="2022-06-04" max="2022-12-31"
-        /> -->
-        <!-- <input type="date" v-model="selected">
-        <input type="time" v-model="selected"> -->
-        <datepicker 
-    v-model="date"
-    :enableTimePicker="false"  
-    :disabledWeekDays="[6, 0]"
-    :minDate="new Date()"
-  />
-    <Datepicker v-model="time" timePicker :is24="false" />
-       
+        <datepicker
+          v-model="date"
+          :enableTimePicker="false"
+          :disabledWeekDays="[6, 0]"
+          :format="dateFormateStyle"
+        />
+       <div v-if="newItem.isTimeActive">
+
+        <Datepicker v-model="time" timePicker :is24="false" />
+       </div>
       </div>
       <div>
         <show-delete-setting
@@ -34,32 +23,41 @@
         />
       </div>
     </div>
-
-  
   </div>
 </template>
 <script>
-import { ref } from 'vue';
+import { ref } from "vue";
 import ShowDeleteSetting from "../ShowDeleteSetting.vue";
-import Datepicker from '@vuepic/vue-datepicker';
-    import '@vuepic/vue-datepicker/dist/main.css';
-"use strict";
-    const date = ref(new Date());
-    const time = ref(new Date());
+import Datepicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+import DateFormat from "../../mixin/DateFormat";
+("use strict");
+
 export default {
-  components: { ShowDeleteSetting,Datepicker },
-        
-       
+  setup() {
+        const date = ref(new Date());
+        const time = ref(new Date());
+        const dayMonthYear = (date) => {
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            return `${year}/${month}/${day}`;
+        }
+        return {
+             date, time,dayMonthYear
+        }
+    },
+  components: { ShowDeleteSetting, Datepicker },
+  mixins: [DateFormat],
+
   data() {
     return {
-      selected:new Date(),
-      date,time
+      newItem:this.item
     };
   },
   props: ["item", "elementId"],
 
   methods: {
-     
     deleteDataId() {
       this.$emit("delete-data-id", this.elementId);
     },
@@ -72,18 +70,30 @@ export default {
         newtitle.classList.add("active");
       }, 1);
     },
-alignData(){
-  console.log('text-align:left', this.item.align);
-}
+    alignData() {
+      console.log("text-align:left", this.item.align);
+    },
     // showProperties(){
     //   // alert(this.id)
     //   this.$emit('show-element-setting',this.id)
     //   // this.showElementSettings=!this.showElementSettings
     // }
   },
+   computed: {
+        dateFormateStyle() {
+          return this.dayMonthYear
+            // if (this.newItem.dateFormate == 'mm/dd/yy') {
+            //     return this.dayMonthYear
+            // }
+            // else{
+            //   return
+            // }
+        }
+    },
 
   mounted() {
     //console.log(this.item);
+   
   },
 };
 </script>
@@ -106,7 +116,7 @@ alignData(){
 .inputNameStyle {
   border-radius: 7px;
   /* border: 1px solid; */
-   padding: 14px 30px;
+  padding: 14px 30px;
   cursor: move;
   position: relative;
   margin: 4px 0;
@@ -137,13 +147,13 @@ alignData(){
 .inputNameStyle .cursorPointerStyle {
   cursor: move;
 }
-.buttonStyle{
+.buttonStyle {
   display: none;
 }
-.inputNameStyle:hover{
+.inputNameStyle:hover {
   background-color: #bfb6b645;
 }
-.inputNameStyle:hover .buttonStyle{
+.inputNameStyle:hover .buttonStyle {
   display: unset;
 }
 select#selecttitle {
@@ -298,5 +308,8 @@ select#selecttitle {
   transition: top 0.15s ease, transform 0.15s ease;
   width: 36px;
   z-index: 2;
+}
+.inputFullNameRow > div {
+    flex: 1;
 }
 </style>

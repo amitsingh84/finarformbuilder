@@ -78,12 +78,12 @@
               />
               <radio-box-element-options
                 @display-element="dispalyElement"
-                v-if="items.name == 'Single Choise'"
+                v-if="items.name == 'Single Choice'"
                 :item="items"
                 :id="newId"
               />
               <check-box-element-options @display-element="dispalyElement"
-                v-if="items.name == 'Multiple Box'"
+                v-if="items.name == 'Multiple Choice'"
                 :item="items"
                 :id="newId"/>
                 <message-element-options @display-element="dispalyElement"
@@ -289,7 +289,8 @@ export default {
           name: item.name,
           id: this.elIndex,
           isRequired: item.isRequired,
-          label: item.label
+          label: item.label,
+          addressOptions:item.addressOptions
         };
       }
        if (item.name == "Heading") {
@@ -302,7 +303,7 @@ export default {
           description:item.description
         };
       }
-      if (item.name == "Single Choise") {
+      if (item.name == "Single Choice") {
         return {
           type: item.type,
           name: item.name,
@@ -313,7 +314,7 @@ export default {
           isSelected:item.isSelected
         };
       }
-      if (item.name == "Multiple Box") {
+      if (item.name == "Multiple Choice") {
         return {
           type: item.type,
           name: item.name,
@@ -342,8 +343,9 @@ export default {
           id: this.elIndex,
           isRequired: item.isRequired,
           label: item.label,
-          values:item.values,
-          isSelected:item.isSelected
+          isTimeActive:item.isTimeActive,
+          timeFormat:item.timeFormat,
+          dateFormat:item.dateFormat
         };
       }
     },

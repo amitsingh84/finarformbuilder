@@ -11,12 +11,12 @@
         <input type="text" v-model="this.newItem.label" />
       </div>
       <div class="inputLabel">
-        <p>Insturctions</p>
+        <p>instructions</p>
         <input
           type="text"
           name="nameDesc"
           id="nameDesc"
-          v-model="this.newItem.Insturctions"
+          v-model="this.newItem.instructions"
         />
       </div>
       <div class="form-check form-switch requiredStyle">
@@ -33,6 +33,19 @@
         <input type="text" v-model="this.newItem.placeholder" />
       </div> -->
     </element-properties>
+     <element-properties accordionHeaderId="2">
+      <template v-slot:elementHeading>OPTIONS</template>
+      <div class="inputLabel">
+        <p>Address Options</p>
+       <select v-model="this.newItem.addressOptions">
+         <option value="Universal">Universal</option>
+         <option value="German">German</option>
+         <option value="United State">United State</option>
+         
+       </select>
+      </div>
+     
+    </element-properties>
   </div>
 </template>
 <script>
@@ -45,37 +58,28 @@ export default {
       showHideData: false,
       prefix: false,
       newItem: this.item,
+      addressOptions:'Universal'
     };
   },
   props: ["id", "item"],
-  // watch: {
-  //   tt() {
-  //     this.newItem.label = this.enterLable;
-  //   },
-  // },
+  
   methods: {
     enterLable(e) {
       this.newItem.label = e.target.value;
     },
  
     showPrefix() {
-      // this.prefix = !this.prefix;
       this.newItem.prefix = !this.newItem.prefix;
     },
     closeBtn() {
       this.$emit("display-element");
       let title = document.getElementById("element_setting");
       title.classList.remove("active");
-      //console.log("title", title);
     },
     checkRequired() {
       this.newItem.isRequired = !this.newItem.isRequired;
     },
-    // showElementSetting() {
-    //   let newtitle = document.getElementById("element_setting");
-    //   newtitle.classList.add("active");
-    //   //console.log("title", newtitle);
-    // },
+    
     checkAlign(e) {
       console.log(e);
       console.log(this.newItem);
@@ -94,76 +98,8 @@ export default {
 .Element_setting_option {
   padding: 0 30px 30px 30px;
 }
-.inputLabel p,
+
 .inputLablAlign p {
   margin-bottom: 5px;
   font-size: 1.1rem; 
-}
-
-.inputLabel input {
-  width: 100%;
-  height: 30px; 
-  border: none;
-  padding-left: 10px;
-}
-
-.inputLabel,
-.inputLablAlign {
-  margin-bottom: 17px;
-}
-.inputLablAlign button {
-  border: none;
-  padding: 10px 17px;
-  border-radius: 2px;
-  background: #192a6b;
-  font-weight: 600;
-  color: #fff;
-}
-.inputLablAlign > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.inputLablAlign > div button {
-  flex: 1;
-}
-.element_setting {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 0;
-  z-index: 99;
-  background: #6868ac;
-  color: #fff;
-  transition: 0.3s;
-  display: none;
-  transform: translateX(-30%);
-}
-.element_setting.active {
- position: absolute;
-  right: 0;
-  top: 0;
-  width: 30%;
-  z-index: 99;
-  background: #6868ac;
-  color: #fff;
-  display: block;
-  transform: translateX(0);
-  height: calc(100vh - 80px);
-  overflow: hidden;
-  overflow-y: scroll;
-}
-.element_setting.active::-webkit-scrollbar {
-  display: none;
-}
-.closeBtn img {
-  width:34px;
-  background: #fff;
-  padding: 10px;
-  cursor: pointer;
-}
-.closeBtn {
-  text-align: right;
-}
-</style>
+}</style>

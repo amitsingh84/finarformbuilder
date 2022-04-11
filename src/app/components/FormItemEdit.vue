@@ -19,10 +19,10 @@
        <div class="edit_option" v-else-if="item.name == 'Heading'">
         <heading-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
-       <div class="edit_option" v-else-if="item.name == 'Single Choise'">
+       <div class="edit_option" v-else-if="item.name == 'Single Choice'">
         <radio-box-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
-       <div class="edit_option" v-else-if="item.name == 'Multiple Box'">
+       <div class="edit_option" v-else-if="item.name == 'Multiple Choice'">
         <check-box-input :item="item" :elementId="elementId" @send-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
       <div class="edit_option" v-else-if="item.name == 'Message'">

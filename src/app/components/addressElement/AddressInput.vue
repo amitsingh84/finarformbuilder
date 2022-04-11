@@ -4,10 +4,80 @@
       <p v-if="item.label">
         <label >{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
-      <p class="instructionStyle" v-if="item.Insturctions ">
-       {{ item.Insturctions }}
+      <p class="instructionStyle" v-if="item.instructions ">
+       {{ item.instructions }}
       </p>
-      <div class="inputFullNameRow inputAddressRow">
+      <div class="inputFullNameRow inputAddressRow" v-if="item.addressOptions=='Universal'">
+         <input
+          class="input cursorPointerStyle"
+          name="Stree Address"
+          placeholder="Stree Address"
+          id="sAddrss"
+          type="text"
+          readonly
+          :required=item.isStreetRequired
+        />
+          <input
+          class="input cursorPointerStyle"
+          name="Stree Address line 2"
+          placeholder="Stree Address Line 2"
+          id="sAddrssl2"
+          type="text"
+          readonly
+          :required=item.isStreet2Required
+        />
+        <div class="inputRowStyle">
+          <input
+          class="input cursorPointerStyle"
+          name="Country"
+          placeholder="Country"
+          id="Country"
+          type="text"
+          readonly
+          :required=item.isCountryRequired
+        />
+          
+          <input
+          class="input cursorPointerStyle"
+          name="State"
+          placeholder="State / Province / Region"
+          id="State"
+          type="text"
+          readonly
+          :required=item.isStateRequired
+        />
+          
+        </div>
+        <div class="inputRowStyle">
+           <input
+          class="input cursorPointerStyle"
+          name="City"
+          placeholder="City/Town"
+          id="City"
+          type="text"
+          readonly
+          :required=item.isCityRequired
+        />
+           <input
+          class="input cursorPointerStyle"
+          name="Zip code"
+          placeholder="Zip / Postal code"
+          id="Zip code"
+          type="text"
+          readonly
+          :required=item.isZipCodeRequired
+        />
+           
+         
+        </div>
+      <div>
+        <show-delete-setting
+          @delete-data-id="deleteDataId"
+          @send-data-id="showDataId"
+        />
+      </div>
+    </div>
+    <div class="inputFullNameRow inputAddressRow" v-if="item.addressOptions=='German'">
          <input
           class="input cursorPointerStyle"
           name="Stree Address"
@@ -29,6 +99,85 @@
         <div class="inputRowStyle">
            <input
           class="input cursorPointerStyle"
+          name="Country"
+          placeholder="Country"
+          id="Country"
+          type="text"
+          readonly
+          :required=item.isCountryRequired
+        />
+           <input
+          class="input cursorPointerStyle"
+          name="Province"
+          placeholder="Province"
+          id="Province"
+          type="text"
+          readonly
+          :required=item.isProvinceRequired
+        />
+         
+           
+        </div>
+        <div class="inputRowStyle">
+          <input
+          class="input cursorPointerStyle"
+          name="City"
+          placeholder="City"
+          id="City"
+          type="text"
+          readonly
+          :required=item.isCityRequired
+        />
+           <input
+          class="input cursorPointerStyle"
+          name="Postal code"
+          placeholder="Postal code"
+          id="Postal code"
+          type="text"
+          readonly
+          :required=item.isPostalCodeRequired
+        />
+         
+          
+        </div>
+      <div>
+        <show-delete-setting
+          @delete-data-id="deleteDataId"
+          @send-data-id="showDataId"
+        />
+      </div>
+    </div>
+      <div class="inputFullNameRow inputAddressRow" v-if="item.addressOptions=='United State'">
+         <input
+          class="input cursorPointerStyle"
+          name="Stree Address"
+          placeholder="Stree Address"
+          id="sAddrss"
+          type="text"
+          readonly
+          :required=item.isStreetRequired
+        />
+          <input
+          class="input cursorPointerStyle"
+          name="Stree Address line 2"
+          placeholder="Stree Address Line 2"
+          id="sAddrssl2"
+          type="text"
+          readonly
+          :required=item.isStreet2Required
+        />
+        <div class="inputRowStyle">
+          <input
+          class="input cursorPointerStyle"
+          name="Country"
+          placeholder="Country"
+          id="Country"
+          type="text"
+          readonly
+          :required=item.isCountryRequired
+        />
+           <input
+          class="input cursorPointerStyle"
           name="City"
           placeholder="City"
           id="City"
@@ -37,17 +186,10 @@
           :required=item.isCityRequired
         />
          
-           <input
-          class="input cursorPointerStyle"
-          name="State"
-          placeholder="State"
-          id="State"
-          type="text"
-          readonly
-          :required=item.isStateRequired
-        />
+          
         </div>
         <div class="inputRowStyle">
+          
            <input
           class="input cursorPointerStyle"
           name="Zip code"
@@ -57,16 +199,16 @@
           readonly
           :required=item.isZipCodeRequired
         />
-         
-           <input
+            <input
           class="input cursorPointerStyle"
-          name="Country"
-          placeholder="Country"
-          id="Country"
+          name="State"
+          placeholder="State"
+          id="State"
           type="text"
           readonly
-          :required=item.isCountryRequired
+          :required=item.isStateRequired
         />
+         
         </div>
       <div>
         <show-delete-setting
@@ -204,43 +346,10 @@ select#selecttitle {
   cursor: pointer;
   outline: none;
 }
-/* .element_setting {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 30%;
-    z-index: 99;
-    background: #6868ac;
-    color: #fff;
-} */
-/* .showElementSetting {
-  position: absolute;
-  right: -11px;
-  top: 70%;
-  transform: translateY(-50%);
-  background: #000;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  color: #000;
-  cursor: pointer;
-} */
+ 
 .showElementSettingg,
 .showElementSetting {
-  /* position: absolute;
-    right: -11px;
-    top: 40%;
-    transform: translateY(-50%);
-    background: #49515a;
-    border-radius: 18px;
-    min-width: 34px;
-    height: 34px;
-    color: #fff;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-     padding: 0 8px; */
+   
   align-items: center;
   background: #49515a;
   border: 0;
@@ -287,49 +396,7 @@ select#selecttitle {
   /* margin-left: 6px; */
   display: none;
 }
-.showElementSettingg:hover span,
-.showElementSetting:hover span {
-  /* display: inline-block; */
-}
-/* .element_setting h4 {
-    text-align: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #fff;
-    margin-bottom: 19px;
-}
-.Element_setting_option {
-    padding: 0 30px 30px 30px;
-}
-.inputLabel p,.inputLablAlign p {
-    margin-bottom: 5px;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
  
-
-.inputLabel input {
-    width: 100%;
-    height: 30px;
-    border-radius: 7px;
-    border: none;
-}
-
-.inputLabel,.inputLablAlign {
-    margin-bottom: 17px;
-}
-.inputLablAlign button {
-    border: none; 
-    padding: 10px 17px;
-    border-radius: 2px;
-    background: #192a6b;
-    font-weight: 600;
-    color: #fff;
-}
-.inputLablAlign > div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-} */
 
 .inputLablAlign > div button {
   flex: 1;

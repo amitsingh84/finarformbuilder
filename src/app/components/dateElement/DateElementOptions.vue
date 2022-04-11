@@ -12,12 +12,12 @@
         <input type="text" v-model="this.newItem.label" />
       </div>
       <div class="inputLabel">
-        <p>Insturctions</p>
+        <p>instructions</p>
         <input
           type="text"
           name="nameDesc"
           id="nameDesc"
-          v-model="this.newItem.Insturctions"
+          v-model="this.newItem.instructions"
         />
       </div>
       <div class="form-check form-switch requiredStyle">
@@ -34,36 +34,30 @@
     <element-properties accordionHeaderId="2">
       <template v-slot:elementHeading>OPTIONS</template>
       <div class="validationSectionStyle">
-          
-
         <div class="inputLabel">
           <p>Date Formate:</p>
           <select
             aria-label="Default select example"
             class=" "
             :id="`dropdown${id}`"
-            v-model="this.newItem.dateFormate"
+            v-model="this.newItem.dateFormat"
           >
             <option value="mm/dd/yy">mm/dd/yy</option>
-            <option value=">dd/mm/yy">dd/mm/yy</option>
+            <option value="dd/mm/yy">dd/mm/yy</option>
             <option value="mm/yy">mm/yy</option>
           </select>
         </div>
         <div class="inputLabel">
           <p>Default Date:</p>
           <select v-model="this.newItem.defaultDate">
-            <option value="none">none</option>
+             
             <option value="current">current</option>
-            <option value="custome">custome</option>
+            <option value="custome" >custome</option>
           </select>
+         
         </div>
-        <div class="inputLabel">
-          <p>Start Weeks On:</p>
-          <select v-model="this.newItem.startWeek">
-            <option value="monday">monday</option>
-            <option value="sunday">sunday</option>
-          </select>
-        </div>
+          <input v-if="newItem.defaultDate=='custome'" type="date">
+        
       </div>
     </element-properties>
     <element-properties accordionHeaderId="3">
@@ -72,19 +66,18 @@
         <p>Time Feild</p>
         <input type="checkbox" v-model="this.newItem.isTimeActive" />
       </div>
-      <div class="inputLabel">
+      <div v-if="newItem.isTimeActive" class="inputLabel">
         <p>Time Formate</p>
-        <select v-model="this.newItem.timeFormate">
+        <select v-model="this.newItem.timeFormat">
           <option value="24 Hour">24 Hour</option>
           <option value="12 Hour">12 Hour</option>
         </select>
       </div>
-      <div class="inputLabel">
+      <div v-if="newItem.isTimeActive" class="inputLabel">
         <p>Default Time</p>
         <select>
-          <option value="none">none</option>
           <option value="current">current</option>
-          <option value="custome">custome</option>
+          <option value="custome" >custome</option>
         </select>
       </div>
     </element-properties>
@@ -105,6 +98,7 @@
             :id="`weekDaysName${index}`"
             checked
             @input="checkDays"
+           
           />
           <label class="form-check-label" :for="`weekDaysName${index}`">
             {{ weekDaysName }}
@@ -115,11 +109,11 @@
       <p>Start & End Date</p>
       <div class="inputLabel">
         <label>Start Date</label>
-        <input type="date" v-model="this.newItem.isTimeActive" />
+        <input type="date" v-model="this.newItem.minDate" />
       </div>
       <div class="inputLabel">
         <label>End Date</label>
-        <input type="date" v-model="this.newItem.isTimeActive" />
+        <input type="date" v-model="this.newItem.maxDate" />
       </div>
     </element-properties>
   </div>
@@ -144,24 +138,39 @@ export default {
         "Friday",
         "Saturday",
       ],
-      dateFormate:'mm/dd/yy',
-      defaultDate:'none',
-      startWeek:'monday'
+      dateFormat: "mm/dd/yy",
+      defaultDate: "current",
+      startWeek: "monday",
+      timeFormat: "",
+      customeDate:false,
+      uncheckDays:[0,1]
     };
   },
   props: ["id", "item"],
-   mounted() {
-       this.newItem.dateFormate=this.dateFormate
-       this.newItem.defaultDate=this.defaultDate
-       this.newItem.startWeek=this.startWeek
-   },
+  mounted() {
+    this.newItem.dateFormat = this.dateFormat;
+    this.newItem.defaultDate = this.defaultDate;
+    this.newItem.startWeek = this.startWeek;
+  },
+//   watch: {
+// defaultDate(){
+//   if(this.newItem.defaultDate=='custome'){
+//     alert('hi')
+//     this.customeDate=false
+//   }
+// }
+//   },
+
   methods: {
+    
+    
     enterLable(e) {
       this.newItem.label = e.target.value;
     },
-checkDays(e){
-    console.log(e.target.value);
-},
+    checkDays(e) {
+      // this.newItem.uncheckDays.push(e.target.value)
+      console.log(e.target.value);
+    },
     showPrefix() {
       // this.prefix = !this.prefix;
       this.newItem.prefix = !this.newItem.prefix;

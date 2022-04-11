@@ -5,19 +5,16 @@ export const elements = [
       label: "Dropdown",
       className: "form-control",
       name: "Dropdown",
-      access: false,
-      multiple: false,
       icon: "../../app/assets/imgs/h.png",
       defalulValueLabel:'Dropdown',
       values: [
         {
-          label: "Option 1",
-          value: "option-1",
+         
+          value: "Choose Option 1",
          
         },
         {
-          label: "Option 2",
-          value: "option-2",
+           value: "Choose Option 2",
          
         },
         
@@ -48,11 +45,12 @@ export const elements = [
     label:"Phone Number"
   },
   {
-    type: "textarea",
+    type: "text",
     name: "Address",
     container: true,
     row: true,
-    label:"Address"
+    label:"Address",
+    addressOptions:"Universal"
   },
 
   {
@@ -64,8 +62,8 @@ export const elements = [
 
   {
     type: "radio",
-    name: "Single Choise",
-     label:"Single Choise",
+    name: "Single Choice",
+     label:"Single Choice",
      values:[
         'Male',
         'Female'
@@ -74,7 +72,7 @@ export const elements = [
 
   {
     type: "checkbox",
-    name: "Multiple Box",
+    name: "Multiple Choice",
      label:"checkbox",
      values:[
        'one',
@@ -94,8 +92,9 @@ export const elements = [
     type: "date",
     name: "Date",
      label:"Date",
-     dateFormate: "mm/dd/yy"
-     
+     dateFormat: "mm/dd/yy",
+     isTimeActive: false,
+     timeFormat:'12 Hour'
   },
   {
     type: "time",

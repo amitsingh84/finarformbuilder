@@ -1,32 +1,34 @@
 <template>
   <div>
-    <div class="selectStyle">
-      <label>{{ item.label }}</label>
-
-      <select class="form-select" aria-label="Default select example">
-        <option selected>
-          {{
-            item.defalulValueLabel == "Select"
-              ? "Select"
-              : item.defalulValueLabel
-          }}
-        </option>
-        <option
-          v-for="(itemm, index) in item.values"
-          :key="index"
-          value="1"
-          :hidden="item.defalulValueLabel == itemm.value"
-        >
-          {{ itemm.value }}
-        </option>
-      </select>
-      <div>
-        <show-delete-setting
-          @delete-data-id="deleteDataId"
-          @send-data-id="showDataId"
-        />
+      <div class="selectStyle">
+        <label>{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
+        <p v-if="item.instructions" class="subHeding">{{item.instructions}}</p>
+        <select class="form-select" aria-label="Default select example">
+          <option selected >
+            {{
+              item.defalulValueLabel == "Select"
+                ? "Select"
+                : item.defalulValueLabel
+                 
+            }}
+          </option>
+          <option
+            v-for="(itemm, index) in item.values"
+            :key="index"
+            value="1"
+            :hidden="item.defalulValueLabel == itemm.value"
+             
+          >
+            {{ itemm.value }}
+          </option>
+        </select>
+        <div>
+          <show-delete-setting
+            @delete-data-id="deleteDataId"
+            @send-data-id="showDataId"
+          />
+        </div>
       </div>
-    </div>
   </div>
 </template>
 
