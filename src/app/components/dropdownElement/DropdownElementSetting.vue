@@ -62,7 +62,8 @@
               <input
                 type="text"
                 v-model="this.newItem.values[index].value"
-                :name="item"
+                :name="newItem.values[index].value"
+                :class="`dsfsdf_${index}`"
               />
               <button class="deleteStyle" @click="deleteItem(index)">X</button>
             </div>
@@ -74,8 +75,19 @@
               :checked="item.value == newItem.defalulValueLabel"
             />
           </div>
-          <button class="AddButtonStyle" @click="addOptions">+</button>
+          <button class="AddButtonStyle" @click="addOptions(id)">+</button>
         </div>
+      </div>
+    </element-properties>
+     <element-properties accordionHeaderId="4">
+      <template v-slot:elementHeading>OPTIONS</template>
+      <div class="optionsLabelStyle">
+        <p>Hide field:</p>
+        <input type="checkbox" v-model="this.newItem.hideField" />
+      </div>
+      <div class="optionsLabelStyle">
+        <p>Readonly field:</p>
+        <input type="checkbox" v-model="this.newItem.readonlyField" />
       </div>
     </element-properties>
     <div class="Element_setting_option"></div>
@@ -95,7 +107,7 @@ export default {
       needDefault: true,
       test: {
         value: "",
-        isDefault: false,
+         
       },
       instructionsLabel: "",
       label: "",
@@ -134,11 +146,12 @@ export default {
       title.classList.remove("active");
     },
 
-    addOptions() {
-      if(this.newItem.values){
+    addOptions(id) {
+     
         this.newItem.values.push(this.test);
+        console.log(id);
          
-      }
+      
     },
   },
 };

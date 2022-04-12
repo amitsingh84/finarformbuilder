@@ -20,6 +20,12 @@
           v-model="this.newItem.instructions"
         />
       </div>
+      <div class="inputLabel">
+        <p>Place Holder</p>
+        <input type="text" v-model="this.newItem.fplaceholder" />
+      <p></p>
+        <input type="text" v-model="this.newItem.lplaceholder" />
+      </div>
       <div class="form-check form-switch requiredStyle">
         <input
           class="form-check-input"
@@ -54,7 +60,17 @@
         <label class="form-check-label" for="prefixStyles">Show Prefix</label>
       </div>
      </element-properties>
-    
+     <element-properties accordionHeaderId="4">
+      <template v-slot:elementHeading>OPTIONS</template>
+      <div class="optionsLabelStyle">
+        <p>Hide field:</p>
+        <input type="checkbox" v-model="this.newItem.hideField" />
+      </div>
+      <div class="optionsLabelStyle">
+        <p>Readonly field:</p>
+        <input type="checkbox" v-model="this.newItem.readonlyField" />
+      </div>
+    </element-properties>
   </div>
 </template>
 <script>

@@ -38,7 +38,7 @@
           type="checkbox"
           name="checkDefault"
            v-model="this.newItem.needDefault"
-          :checked="needDefault"
+          
           @click="CheckIfWantDefault"
         />
       </div>
@@ -62,11 +62,13 @@
               </button>
             </div>
             <input
-              v-if="needDefault"
+              v-if="newItem.needDefault"
               type="radio"
               name="default"
-              @click="isDataDefault(item, index)"
-              :checked="item.value == newItem.defalulValueLabel"
+              :value="newItem.values[index]"
+              v-model="this.newItem.defalulValueLabel"
+              
+               
             />
           </div>
           <button class="AddButtonStyle" @click="addFeild(id)">+</button>
@@ -81,15 +83,18 @@
         />
       </div>
     </element-properties>
-
-    <!-- <div class="inputLablAlign">
-        <p>Label Align</p>
-        <div>
-          <button @click="checkAlign" value="left">Left</button
-          ><button @click="checkAlign" value="center">Center</button
-          ><button value="right" @click="checkAlign">Right</button>
-        </div>
-      </div> -->
+ <element-properties accordionHeaderId="4">
+      <template v-slot:elementHeading>OPTIONS</template>
+      <div class="optionsLabelStyle">
+        <p>Hide field:</p>
+        <input type="checkbox" v-model="this.newItem.hideField" />
+      </div>
+      <div class="optionsLabelStyle">
+        <p>Readonly field:</p>
+        <input type="checkbox" v-model="this.newItem.readonlyField" />
+      </div>
+    </element-properties>
+    
   </div>
 </template>
 <script>
@@ -103,22 +108,23 @@ export default {
       prefix: false,
       newItem: this.item,
       test: "",
-      needDefault: true,
     };
   },
   props: ["id", "item"],
 
   methods: {
     CheckIfWantDefault() {
-      this.needDefault = !this.needDefault;
-      if (this.needDefault == false) {
+      // this.newItem.needDefault=true
+      console.log(this.newItem.needDefault);
+     if (this.newItem.needDefault == true) {
         this.newItem.defalulValueLabel = "select";
       }
     },
+     
     addFeild(id) {
       //  let newData= this.newItem.values.find(element => element);
       // console.log(this.newItem.indexOf(this.newItem));
-      // this.newItem[1].values.push(this.test)
+      this.newItem.values.push(this.test)
       console.log(id);
       console.log(this.newItem);
     },
@@ -135,7 +141,7 @@ export default {
       this.$emit("display-element");
       let title = document.getElementById("element_setting");
       title.classList.remove("active");
-      //console.log("title", title);
+       
     },
     checkRequired() {
       this.newItem.isRequired = !this.newItem.isRequired;

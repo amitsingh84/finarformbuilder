@@ -1,9 +1,10 @@
 <template>
   <div>
     <div class="inputNameStyle">
-      <p :style="!item.align?'text-align:left;': `text-align:${item.align}`">
+      <p>
         <label >{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
+      <p class="instructionStyle">{{item.instructions}}</p>
       <div class="inputFullNameRow">
         <select name="selectprfix" id="selecttitle" v-if="item.prefix">
           <option value="mr">Mr</option>
@@ -12,7 +13,7 @@
         <input
           class="input cursorPointerStyle"
           name="first name"
-          placeholder="First Name"
+          :placeholder="item.fplaceholder==null?'First Name':item.fplaceholder"
           id="fname"
           type="text"
           readonly
@@ -22,7 +23,7 @@
           type="text"
           name="last name"
           id="lname"
-          placeholder="Last Name"
+          :placeholder="item.lplaceholder==null?'Last Name':item.lplaceholder"
           readonly
           class="cursorPointerStyle"
           :required=item.isRequired
@@ -105,11 +106,11 @@ alignData(){
   margin: 4px 0;
   /* padding-bottom: 24px; */
 }
-.inputNameStyle p {
+/* .inputNameStyle p {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 7px;
-}
+} */
 .inputFullNameRow input {
   height: 35px;
   padding-left: 10px;

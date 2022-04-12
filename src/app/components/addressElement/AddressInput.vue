@@ -268,11 +268,7 @@ alignData(){
 };
 </script>
 <style scoped>
-.inputNameStyle p.instructionStyle {
-    font-weight: 400;
-    font-size: 15px;
-    margin-bottom: 0;
-}
+ 
 .content_block {
   height: calc(100vh - 100px);
 }
@@ -282,9 +278,7 @@ alignData(){
   flex-direction: column;
 }
 
- .inputFullNameRow.inputAddressRow {
-    padding-top: 17px;
-}
+  
  
 .inputNameStyle {
   border-radius: 7px;
@@ -294,11 +288,7 @@ alignData(){
   margin: 10px 0;
   padding-bottom: 24px;
 }
-.inputNameStyle p {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 0;
-}
+ 
 textarea#adderss {
     border: 1px solid #ced4da;
     padding-left: 10px;

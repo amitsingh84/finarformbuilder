@@ -4,7 +4,7 @@
       <!-- <p :style="!item.align?'text-align:left;': `text-align:${item.align}`">
         <label >{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p> -->
-      <div class="inputFullNameRow" :style="!item.align?'text-align:left;': `text-align:${item.align}`">
+      <div class=" " :style="!item.align?'text-align:left;': `text-align:${item.align}`">
           <h1>{{item.label}}</h1>
          
          

@@ -65,6 +65,7 @@
         <input type="checkbox" v-model="this.newItem.readonlyField" />
       </div>
     </element-properties>
+    
     <!-- <div class="Element_setting_option"> -->
 
     <!-- <div class="inputLablAlign">

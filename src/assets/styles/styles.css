@@ -1,138 +1,154 @@
-.inputLabel, .inputLablAlign {
-    margin-bottom: 17px;
+.inputLabel,
+.inputLablAlign {
+  margin-bottom: 17px;
 }
-.subHeding {
-    margin-bottom: 5px;
-    font-size: 1rem;
+.inputNameStyle .subHeding {
+  margin-bottom: 5px;
+  font-size: 1rem;
+  font-weight: 400;
+}
+.inputNameStyle p {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 0;
 }
 .inputLabel input {
   width: 100%;
-  height: 30px; 
+  height: 30px;
   border: none;
   padding-left: 10px;
 }
-.optionSectionStyle > div{margin-bottom: 17px;}
-input[type="text"],input[type="email"],input[type="number"] {
-    width: 100%;
+.inputNameStyle p.instructionStyle, p.instructionStyle ,p.subHeding {
+  font-weight: 400;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.optionSectionStyle > div {
+  margin-bottom: 17px;
+}
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+  width: 100%;
 }
 .elementPropsBlock .accordion-body[data-v-31ca851e] {
-    background: transparent;
-    padding-top: 0;
+  background: transparent;
+  padding-top: 0;
 }
 .elementPropsBlock .accordion-item[data-v-31ca851e] {
-    background-color: #6868ac;
-    border: 0;
-    border-radius: 0;
-    border-bottom: 1px solid #fff3;
+  background-color: #6868ac;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #fff3;
 }
 .inputLablAlign button {
-    border: none;
-    padding: 10px 17px;
-    border-radius: 2px;
-    background: #192a6b;
-    font-weight: 600;
-    color: #fff;
-  }
-  .inputLablAlign > div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-  }
-  button.deleteStyle {
-    position: absolute;
-    right: 0;
-    background: transparent;
-    border: none;
-    font-weight: 600;
-    color: gray;
-    font-family: cursive;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .inputWithDeleteStyle {
-    position: relative;
-  }
-  .optionSelectBoxStyle div {
-    flex: 1;
-    margin-bottom: 10px
-  }
-  button.AddButtonStyle {
-    margin-top: 12px;
-    width: 100%;
-    background: #192a6b;
-    border: none;
-    padding: 0;
-    font-size: 30px;
-    font-weight: 800;
-    font-family: cursive;
-    color: #fff;
-    line-height: 37px;
-  }
-  input[type="text"] {
-    width: 100%;
-  }
-  .optionSelectBoxStyle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 7px;
-  }
-  .inputLablAlign > div button {
-    flex: 1;
-  }
-  .element_setting {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 0;
-    z-index: 99;
-    background: #6868ac;
-    color: #fff;
-    transition: 0.3s;
-    display: none;
-    transform: translateX(-30%);
-  }
-  .element_setting.active {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 30%;
-    z-index: 99;
-    background: #6868ac;
-    color: #fff;
-    display: block;
-    transform: translateX(0);
-    height: calc(100vh - 80px);
-      overflow: hidden;
-      overflow-y: scroll;
-  }
-  .element_setting.active::-webkit-scrollbar {
-    display: none;
-  }
-  .closeBtn img {
-    width:34px;
-    background: #fff;
-    padding: 10px;
-    cursor: pointer;
-  }
-  .closeBtn {
-    text-align: right;
-  }
-  .defaultCheckboxtStyle p {
-      margin-bottom: 0;
-  }
-  .defaultCheckboxtStyle {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 15px;
-      align-items: center;
-  }
-  .optionSelectionStyle p {
-      margin-bottom: 8px;
-  }
-  .prefillSectionStyle textarea {
-    width: 100%;
+  border: none;
+  padding: 10px 17px;
+  border-radius: 2px;
+  background: #192a6b;
+  font-weight: 600;
+  color: #fff;
+}
+.inputLablAlign > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+button.deleteStyle {
+  position: absolute;
+  right: 0;
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  color: gray;
+  font-family: cursive;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.inputWithDeleteStyle {
+  position: relative;
+}
+.optionSelectBoxStyle div {
+  flex: 1;
+  margin-bottom: 10px;
+}
+button.AddButtonStyle {
+  margin-top: 12px;
+  width: 100%;
+  background: #192a6b;
+  border: none;
+  padding: 0;
+  font-size: 30px;
+  font-weight: 800;
+  font-family: cursive;
+  color: #fff;
+  line-height: 37px;
+}
+input[type="text"] {
+  width: 100%;
+}
+.optionSelectBoxStyle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 7px;
+}
+.inputLablAlign > div button {
+  flex: 1;
+}
+.element_setting {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+  z-index: 99;
+  background: #6868ac;
+  color: #fff;
+  transition: 0.3s;
+  display: none;
+  transform: translateX(-30%);
+}
+.element_setting.active {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30%;
+  z-index: 99;
+  background: #6868ac;
+  color: #fff;
+  display: block;
+  transform: translateX(0);
+  height: calc(100vh - 80px);
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.element_setting.active::-webkit-scrollbar {
+  display: none;
+}
+.closeBtn img {
+  width: 34px;
+  background: #fff;
+  padding: 10px;
+  cursor: pointer;
+}
+.closeBtn {
+  text-align: right;
+}
+.defaultCheckboxtStyle p {
+  margin-bottom: 0;
+}
+.defaultCheckboxtStyle {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  align-items: center;
+}
+.optionSelectionStyle p {
+  margin-bottom: 8px;
+}
+.prefillSectionStyle textarea {
+  width: 100%;
 }
 .optionLabelField {
   display: flex;
@@ -146,11 +162,68 @@ input[type="text"],input[type="email"],input[type="number"] {
   font-weight: 600;
   margin-bottom: 0;
 }
-.inputSubHeaderStyle{
+.inputSubHeaderStyle {
   font-size: 14px;
   margin-bottom: 7px;
 }
-.inputTextArea textarea{
+.inputTextArea textarea {
   width: 100%;
   padding-left: 10px;
+}
+/*-------full name start--------------------*/
+.inputFullNameRow {
+  display: flex;
+  gap: 18px;
+}
+
+.inputNameStyle .cursorPointerStyle {
+  cursor: move;
+}
+select#selectTitle {
+  border-radius: 7px;
+  border: 1px solid #ced4da;
+  cursor: pointer;
+  outline: none;
+}
+ 
+.inputFullNameRow > select {
+  flex: 0.1;
+}
+.nameForm p.nameLabel {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+.inputFullNameRow input {
+  height: 35px;
+  padding-left: 10px;
+  border-radius: 7px;
+  border: 1px solid #ced4da;
+  box-shadow: none;
+  outline: none;
+}
+
+.inputFullNameRow input {
+  flex: 1;
+}
+
+input[type="text"] {
+  width: 100%;
+}
+.inputFullNameRow > div{
+  flex: 1;
+}
+/*---------full name end----------------*/
+
+optionsLabelStyle {
+  display: flex;
+  justify-content: space-between;
+}
+input.input.cursorPointerStyle.invalidInputStyle {
+  border-color: #d28b8b;
+  /* box-shadow: 1px 1px 5px #e19090; */
+}
+p.invalidText {
+  font-size: 10px;
+  color: #d28b8b;
 }

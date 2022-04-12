@@ -4,25 +4,25 @@
       <p :style="!item.align ? 'text-align:left;' : `text-align:${item.align}`">
         <label>{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
-      <div class="inputFullNameRow">
+      <div class="">
 
-        <div class="form-check" v-for="(data,i) in item.values" :key="i">
-            
+        <div class="form-check" >
+            <div class="formCheckStyle row">
+              <div class="col-md-6" v-for="(data,i) in item.values" :key="i">
           <input
             class="form-check-input"
-            type="radio"
+            type="checkbox"
             :value="data"
             id="flexCheckDefault"
             @input="checkBoxData"
-            :checked="data.isSelected"
-           readonly
-           name="t"
+           :name="data"
           />
           <label class="form-check-label" for="flexCheckDefault">
             {{data}}
           </label>
         </div>
-
+            </div>
+        </div>
         <div>
           <show-delete-setting
             @delete-data-id="deleteDataId"
@@ -139,7 +139,7 @@ select#selecttitle {
   outline: none;
 }
 .inputNameStyle.inputCheckbox input {
-    border-radius: 50%;
+    
     height: 15px;
     width:15px
 }

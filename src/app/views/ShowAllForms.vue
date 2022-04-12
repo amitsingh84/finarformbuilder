@@ -9,8 +9,7 @@
           <!-- {{item.name}} -->
           <div v-if="item.name == 'Full Name'">
             <full-name-form :item="item" />
-          </div>
-           
+          </div>           
           <div v-else-if="item.name == 'Email Address'">
             <email-address-form :item="item" />
           </div>
@@ -23,23 +22,42 @@
           <div v-else-if="item.name == 'Heading'">
             <heading-form :item="item"/>
           </div>
-          <div v-else-if="item.name == 'select'"></div>
+           
           <div v-else-if="item.name == 'Dropdown'">
             <drop-down-forms :item="item" />
           </div>
+           <div v-else-if="item.name == 'Single Choice'">
+            <single-choice-form :item="item" />
+          </div>
+           <div v-else-if="item.name == 'Multiple Choice'">
+            <multiple-choice-form :item="item" />
+          </div>
+           <div v-else-if="item.name == 'Message'">
+            <message-form :item="item" />
+          </div>
+           <div v-else-if="item.name == 'Date'">
+            <date-form :item="item" />
+          </div>
         </div>
+        <div class="submitBtn">
+
         <button type="submit">Submit</button>
+        </div>
       </div>
     </form>
   </div>
 </template>
 <script>
 import AddressForm from './viewAllForms/AddressForm.vue';
+import DateForm from './viewAllForms/DateForm.vue';
 import DropDownForms from "./viewAllForms/DropDownForm.vue";
 import EmailAddressForm from "./viewAllForms/EmailAddressForm.vue";
 import FullNameForm from "./viewAllForms/FullNameForm.vue";
 import HeadingForm from "./viewAllForms/HeadingForm.vue";
+import MessageForm from './viewAllForms/MessageForm.vue';
+import MultipleChoiceForm from './viewAllForms/MultipleChoiceForm.vue';
 import PhoneForm from "./viewAllForms/PhoneForm.vue";
+import SingleChoiceForm from './viewAllForms/SingleChoiceForm.vue';
 export default {
   components: {
     DropDownForms,
@@ -48,6 +66,10 @@ export default {
     PhoneForm,
     HeadingForm,
     AddressForm,
+    SingleChoiceForm,
+    MultipleChoiceForm,
+    MessageForm,
+    DateForm,
   },
   props: ["items"],
   methods: {
@@ -73,17 +95,27 @@ export default {
   text-align: right;
 }
 .previewFromBlockStyle {
-  padding: 17px;
-  border: 1px solid;
-  margin: 17px;
-  border-radius: 7px;
-  overflow-y: scroll;
-  height: calc(100vh - 188px);
+ padding: 27px;
+    
+    border-radius: 7px;
+    overflow-y: scroll;
+    height: calc(100vh - 136px);
+    width: 70%;
+    margin: auto;
+    border: 1px solid #eee;
+    box-shadow: 1px 1px 6px #e8dddd;
 }
 .previewFromBlockStyle::-webkit-scrollbar {
   width: 0;
 }
-
+.submitBtn button { 
+    background: #192a6b;
+    border: none;
+    color: #fff;
+    padding: 10px 24px;
+    font-weight: 600;
+    border-radius: 7px;
+}
 p.nameLabel {
   font-size: 17px;
   font-weight: 600;

@@ -1,22 +1,27 @@
 <template>
   <div>
     <div class="inputNameStyle">
-      <p :style="!item.align?'text-align:left;': `text-align:${item.align}`">
+      <p>
         <label >{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
+      <p class="instructionStyle">{{item.instructions}}</p>
       <div class="inputFullNameRow">
         
         <input
           class="input cursorPointerStyle"
+          :class="{invalidInputStyle:invalidData=='invalid'}"
           name="Enter Email"
           :placeholder="!item.placeholder || item.placeholder==''?'Enter Email':item.placeholder"
           id="email"
           type="text"
-          readonly
           :required=item.isRequired
+          @blur="checkValidation"
+          readonly
+          
         />
          
       </div>
+     
       <div>
         <show-delete-setting
           @delete-data-id="deleteDataId"
@@ -35,43 +40,37 @@ export default {
   components: { ShowDeleteSetting },
   data() {
     return {
-      // prefix: false,
-      // items: this.item,
-      // showElementSettings:false,
+     newItem:this.item,
+     emailValue:'',
+     invalidData:'pending'
       
     };
   },
+   
   props: ["item", "elementId"],
 
   methods: {
-    // showPrefix() {
-    //   this.prefix = !this.prefix;
-    //   this.items.prefix = this.prefix;
-    // },
+     
     deleteDataId() {
       this.$emit("delete-data-id", this.elementId);
     },
     showDataId() {
       this.$emit("send-data-id", this.elementId);
-      //console.log(this.elementId);
-    //   setTimeout(() => {
-    //     let newtitle = document.getElementById("element_setting");
-    //     //console.log(newtitle);
-    //     newtitle.classList.add("active");
-    //   }, 1);
     },
-alignData(){
-  console.log('text-align:left', this.item.align);
-}
-    // showProperties(){
-    //   // alert(this.id)
-    //   this.$emit('show-element-setting',this.id)
-    //   // this.showElementSettings=!this.showElementSettings
-    // }
+ checkValidation(){
+   
+   if (this.newItem.emailValue=='') {
+         this.invalidData="invalid"
+    } else {
+      
+        this.invalidData="valid"
+    }
+ }
+     
   },
 
   mounted() {
-    //console.log(this.item);
+     
   },
 };
 </script>
@@ -103,11 +102,7 @@ alignData(){
 .buttonStyle{
   display: none;
 }
-.inputNameStyle p {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 7px;
-}
+ 
 .inputNameStyle:hover{
   background-color: #bfb6b645;
 }

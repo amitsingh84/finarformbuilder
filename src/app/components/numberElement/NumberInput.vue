@@ -4,12 +4,13 @@
       <p :style="!item.align?'text-align:left;': `text-align:${item.align}`">
         <label >{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
+      <p class="instructionStyle">{{item.instructions}}</p>
       <div class="inputFullNameRow">
         
         <input
           class="input cursorPointerStyle"
           name="Enter Number"
-          placeholder="Enter Number"
+          :placeholder="item.placeholder==null || item.placeholder==''?'Enter Number':item.placeholder"
           id="number"
           type="tel"
           readonly
@@ -102,11 +103,7 @@ alignData(){
 .buttonStyle{
   display: none;
 }
-.inputNameStyle p {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 7px;
-}
+ 
 .inputNameStyle:hover{
   background-color: #bfb6b645;
 }

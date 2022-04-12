@@ -116,6 +116,17 @@
         <input type="date" v-model="this.newItem.maxDate" />
       </div>
     </element-properties>
+     <element-properties accordionHeaderId="5">
+      <template v-slot:elementHeading>OPTIONS</template>
+      <div class="optionsLabelStyle">
+        <p>Hide field:</p>
+        <input type="checkbox" v-model="this.newItem.hideField" />
+      </div>
+      <div class="optionsLabelStyle">
+        <p>Readonly field:</p>
+        <input type="checkbox" v-model="this.newItem.readonlyField" />
+      </div>
+    </element-properties>
   </div>
 </template>
 <script>

@@ -1,10 +1,47 @@
 <template>
-    <div>
-        
+  <div>
+    <div class="inputNameStyle inputCheckbox">
+      <p>
+        <label
+          >{{ item.label == "radio" ? "Single Choice" : item.label
+          }}<sup v-if="item.isRequired">*</sup></label
+        >
+      </p>
+
+      <div class="form-check">
+        <div class="formCheckStyle row">
+          <div class="col-md-6" v-for="(data, i) in item.values" :key="i">
+            <input
+              class="form-check-input"
+              type="radio"
+              :value="data"
+              :id="`flexCheckDefault_${i}`"
+              @input="checkBoxData"
+              :checked="data==newItem.defalulValueLabel"
+              name="Single Choice"
+              disabled
+            />
+             
+            <label
+              class="form-check-label"
+              :for="`flexCheckDefault_${i}`"
+              disabled
+            >
+              {{ data }}
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 <script>
 export default {
-    props:['item']
-}
+  props: ["item"],
+  data() {
+    return {
+      newItem:this.item
+    }
+  },
+};
 </script>

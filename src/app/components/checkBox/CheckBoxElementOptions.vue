@@ -3,56 +3,90 @@
     <div class="closeBtn">
       <img @click="closeBtn" src="../../../assets/imgs/close.png" alt="" />
     </div>
-    <h4>Element Setting{{ id }}</h4>
-    <div class="Element_setting_option">
+    <h4>{{item.name}}</h4>
+     <element-properties accordionHeaderId="1">
+      <template v-slot:elementHeading>QUICK SETUP</template>
       <div class="inputLabel">
         <p>Label</p>
+        <input type="text" v-model="this.newItem.label" />
+      </div>
+      <div class="inputLabel">
+        <p>instructions</p>
         <input
           type="text"
-          @input="enterLable"
-          :value="item.label == 'radio' ? '' : item.label"
+          name="nameDesc"
+          id="nameDesc"
+          v-model="this.newItem.instructions"
         />
       </div>
-      <!-- <div class="inputLablAlign">
-        <p>Label Align</p>
-        <div>
-          <button @click="checkAlign" value="left">Left</button
-          ><button @click="checkAlign" value="center">Center</button
-          ><button value="right" @click="checkAlign">Right</button>
-        </div>
-      </div> -->
-
       <div class="form-check form-switch requiredStyle">
         <input
           class="form-check-input"
           type="checkbox"
           id="checkrequired"
-          @click="checkRequired"
-          :checked="item.isRequired"
+          v-model="this.newItem.isRequired"
         />
         <p class="form-check-label" for="checkrequired">Required</p>
       </div>
+    </element-properties>
+     <element-properties accordionHeaderId="2">
+      <template v-slot:elementHeading>EDIT CHOICES</template>
 
-      <div class="inputLablAlign">
-        <p>Edit Check Box</p>
-        <button @click="addFeild">Add</button>
-
-        <div v-for="(item, index) in newItem.values" :key="index">
-          <!-- <input type="text" @input="inputData" :index="index" :value="item"/>  -->
-          <input
-            type="text"
-            v-model="this.newItem.values[index]"
-            :name="item"
-          />
-          <button @click="closeProp(item, index)">close</button>
+      <!-- <div class="mb-3 defaultCheckboxtStyle">
+        <p>Defalut Choice</p>
+        <input
+          type="checkbox"
+          name="checkDefault"
+           v-model="this.newItem.needDefault"
+          @click="CheckIfWantDefault"
+        />
+      </div> -->
+      <div class="mb-3 optionSelectionStyle">
+        <div  v-if="newItem.id==item.id">
+          <p>Select Choice</p>
+          <div
+            class="optionSelectBoxStyle"
+            v-for="(item, index) in newItem.values"
+            :key="index"
+          >
+            <div class="inputWithDeleteStyle">
+              <input
+                type="text"
+                v-model="this.newItem.values[index]"
+                :name="item"
+              />
+              <button class="deleteStyle" @click="deleteItem(index, id)">
+                X
+              </button>
+            </div>
+            <input
+              v-if="newItem.needDefault"
+              type="radio"
+              name="default"
+              :value="newItem.values[index]"
+              v-model="this.newItem.defalulValueLabel"
+            />
+          </div>
+          <button class="AddButtonStyle" @click="addFeild(id)">+</button>
         </div>
       </div>
-    </div>
+      <div class="mb-3 defaultCheckboxtStyle">
+        <p>Other Choice</p>
+        <input
+          type="checkbox"
+          name="checkDefault"
+          @click="CheckIfOtherChoice"
+        />
+      </div>
+    </element-properties>
+    
   </div>
 </template>
 <script>
+import ElementProperties from '../../slots/ElementProperties.vue';
 "use strict";
 export default {
+  components: { ElementProperties },
   data() {
     return {
       showHideData: false,
@@ -71,9 +105,11 @@ export default {
       this.newItem.label = e.target.value;
     },
     //
-    closeProp(item, i) {
-      console.log(item, i);
-      this.newItem.values.splice(i, 1);
+    deleteItem(index, id) {
+      console.log("id", id);
+      if (this.newItem.id == id) {
+        this.newItem.values.splice(index, 1);
+      }
     },
     closeBtn() {
       this.$emit("display-element");
