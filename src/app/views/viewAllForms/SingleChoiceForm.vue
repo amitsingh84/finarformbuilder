@@ -19,13 +19,13 @@
               @input="checkBoxData"
               :checked="data==newItem.defalulValueLabel"
               name="Single Choice"
-              disabled
+               
             />
              
             <label
               class="form-check-label"
               :for="`flexCheckDefault_${i}`"
-              disabled
+               
             >
               {{ data }}
             </label>

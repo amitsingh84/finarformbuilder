@@ -75,6 +75,7 @@
               :checked="item.value == newItem.defalulValueLabel"
             />
           </div>
+          
           <button class="AddButtonStyle" @click="addOptions(id)">+</button>
         </div>
       </div>
@@ -105,10 +106,6 @@ export default {
       prefix: false,
       newItem: this.item,
       needDefault: true,
-      test: {
-        value: "",
-         
-      },
       instructionsLabel: "",
       label: "",
       isRequired: false,
@@ -116,7 +113,7 @@ export default {
     };
   },
 
-  props: ["id", "item"],
+  props: ["id", "item","newElId"],
 //  beforeUpdate()
 //   {
 //     if(this.newItem.values)
@@ -147,11 +144,12 @@ export default {
     },
 
     addOptions(id) {
-     
-        this.newItem.values.push(this.test);
+      //  this.newElId.find((item)=>{
+      //    console.log(indexOf);
+      //  })
+        this.newItem.values.push({value:''});
         console.log(id);
-         
-      
+        console.log(this.newElId);
     },
   },
 };

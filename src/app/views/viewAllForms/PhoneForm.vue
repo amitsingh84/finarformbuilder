@@ -1,6 +1,6 @@
 <template>
     <div>
-         <div class="nameForm">
+         <div class="nameForm"  :hidden="item.hideField">
           
           <p class="nameLabel" :style="`text-align:${item.align}`">
             <label for="">{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
@@ -17,6 +17,8 @@
               v-model="phoneValue"
               @blur="checkValidation"
               :required=item.isRequired
+              :readonly="item.readonlyField"
+              
             /> 
             
           </div>

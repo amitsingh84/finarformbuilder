@@ -35,10 +35,7 @@
         <p>Hide field:</p>
         <input type="checkbox" v-model="this.newItem.hideField" />
       </div>
-      <div class="optionsLabelStyle">
-        <p>Readonly field:</p>
-        <input type="checkbox" v-model="this.newItem.readonlyField" />
-      </div>
+       
     </element-properties>
   </div>
 </template>

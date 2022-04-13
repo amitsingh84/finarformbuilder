@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="inputNameStyle inputCheckbox">
-      <p>
-        <label>{{ item.label=='radio'?'Single Choice':item.label }}<sup v-if="item.isRequired">*</sup></label>
-      </p>
+      
+        <p>{{ item.label=='radio'?'Single Choice':item.label }}<sup v-if="item.isRequired">*</sup></p>
+        <p class="subHeading">{{item.instructions}}</p>
       
 
         <div class="form-check" >
@@ -109,11 +109,7 @@ console.log(e.target.value);
   margin: 4px 0;
   /* padding-bottom: 24px; */
 }
-.inputNameStyle p {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 7px;
-}
+ 
 .inputFullNameRow input[type="text"] {
   height: 35px;
   padding-left: 10px;

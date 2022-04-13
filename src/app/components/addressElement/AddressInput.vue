@@ -2,232 +2,79 @@
   <div>
     <div class="inputNameStyle">
       <p v-if="item.label">
-        <label >{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
+        <label>{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
-      <p class="instructionStyle" v-if="item.instructions ">
-       {{ item.instructions }}
+      <p class="instructionStyle" v-if="item.instructions">
+        {{ item.instructions }}
       </p>
-      <div class="inputFullNameRow inputAddressRow" v-if="item.addressOptions=='Universal'">
-         <input
-          class="input cursorPointerStyle"
-          name="Stree Address"
-          placeholder="Stree Address"
-          id="sAddrss"
-          type="text"
-          readonly
-          :required=item.isStreetRequired
-        />
-          <input
-          class="input cursorPointerStyle"
-          name="Stree Address line 2"
-          placeholder="Stree Address Line 2"
-          id="sAddrssl2"
-          type="text"
-          readonly
-          :required=item.isStreet2Required
-        />
-        <div class="inputRowStyle">
-          <input
-          class="input cursorPointerStyle"
-          name="Country"
-          placeholder="Country"
-          id="Country"
-          type="text"
-          readonly
-          :required=item.isCountryRequired
-        />
-          
-          <input
-          class="input cursorPointerStyle"
-          name="State"
-          placeholder="State / Province / Region"
-          id="State"
-          type="text"
-          readonly
-          :required=item.isStateRequired
-        />
-          
-        </div>
-        <div class="inputRowStyle">
-           <input
-          class="input cursorPointerStyle"
-          name="City"
-          placeholder="City/Town"
-          id="City"
-          type="text"
-          readonly
-          :required=item.isCityRequired
-        />
-           <input
-          class="input cursorPointerStyle"
-          name="Zip code"
-          placeholder="Zip / Postal code"
-          id="Zip code"
-          type="text"
-          readonly
-          :required=item.isZipCodeRequired
-        />
-           
-         
-        </div>
-      <div>
-        <show-delete-setting
-          @delete-data-id="deleteDataId"
-          @send-data-id="showDataId"
-        />
+      <div class="addressData row">
+      <div class="selectCountry col-md-6 col-12">
+        <label :for="`vehicle-makes${item.id}`">Select Country </label>
+        <select
+          class="ui dropdown"
+          v-model="make"
+          :id="`vehicle-makes${item.id}`"
+          aria-label="Default select"
+          disabled
+        >
+          <option
+            v-for="option in country_options"
+            :key="option"
+            :value="option.id"
+          >
+            {{ option.text }}
+          </option>
+        </select>
       </div>
-    </div>
-    <div class="inputFullNameRow inputAddressRow" v-if="item.addressOptions=='German'">
-         <input
-          class="input cursorPointerStyle"
-          name="Stree Address"
-          placeholder="Stree Address"
-          id="sAddrss"
-          type="text"
-          readonly
-          :required=item.isStreetRequired
-        />
-          <input
-          class="input cursorPointerStyle"
-          name="Stree Address line 2"
-          placeholder="Stree Address Line 2"
-          id="sAddrssl2"
-          type="text"
-          readonly
-          :required=item.isStreet2Required
-        />
-        <div class="inputRowStyle">
-           <input
-          class="input cursorPointerStyle"
-          name="Country"
-          placeholder="Country"
-          id="Country"
-          type="text"
-          readonly
-          :required=item.isCountryRequired
-        />
-           <input
-          class="input cursorPointerStyle"
-          name="Province"
-          placeholder="Province"
-          id="Province"
-          type="text"
-          readonly
-          :required=item.isProvinceRequired
-        />
-         
-           
-        </div>
-        <div class="inputRowStyle">
-          <input
-          class="input cursorPointerStyle"
-          name="City"
-          placeholder="City"
-          id="City"
-          type="text"
-          readonly
-          :required=item.isCityRequired
-        />
-           <input
-          class="input cursorPointerStyle"
-          name="Postal code"
-          placeholder="Postal code"
-          id="Postal code"
-          type="text"
-          readonly
-          :required=item.isPostalCodeRequired
-        />
-         
-          
-        </div>
-      <div>
-        <show-delete-setting
-          @delete-data-id="deleteDataId"
-          @send-data-id="showDataId"
-        />
-      </div>
-    </div>
-      <div class="inputFullNameRow inputAddressRow" v-if="item.addressOptions=='United State'">
-         <input
-          class="input cursorPointerStyle"
-          name="Stree Address"
-          placeholder="Stree Address"
-          id="sAddrss"
-          type="text"
-          readonly
-          :required=item.isStreetRequired
-        />
-          <input
-          class="input cursorPointerStyle"
-          name="Stree Address line 2"
-          placeholder="Stree Address Line 2"
-          id="sAddrssl2"
-          type="text"
-          readonly
-          :required=item.isStreet2Required
-        />
-        <div class="inputRowStyle">
-          <input
-          class="input cursorPointerStyle"
-          name="Country"
-          placeholder="Country"
-          id="Country"
-          type="text"
-          readonly
-          :required=item.isCountryRequired
-        />
-           <input
-          class="input cursorPointerStyle"
-          name="City"
-          placeholder="City"
-          id="City"
-          type="text"
-          readonly
-          :required=item.isCityRequired
-        />
-         
-          
-        </div>
-        <div class="inputRowStyle">
-          
-           <input
-          class="input cursorPointerStyle"
-          name="Zip code"
-          placeholder="Zip code"
-          id="Zip code"
-          type="text"
-          readonly
-          :required=item.isZipCodeRequired
-        />
-            <input
-          class="input cursorPointerStyle"
-          name="State"
-          placeholder="State"
-          id="State"
-          type="text"
-          readonly
-          :required=item.isStateRequired
-        />
-         
-        </div>
-      <div>
-        <show-delete-setting
-          @delete-data-id="deleteDataId"
-          @send-data-id="showDataId"
-        />
-      </div>
-    </div>
 
+      <div class="selectState col-md-6 col-12">
+        <label :for="`region${item.id}`">Select Region </label>
+         <select class="ui dropdown"  v-model="model" :id="`region${item.id}`" disabled>
+        <option 
+          v-for="option in region_options[make]" 
+          :value="option.id" 
+          :key="option.id"
+        >
+          {{ option.text }}
+        </option>
+      </select>
+      </div>
+      </div>
+      <show-delete-setting
+          @delete-data-id="deleteDataId"
+          @send-data-id="showDataId"
+        />
+      
     </div>
   </div>
 </template>
 <script>
 import ShowDeleteSetting from "../ShowDeleteSetting.vue";
+var region_options = {
+  1: [
+    { text: "Alaska", id: 1 },
+    { text: "Indiana", id: 2 },
+  ],
+  2: [
+    { text: "Bavaria", id: 3 },
+    { text: "Thuringia", id: 4 },
+  ],
+};
+
+var country_options = [
+  { text: "United State", id: 1 },
+  { text: "German", id: 2 },
+  { text: "Universal", id: 3 },
+];
 ("use strict");
 export default {
   components: { ShowDeleteSetting },
   data() {
     return {
+      make: null,
+      model: null,
+      country_options: country_options,
+      region_options: region_options,
       // prefix: false,
       // items: this.item,
       // showElementSettings:false,
@@ -252,9 +99,9 @@ export default {
         newtitle.classList.add("active");
       }, 1);
     },
-alignData(){
-  console.log('text-align:left', this.item.align);
-}
+    alignData() {
+      console.log("text-align:left", this.item.align);
+    },
     // showProperties(){
     //   // alert(this.id)
     //   this.$emit('show-element-setting',this.id)
@@ -268,7 +115,6 @@ alignData(){
 };
 </script>
 <style scoped>
- 
 .content_block {
   height: calc(100vh - 100px);
 }
@@ -278,20 +124,11 @@ alignData(){
   flex-direction: column;
 }
 
-  
- 
-.inputNameStyle {
-  border-radius: 7px;
-  padding: 10px 30px 10px 10px;
-  cursor: move;
-  position: relative;
-  margin: 10px 0;
-  padding-bottom: 24px;
-}
- 
+
+
 textarea#adderss {
-    border: 1px solid #ced4da;
-    padding-left: 10px;
+  border: 1px solid #ced4da;
+  padding-left: 10px;
 }
 .inputFullNameRow input {
   height: 35px;
@@ -303,11 +140,11 @@ textarea#adderss {
 }
 
 .inputRowStyle {
-    display: flex;
-    gap: 17px;
+  display: flex;
+  gap: 17px;
 }
 .inputRowStyle input {
-    flex: 1;
+  flex: 1;
 }
 .prefixStyle input,
 .requiredStyle input {
@@ -321,13 +158,13 @@ textarea#adderss {
 .inputNameStyle .cursorPointerStyle {
   cursor: move;
 }
-.buttonStyle{
+.buttonStyle {
   display: none;
 }
-.inputNameStyle:hover{
+.inputNameStyle:hover {
   background-color: #bfb6b645;
 }
-.inputNameStyle:hover .buttonStyle{
+.inputNameStyle:hover .buttonStyle {
   display: unset;
 }
 select#selecttitle {
@@ -336,10 +173,9 @@ select#selecttitle {
   cursor: pointer;
   outline: none;
 }
- 
+
 .showElementSettingg,
 .showElementSetting {
-   
   align-items: center;
   background: #49515a;
   border: 0;
@@ -386,7 +222,6 @@ select#selecttitle {
   /* margin-left: 6px; */
   display: none;
 }
- 
 
 .inputLablAlign > div button {
   flex: 1;

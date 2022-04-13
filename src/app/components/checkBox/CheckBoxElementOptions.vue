@@ -75,7 +75,7 @@
         <input
           type="checkbox"
           name="checkDefault"
-          @click="CheckIfOtherChoice"
+         v-model="this.newItem.checkIfOtherChoice"
         />
       </div>
     </element-properties>

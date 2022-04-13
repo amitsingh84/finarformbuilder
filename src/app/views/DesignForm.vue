@@ -51,6 +51,7 @@
                 v-if="items.name == 'Dropdown'"
                 :item="items"
                 :id="newId"
+                :newElId="newElements"
               />
               <email-element-opttions
                 @display-element="dispalyElement"

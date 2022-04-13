@@ -1,9 +1,10 @@
 <template>
   <div>
     <div class="inputNameStyle inputCheckbox">
-      <p :style="!item.align ? 'text-align:left;' : `text-align:${item.align}`">
+      <p  >
         <label>{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
+  <p class="subHeading">{{item.instructions}}</p>
       <div class="">
 
         <div class="form-check" >
@@ -13,15 +14,31 @@
             class="form-check-input"
             type="checkbox"
             :value="data"
-            id="flexCheckDefault"
+            :id="`flexCheckDefault${ newItem.id}`"
             @input="checkBoxData"
            :name="data"
+           disabled
           />
-          <label class="form-check-label" for="flexCheckDefault">
+          <label class="form-check-label" :for="`flexCheckDefault${ newItem.id}`">
             {{data}}
           </label>
         </div>
+        <div  v-if="newItem.checkIfOtherChoice" class="col-md-6">
+        <input
+            class="form-check-input"
+            type="checkbox"
+            value="other"
+            :id="`flexCheckDefault${ newItem.id}`"
+           name="other"
+            disabled
+          />
+          <label class="form-check-label" :for="`flexCheckDefault${ newItem.id}`">
+            Other Data
+          </label>
+           
+          </div>
             </div>
+            
         </div>
         <div>
           <show-delete-setting
@@ -40,6 +57,8 @@ export default {
   components: { ShowDeleteSetting },
   data() {
     return {
+      newItem:this.item,
+      otherData:''
       // prefix: false,
       // items: this.item,
       // showElementSettings:false,
@@ -98,20 +117,8 @@ console.log(e.target.value);
 .inputFullNameRow input {
   flex: 1;
 }
-.inputNameStyle {
-  border-radius: 7px;
-  border: 1px solid;
-  padding: 10px 30px 10px 10px;
-  cursor: move;
-  position: relative;
-  margin: 10px 0;
-  padding-bottom: 24px;
-}
-.inputNameStyle p {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 7px;
-}
+ 
+ 
 .inputFullNameRow input {
   height: 35px;
   padding-left: 10px;
@@ -138,11 +145,7 @@ select#selecttitle {
   cursor: pointer;
   outline: none;
 }
-.inputNameStyle.inputCheckbox input {
-    
-    height: 15px;
-    width:15px
-}
+ 
 /* .element_setting {
     position: absolute;
     right: 0;

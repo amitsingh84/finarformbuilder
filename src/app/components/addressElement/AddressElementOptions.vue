@@ -33,19 +33,7 @@
         <input type="text" v-model="this.newItem.placeholder" />
       </div> -->
     </element-properties>
-     <element-properties accordionHeaderId="2">
-      <template v-slot:elementHeading>OPTIONS</template>
-      <div class="inputLabel">
-        <p>Address Options</p>
-       <select v-model="this.newItem.addressOptions">
-         <option value="Universal">Universal</option>
-         <option value="German">German</option>
-         <option value="United State">United State</option>
-         
-       </select>
-      </div>
      
-    </element-properties>
      <element-properties accordionHeaderId="4">
       <template v-slot:elementHeading>OPTIONS</template>
       <div class="optionsLabelStyle">

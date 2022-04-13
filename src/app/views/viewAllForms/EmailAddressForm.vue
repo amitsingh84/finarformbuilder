@@ -1,24 +1,26 @@
 <template>
     <div>
-        <div class="emailForm">
-          
-          <p class="nameLabel">
-            <label for="">{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
-          </p>
-          <div class="inputFullNameRow">
-             
-            <input
-              class="input cursorPointerStyle"
-              :class="{invalidInputStyle:invalidData=='invalid'}"
-              name="first name"
-              placeholder="Enter Email"
-              id="email"
-              type="email"
-              v-model.trim="emailValue"
-              :required=item.isRequired
-              @blur="checkValidation"
-            />
-          </div>
+        <div class="inputNameStyle"  :hidden="item.hideField">
+          <p>
+        <label >{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
+      </p>
+      <p class="instructionStyle">{{item.instructions}}</p>
+      <div class="inputFullNameRow">
+        
+        <input
+          class="input cursorPointerStyle"
+          :class="{invalidInputStyle:invalidData=='invalid'}"
+          name="Enter Email"
+          :placeholder="!item.placeholder || item.placeholder==''?'Enter Email':item.placeholder"
+          id="email"
+          type="text"
+          :required=item.isRequired
+          @blur="checkValidation"
+          :readonly="item.readonlyField"
+         
+        />
+         
+      </div>
               <p class="invalidText" v-if="invalidData=='invalid'">This Email Feild is required</p>
         </div>
     </div>

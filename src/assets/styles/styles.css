@@ -2,15 +2,15 @@
 .inputLablAlign {
   margin-bottom: 17px;
 }
-.inputNameStyle .subHeding {
-  margin-bottom: 5px;
-  font-size: 1rem;
-  font-weight: 400;
-}
 .inputNameStyle p {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 0;
+}
+.inputNameStyle p.subHeading {
+  margin-bottom: 5px;
+  font-size: 1rem;
+  font-weight: 400;
 }
 .inputLabel input {
   width: 100%;
@@ -18,7 +18,7 @@
   border: none;
   padding-left: 10px;
 }
-.inputNameStyle p.instructionStyle, p.instructionStyle ,p.subHeding {
+.inputNameStyle p.instructionStyle, p.instructionStyle ,p.subHeading {
   font-weight: 400;
   font-size: 15px;
   margin-bottom: 10px;
@@ -175,7 +175,14 @@ input[type="text"] {
   display: flex;
   gap: 18px;
 }
-
+.inputNameStyle {
+  border-radius: 7px;
+  padding: 10px 30px;
+  cursor: move;
+  position: relative;
+  margin: 10px 0;
+  padding-bottom: 24px;
+}
 .inputNameStyle .cursorPointerStyle {
   cursor: move;
 }
@@ -194,7 +201,7 @@ select#selectTitle {
   font-weight: 600;
   margin-bottom: 0;
 }
-.inputFullNameRow input {
+.inputFullNameRow input,.inputAddressRow input {
   height: 35px;
   padding-left: 10px;
   border-radius: 7px;
@@ -215,7 +222,7 @@ input[type="text"] {
 }
 /*---------full name end----------------*/
 
-optionsLabelStyle {
+.optionsLabelStyle {
   display: flex;
   justify-content: space-between;
 }
@@ -226,4 +233,34 @@ input.input.cursorPointerStyle.invalidInputStyle {
 p.invalidText {
   font-size: 10px;
   color: #d28b8b;
+}
+
+/*-------------- address data start --------------*/
+/* .addressData {display: flex;justify-content: space-between;gap: 17px;} */
+
+.addressData > div {flex: 1;display: flex;flex-direction: column;}
+
+.addressData > div select {width: 100%;height: 38px;border: 1px solid #ced4da;border-radius: 7px;}
+
+.addressData > div label {font-size: .9rem;font-weight: 400;margin-top: 10px;margin-bottom: 1px;}
+.inputFullNameRow.inputAddressRow > input {
+  width: 50%;
+  flex: unset;
+}
+.inputFullNameRow { 
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+/*-----------address data end-----------*/
+
+.inputNameStyle:hover {
+  background-color: #bfb6b645;
+} 
+.inputNameStyle {
+  border-radius: 7px; 
+  padding: 14px 30px;
+  cursor: move;
+  position: relative;
+  margin: 4px 0;
+  /* padding-bottom: 24px; */
 }
