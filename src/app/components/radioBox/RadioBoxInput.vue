@@ -2,8 +2,8 @@
   <div>
     <div class="inputNameStyle inputCheckbox">
       
-        <p>{{ item.label=='radio'?'Single Choice':item.label }}<sup v-if="item.isRequired">*</sup></p>
-        <p class="subHeading">{{item.instructions}}</p>
+        <p>{{ item.label=='radio'?'Single Selection':item.label }}<sup v-if="item.isRequired">*</sup></p>
+        <p class="subHeading">{{item.subHeading}}</p>
       
 
         <div class="form-check" >
@@ -16,7 +16,7 @@
             :id="`flexCheckDefault_${i}`"
             @input="checkBoxData"
             :checked="data.isSelected"
-            name="Single Choice"
+            name="Single Selection"
             disabled
           />
           <label class="form-check-label" :for="`flexCheckDefault_${i}`" disabled>
@@ -28,7 +28,7 @@
         <div>
           <show-delete-setting
             @delete-data-id="deleteDataId"
-            @send-data-id="showDataId"
+            @show-data-id="showDataId"
           />
         </div>
       </div>
@@ -58,7 +58,7 @@ export default {
       this.$emit("delete-data-id", this.elementId);
     },
     showDataId() {
-      this.$emit("send-data-id", this.elementId);
+      this.$emit("show-data-id", this.elementId);
       //console.log(this.elementId);
       setTimeout(() => {
         let newtitle = document.getElementById("element_setting");
@@ -149,7 +149,7 @@ console.log(e.target.value);
   color: #000;
   cursor: pointer;
 } */
-.showElementSettingg,
+.deleteElementSetting,
 .showElementSetting {
   /* position: absolute;
     right: -11px;
@@ -184,7 +184,7 @@ console.log(e.target.value);
   cursor: pointer;
 }
 
-.showElementSettingg::before,
+.deleteElementSetting::before,
 .showElementSetting::before {
   content: "";
   display: flex;
@@ -194,18 +194,18 @@ console.log(e.target.value);
   filter: invert(1);
   background-size: contain;
 }
-.showElementSettingg::before {
+.deleteElementSetting::before {
   background-image: url(../../../assets/imgs/trash.png);
 }
 .showElementSetting::before {
   background-image: url(../../../assets/imgs/gear.png);
 }
-.showElementSettingg img,
+.deleteElementSetting img,
 .showElementSetting img {
   width: 18px;
   filter: invert(1);
 }
-.showElementSettingg span,
+.deleteElementSetting span,
 .showElementSetting span {
   font-size: 10px;
   display: none;

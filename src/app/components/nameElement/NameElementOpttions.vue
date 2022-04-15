@@ -12,12 +12,12 @@
         <input type="text" v-model="this.newItem.label" />
       </div>
       <div class="inputLabel">
-        <p>instructions</p>
+        <p>Sub Heading</p>
         <input
           type="text"
           name="nameDesc"
           id="nameDesc"
-          v-model="this.newItem.instructions"
+          v-model="this.newItem.subHeading"
         />
       </div>
       <div class="inputLabel">
@@ -36,16 +36,6 @@
         <p class="form-check-label" for="checkrequired">Required</p>
       </div>
     </element-properties>
-   
-      <!-- <div class="inputLablAlign">
-        <p>Label Align</p>
-        <div>
-          <button @click="checkAlign" value="left">Left</button
-          ><button @click="checkAlign" value="center">Center</button
-          ><button value="right" @click="checkAlign">Right</button>
-        </div>
-      </div> -->
-
      <element-properties accordionHeaderId="2">
       <template v-slot:elementHeading>QUICK SETUP</template>
 

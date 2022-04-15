@@ -12,12 +12,12 @@
         <input type="text" v-model="this.newItem.label" />
       </div>
       <div class="inputLabel">
-        <p>instructions</p>
+        <p>Sub Heading</p>
         <input
           type="text"
           name="nameDesc"
           id="nameDesc"
-          v-model="this.newItem.instructions"
+          v-model="this.newItem.subHeading"
         />
       </div>
       <div class="form-check form-switch requiredStyle">

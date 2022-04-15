@@ -5,7 +5,7 @@
           <p class="nameLabel" :style="`text-align:${item.align}`">
             <label for="">{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
           </p>
-          <p v-if="item.instructions" class="instructionStyle">{{item.instructions}}</p>
+          <p v-if="item.subHeading" class="instructionStyle">{{item.subHeading}}</p>
           <div class="inputFullNameRow">
              
             <input

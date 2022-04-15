@@ -4,7 +4,7 @@
       <p  >
         <label>{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
-      <p class="subHeading">{{item.instructions}}</p>
+      <p class="subHeading">{{item.subHeading}}</p>
       <div class="inputCheckBoxStyle">
 
         <div class="form-check" v-for="(data,i) in item.values" :key="i">

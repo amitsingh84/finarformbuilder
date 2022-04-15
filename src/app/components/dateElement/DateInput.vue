@@ -5,49 +5,33 @@
         <label>{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
       <div class="inputFullNameRow">
-        <datepicker
-          v-model="date"
-          :enableTimePicker="false"
-          :disabledWeekDays="[6, 0]"
-          :format="dateFormateStyle"
-        />
+       <VueCtkDateTimePicker v-model="yourValue" />
        <div v-if="newItem.isTimeActive">
 
-        <Datepicker v-model="time" timePicker :is24="false" />
+        <!-- <Datepicker v-model="time" timePicker :is24="false" /> -->
        </div>
       </div>
       <div>
         <show-delete-setting
           @delete-data-id="deleteDataId"
-          @send-data-id="showDataId"
+          @show-data-id="showDataId"
         />
       </div>
     </div>
   </div>
 </template>
 <script>
-import { ref } from "vue";
+ 
 import ShowDeleteSetting from "../ShowDeleteSetting.vue";
-import Datepicker from "@vuepic/vue-datepicker";
-import "@vuepic/vue-datepicker/dist/main.css";
+import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
+import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
 import DateFormat from "../../mixin/DateFormat";
 ("use strict");
 
 export default {
-  setup() {
-        const date = ref(new Date());
-        const time = ref(new Date());
-        const dayMonthYear = (date) => {
-            const day = date.getDate();
-            const month = date.getMonth() + 1;
-            const year = date.getFullYear();
-            return `${year}/${month}/${day}`;
-        }
-        return {
-             date, time,dayMonthYear
-        }
-    },
-  components: { ShowDeleteSetting, Datepicker },
+  
+    
+  components: { ShowDeleteSetting,VueCtkDateTimePicker },
   mixins: [DateFormat],
 
   data() {
@@ -62,7 +46,8 @@ export default {
       this.$emit("delete-data-id", this.elementId);
     },
     showDataId() {
-      this.$emit("send-data-id", this.elementId);
+     
+      this.$emit("show-data-id", this.elementId);
       //console.log(this.elementId);
       setTimeout(() => {
         let newtitle = document.getElementById("element_setting");
@@ -73,22 +58,10 @@ export default {
     alignData() {
       console.log("text-align:left", this.item.align);
     },
-    // showProperties(){
-    //   // alert(this.id)
-    //   this.$emit('show-element-setting',this.id)
-    //   // this.showElementSettings=!this.showElementSettings
-    // }
+     
   },
    computed: {
-        dateFormateStyle() {
-          return this.dayMonthYear
-            // if (this.newItem.dateFormate == 'mm/dd/yy') {
-            //     return this.dayMonthYear
-            // }
-            // else{
-            //   return
-            // }
-        }
+         
     },
 
   mounted() {
@@ -183,7 +156,7 @@ select#selecttitle {
   color: #000;
   cursor: pointer;
 } */
-.showElementSettingg,
+.deleteElementSetting,
 .showElementSetting {
   /* position: absolute;
     right: -11px;
@@ -218,7 +191,7 @@ select#selecttitle {
   cursor: pointer;
 }
 
-.showElementSettingg::before,
+.deleteElementSetting::before,
 .showElementSetting::before {
   content: "";
   display: flex;
@@ -228,24 +201,24 @@ select#selecttitle {
   filter: invert(1);
   background-size: contain;
 }
-.showElementSettingg::before {
+.deleteElementSetting::before {
   background-image: url(../../../assets/imgs/trash.png);
 }
 .showElementSetting::before {
   background-image: url(../../../assets/imgs/gear.png);
 }
-.showElementSettingg img,
+.deleteElementSetting img,
 .showElementSetting img {
   width: 18px;
   filter: invert(1);
 }
-.showElementSettingg span,
+.deleteElementSetting span,
 .showElementSetting span {
   font-size: 10px;
   /* margin-left: 6px; */
   display: none;
 }
-.showElementSettingg:hover span,
+.deleteElementSetting:hover span,
 .showElementSetting:hover span {
   /* display: inline-block; */
 }

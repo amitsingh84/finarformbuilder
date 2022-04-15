@@ -63,7 +63,7 @@
       <div>
         <show-delete-setting
           @delete-data-id="deleteDataId"
-          @send-data-id="showDataId"
+          @show-data-id="showDataId"
         />
       </div>
     </div>
@@ -80,7 +80,7 @@ export default {
     },
     showDataId() {
        
-      this.$emit("send-data-id", this.elementId);
+      this.$emit("show-data-id", this.elementId);
       //console.log(this.elementId);
       setTimeout(() => {
         let newtitle = document.getElementById("element_setting");

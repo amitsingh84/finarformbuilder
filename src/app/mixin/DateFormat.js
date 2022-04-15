@@ -10,6 +10,7 @@
 //             const year = date.getFullYear();
 //             return `${year}/${month}/${day}`;
 //         }
+       
 //         return {
 //              date, time,dayMonthYear
 //         }
@@ -17,17 +18,18 @@
 //     data() {
 //         return {
 
-
+//             date:'',
+//             dayMonthYear:''
 //         }
 //     },
 
 //     methods: {
 //     },
-//     computed: {
-//         dateFormateStyle() {
-//             if (this.item.dateFormate == 'mm/dd/yy') {
-//                 return this.dayMonthYear
-//             }
-//         }
-//     }
+//     // computed: {
+//     //     dateFormateStyle() {
+//     //         if (this.item.dateFormate == 'mm/dd/yy') {
+//     //             return this.dayMonthYear
+//     //         }
+//     //     }
+//     // }
 // }

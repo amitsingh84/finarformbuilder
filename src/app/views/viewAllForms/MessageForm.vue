@@ -5,7 +5,7 @@
         <label v-if="item.label">{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
       <p class="inputSubHeaderStyle">
-        <label v-if="item.instructions">{{ item.instructions }}<sup v-if="item.isRequired">*</sup></label>
+        <label v-if="item.subHeading">{{ item.subHeading }}<sup v-if="item.isRequired">*</sup></label>
       </p>
       <div class="inputTextArea">
         

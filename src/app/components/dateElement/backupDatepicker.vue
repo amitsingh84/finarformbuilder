@@ -1,14 +1,21 @@
 <template>
   <div>
     <div class="inputNameStyle">
-      <!-- <p :style="!item.align?'text-align:left;': `text-align:${item.align}`">
-        <label >{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
-      </p> -->
-      <div class=" " :style="!item.align?'text-align:left;': `text-align:${item.align}`">
-          <h1>{{item.label}}</h1>
-         
-         
-          <p>{{item.description}}</p>
+      <p :style="!item.align ? 'text-align:left;' : `text-align:${item.align}`">
+        <label>{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
+      </p>
+      <div class="inputFullNameRow">
+        <datepicker
+          v-model="date"
+          :enableTimePicker="false"
+          :disabledWeekDays="[6, 0]"
+          :format="dayMonthYear"
+        />
+       <div v-if="newItem.isTimeActive">
+
+        <Datepicker v-model="time" timePicker :is24="false" />
+       </div>
+      </div>
       <div>
         <show-delete-setting
           @delete-data-id="deleteDataId"
@@ -16,33 +23,49 @@
         />
       </div>
     </div>
-
-    </div>
   </div>
 </template>
 <script>
+import { ref } from "vue";
 import ShowDeleteSetting from "../ShowDeleteSetting.vue";
+import Datepicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+import DateFormat from "../../mixin/DateFormat";
 ("use strict");
+
 export default {
-  components: { ShowDeleteSetting },
+  setup() {
+        const date = ref(new Date());
+        const time = ref(new Date());
+        
+        const dayMonthYear = (date) => {
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            console.log(date);
+            return `${year}/${month}/${day}`;
+        }
+       
+        return {
+             date, time,dayMonthYear
+        }
+    },
+  components: { ShowDeleteSetting, Datepicker },
+  mixins: [DateFormat],
+
   data() {
     return {
-      // prefix: false,
-      // items: this.item,
-      // showElementSettings:false,
+      newItem:this.item
     };
   },
   props: ["item", "elementId"],
 
   methods: {
-    // showPrefix() {
-    //   this.prefix = !this.prefix;
-    //   this.items.prefix = this.prefix;
-    // },
     deleteDataId() {
       this.$emit("delete-data-id", this.elementId);
     },
     showDataId() {
+     
       this.$emit("show-data-id", this.elementId);
       //console.log(this.elementId);
       setTimeout(() => {
@@ -51,18 +74,30 @@ export default {
         newtitle.classList.add("active");
       }, 1);
     },
-alignData(){
-  console.log('text-align:left', this.item.align);
-}
+    alignData() {
+      console.log("text-align:left", this.item.align);
+    },
     // showProperties(){
     //   // alert(this.id)
     //   this.$emit('show-element-setting',this.id)
     //   // this.showElementSettings=!this.showElementSettings
     // }
   },
+   computed: {
+        // dateFormateStyle() {
+        //   // return this.dayMonthYear
+        //     if (this.newItem.dateFormate == 'mm/dd/yy') {
+        //         return this.dayMonthYear
+        //     }
+        //     else{
+        //       return 1
+        //     }
+        // }
+    },
 
   mounted() {
     //console.log(this.item);
+   
   },
 };
 </script>
@@ -71,6 +106,7 @@ alignData(){
   height: calc(100vh - 100px);
 }
 .inputFullNameRow {
+  display: flex;
   gap: 18px;
 }
 
@@ -83,11 +119,12 @@ alignData(){
 }
 .inputNameStyle {
   border-radius: 7px;
-  padding: 10px 30px 10px 10px;
+  /* border: 1px solid; */
+  padding: 14px 30px;
   cursor: move;
   position: relative;
-  margin: 10px 0;
-  padding-bottom: 24px;
+  margin: 4px 0;
+  /* padding-bottom: 24px; */
 }
 .inputNameStyle p {
   font-size: 18px;
@@ -114,14 +151,13 @@ alignData(){
 .inputNameStyle .cursorPointerStyle {
   cursor: move;
 }
- 
-.buttonStyle{
+.buttonStyle {
   display: none;
 }
-.inputNameStyle:hover{
+.inputNameStyle:hover {
   background-color: #bfb6b645;
 }
-.inputNameStyle:hover .buttonStyle{
+.inputNameStyle:hover .buttonStyle {
   display: unset;
 }
 select#selecttitle {
@@ -276,5 +312,8 @@ select#selecttitle {
   transition: top 0.15s ease, transform 0.15s ease;
   width: 36px;
   z-index: 2;
+}
+.inputFullNameRow > div {
+    flex: 1;
 }
 </style>

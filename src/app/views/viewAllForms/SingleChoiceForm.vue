@@ -3,7 +3,7 @@
     <div class="inputNameStyle inputCheckbox">
       <p>
         <label
-          >{{ item.label == "radio" ? "Single Choice" : item.label
+          >{{ item.label == "radio" ? "Single Selection" : item.label
           }}<sup v-if="item.isRequired">*</sup></label
         >
       </p>
@@ -18,7 +18,7 @@
               :id="`flexCheckDefault_${i}`"
               @input="checkBoxData"
               :checked="data==newItem.defalulValueLabel"
-              name="Single Choice"
+              name="Single Selection"
                
             />
              

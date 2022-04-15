@@ -5,7 +5,7 @@
         <label v-if="item.label">{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
       <p class="inputSubHeaderStyle">
-        <label v-if="item.instructions">{{ item.instructions }}<sup v-if="item.isRequired">*</sup></label>
+        <label v-if="item.subHeading">{{ item.subHeading }}<sup v-if="item.isRequired">*</sup></label>
       </p>
       <div class="inputTextArea">
         
@@ -24,7 +24,7 @@
       <div>
         <show-delete-setting
           @delete-data-id="deleteDataId"
-          @send-data-id="showDataId"
+          @show-data-id="showDataId"
         />
       </div>
     </div>
@@ -50,7 +50,7 @@ export default {
       this.$emit("delete-data-id", this.elementId);
     },
     showDataId() {
-      this.$emit("send-data-id", this.elementId);
+      this.$emit("show-data-id", this.elementId);
       //console.log(this.elementId);
       setTimeout(() => {
         let newtitle = document.getElementById("element_setting");
@@ -155,7 +155,7 @@ select#selecttitle {
   color: #000;
   cursor: pointer;
 } */
-.showElementSettingg,
+.deleteElementSetting,
 .showElementSetting {
   /* position: absolute;
     right: -11px;
@@ -190,7 +190,7 @@ select#selecttitle {
   cursor: pointer;
 }
 
-.showElementSettingg::before,
+.deleteElementSetting::before,
 .showElementSetting::before {
   content: "";
   display: flex;
@@ -200,24 +200,24 @@ select#selecttitle {
   filter: invert(1);
   background-size: contain;
 }
-.showElementSettingg::before {
+.deleteElementSetting::before {
   background-image: url(../../../assets/imgs/trash.png);
 }
 .showElementSetting::before {
   background-image: url(../../../assets/imgs/gear.png);
 }
-.showElementSettingg img,
+.deleteElementSetting img,
 .showElementSetting img {
   width: 18px;
   filter: invert(1);
 }
-.showElementSettingg span,
+.deleteElementSetting span,
 .showElementSetting span {
   font-size: 10px;
   /* margin-left: 6px; */
   display: none;
 }
-.showElementSettingg:hover span,
+.deleteElementSetting:hover span,
 .showElementSetting:hover span {
   /* display: inline-block; */
 }

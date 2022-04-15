@@ -2,10 +2,10 @@
 
      <div class="buttonStyle">
          <div class="showElementSetting" @click="showDataId">
-            <span>Properties</span>
+            
           </div>
-          <div class="showElementSettingg" @click="deleteDataId">
-            <span>Remove</span>
+          <div class="deleteElementSetting" @click="deleteDataId">
+             
           </div>
      </div>
 </template>
@@ -18,7 +18,7 @@ export default {
     },
     showDataId(){
       console.log(this.elementId);
-      this.$emit('send-data-id',this.elementId)
+      this.$emit('show-data-id',this.elementId)
       setTimeout(() => {
         
         let newtitle=document.getElementById('element_setting')
@@ -31,46 +31,8 @@ export default {
 </script>
 
 <style scoped>
-/* .showElementSetting {
-  position: absolute;
-  right: -11px;
-  top: 70%;
-  transform: translateY(-50%);
-  background: #000;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  color: #000;
-  cursor: pointer;
-}
-.showElementSettingg {
-  position: absolute;
-  right: -11px;
-  top: 40%;
-  transform: translateY(-50%);
-  background: #000;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  color: #fff;
-  cursor: pointer;
-} */
-.showElementSettingg,
+.deleteElementSetting,
 .showElementSetting {
-  /* position: absolute;
-    right: -11px;
-    top: 40%;
-    transform: translateY(-50%);
-    background: #49515a;
-    border-radius: 18px;
-    min-width: 34px;
-    height: 34px;
-    color: #fff;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-     padding: 0 8px; */
   align-items: center;
   background: #49515a;
   border: 0;
@@ -83,14 +45,10 @@ export default {
   min-width: 36px;
   padding: 0 8px;
   white-space: nowrap;
-  /* position: absolute;
-    top: 40%;
-    transform: translateY(-50%);
-    right: -5%; */
   cursor: pointer;
 }
 
-.showElementSettingg::before,
+.deleteElementSetting::before,
 .showElementSetting::before {
   content: "";
   display: flex;
@@ -100,18 +58,18 @@ export default {
   filter: invert(1);
   background-size: contain;
 }
-.showElementSettingg::before {
+.deleteElementSetting::before {
   background-image: url(../../assets/imgs/trash.png);
 }
 .showElementSetting::before {
   background-image: url(../../assets/imgs/gear.png);
 }
-.showElementSettingg img,
+.deleteElementSetting img,
 .showElementSetting img {
   width: 18px;
   filter: invert(1);
 }
-.showElementSettingg span,
+.deleteElementSetting span,
 .showElementSetting span {
   font-size: 10px;
   /* margin-left: 6px; */

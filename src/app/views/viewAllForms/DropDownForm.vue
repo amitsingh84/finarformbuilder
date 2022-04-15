@@ -2,7 +2,7 @@
   <div>
     <div class="selectStyle">
       <label>{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
-      <p v-if="item.instructions" class="subHeading">{{ item.instructions }}</p>
+      <p v-if="item.subHeading" class="subHeading">{{ item.subHeading }}</p>
       <select class="form-select" aria-label="Default select example">
         <option selected>
           {{

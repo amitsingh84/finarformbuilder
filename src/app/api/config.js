@@ -62,8 +62,8 @@ export const elements = [
 
   {
     type: "radio",
-    name: "Single Choice",
-     label:"Single Choice",
+    name: "Single Selection",
+     label:"Single Selection",
      values:[
         'Male',
         'Female'
@@ -72,13 +72,11 @@ export const elements = [
 
   {
     type: "checkbox",
-    name: "Multiple Choice",
+    name: "Multiple Selection",
      label:"checkbox",
      values:[
        'one',
        'two',
-       'three',
-       'four'
 
      ]
   },
@@ -90,16 +88,11 @@ export const elements = [
   },
   {
     type: "date",
-    name: "Date",
+    name: "Date & Time",
      label:"Date",
      dateFormat: "mm/dd/yy",
      isTimeActive: false,
      timeFormat:'12 Hour'
   },
-  {
-    type: "time",
-    name: "Time",
-     label:"Time",
-     
-  },
+   
 ]

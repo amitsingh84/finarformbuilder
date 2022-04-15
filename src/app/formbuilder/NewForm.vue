@@ -10,7 +10,10 @@
       <button @click="setSelectedComponent('response-form')" :class="selectedComponent=='response-form'? 'active':''">Response</button>
 
     </div>
-    <component :is="selectedComponent"></component></div>
+    <keep-alive>
+    <component :is="selectedComponent"></component>
+    </keep-alive>
+    </div>
   </div>
 </template>
 <script>

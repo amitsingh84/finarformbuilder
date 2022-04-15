@@ -4,7 +4,7 @@
           <p class="nameLabel">
             <label for="">{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
           </p>
-          <p v-if="item.instructions" class="subHeading">{{item.instructions}}</p>
+          <p v-if="item.subHeading" class="subHeading">{{item.subHeading}}</p>
           <div class="inputFullNameRow">
             <select name="selectprfix" id="selectTitle" v-if="item.prefix">
               <option value="mr">Mr</option>

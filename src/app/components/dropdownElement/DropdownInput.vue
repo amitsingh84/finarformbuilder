@@ -2,7 +2,7 @@
   <div>
       <div class="selectStyle">
         <label>{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
-        <p v-if="item.instructions" class="subHeading">{{item.instructions}}</p>
+        <p v-if="item.subHeading" class="subHeading">{{item.subHeading}}</p>
         <select class="form-select" aria-label="Default select example">
           <option selected >
             {{
@@ -23,7 +23,7 @@
         <div>
           <show-delete-setting
             @delete-data-id="deleteDataId"
-            @send-data-id="showDataId"
+            @show-data-id="showDataId"
           />
         </div>
       </div>
@@ -48,7 +48,7 @@ export default {
       this.$emit("delete-data-id", this.elementId);
     },
     showDataId() {
-      this.$emit("send-data-id", this.elementId);
+      this.$emit("show-data-id", this.elementId);
 
       //console.log(this.elementId);
       setTimeout(() => {

@@ -4,7 +4,7 @@
           <p>
         <label >{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
-      <p class="instructionStyle">{{item.instructions}}</p>
+      <p class="instructionStyle">{{item.subHeading}}</p>
       <div class="inputFullNameRow">
         
         <input

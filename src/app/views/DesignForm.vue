@@ -13,7 +13,7 @@
         <form-block-right>
           <div sytle="position: relative;" v-if="!newElements.length">
             <p class="blankElement">
-               Drag your first question here from the right.
+              Drag your first question here from the right.
             </p>
           </div>
           <draggable
@@ -31,8 +31,9 @@
                   :items="newElements"
                   :id="index"
                   :elementId="element.id"
-                  @send-data-id="showElementSetting"
+                  @show-data-id="showElementSetting"
                   @delete-data-id="deleteElementData"
+                  
                 ></form-item-edit>
                 <!-- <i class="fa fa-times close" @click="removeAt(index)">Delete</i> -->
               </div>
@@ -52,6 +53,7 @@
                 :item="items"
                 :id="newId"
                 :newElId="newElements"
+               
               />
               <email-element-opttions
                 @display-element="dispalyElement"
@@ -79,22 +81,28 @@
               />
               <radio-box-element-options
                 @display-element="dispalyElement"
-                v-if="items.name == 'Single Choice'"
+                v-if="items.name == 'Single Selection'"
                 :item="items"
                 :id="newId"
               />
-              <check-box-element-options @display-element="dispalyElement"
-                v-if="items.name == 'Multiple Choice'"
+              <check-box-element-options
+                @display-element="dispalyElement"
+                v-if="items.name == 'Multiple Selection'"
                 :item="items"
-                :id="newId"/>
-                <message-element-options @display-element="dispalyElement"
+                :id="newId"
+              />
+              <message-element-options
+                @display-element="dispalyElement"
                 v-if="items.name == 'Message'"
                 :item="items"
-                :id="newId"/>
-                 <date-element-options @display-element="dispalyElement"
-                v-if="items.name == 'Date'"
+                :id="newId"
+              />
+              <date-element-options
+                @display-element="dispalyElement"
+                v-if="items.name == 'Date & Time'"
                 :item="items"
-                :id="newId"/>
+                :id="newId"
+              />
             </div>
           </div>
         </form-block-right>
@@ -109,7 +117,7 @@
             item-key="id"
             :clone="onClone"
             :sort="false"
-            v-if="newTest"
+            v-if="showAllElementNames"
           >
             <template #item="{ element }">
               <div class="list-group-item">
@@ -121,8 +129,6 @@
         </div>
       </form-block-left>
       <div class="flex justify-between">
-        <!-- <json-display class="w-64 mr-1" :value="elements" /> -->
-
         <json-display class="w-64" :value="newElements" />
       </div>
     </div>
@@ -141,13 +147,13 @@ import EmailElementOpttions from "../components/emailElement/EmailElementOptions
 import DropdownElementSetting from "../components/dropdownElement/DropdownElementSetting.vue";
 import JsonDisplay from "./JsonDisplay.vue";
 import ShowAllForms from "./ShowAllForms.vue";
-import NumberElementOptions from '../components/numberElement/NumberElementOptions.vue';
-import AddressElementOptions from '../components/addressElement/AddressElementOptions.vue';
-import HeadingElementOptions from '../components/Heading/HeadingElementOptions.vue';
-import CheckBoxElementOptions from '../components/checkBox/CheckBoxElementOptions.vue';
-import RadioBoxElementOptions from '../components/radioBox/RadioBoxElementOptions.vue';
-import MessageElementOptions from '../components/messageElement/MessageElementOptions.vue';
-import DateElementOptions from '../components/dateElement/DateElementOptions.vue';
+import NumberElementOptions from "../components/numberElement/NumberElementOptions.vue";
+import AddressElementOptions from "../components/addressElement/AddressElementOptions.vue";
+import HeadingElementOptions from "../components/Heading/HeadingElementOptions.vue";
+import CheckBoxElementOptions from "../components/checkBox/CheckBoxElementOptions.vue";
+import RadioBoxElementOptions from "../components/radioBox/RadioBoxElementOptions.vue";
+import MessageElementOptions from "../components/messageElement/MessageElementOptions.vue";
+import DateElementOptions from "../components/dateElement/DateElementOptions.vue";
 export default {
   components: {
     draggable,
@@ -168,7 +174,8 @@ export default {
     DateElementOptions,
   },
   data() {
-    return {view: false,
+    return {
+      view: false,
       newElements: [],
       draggable: false,
       elIndex: 0,
@@ -177,7 +184,8 @@ export default {
       showElementSettings: false,
       newId: null,
       showHidePreview: false,
-      newTest: true,
+      showAllElementNames: true,
+      setActiveElement:true
     };
   },
   computed: {
@@ -198,35 +206,17 @@ export default {
     },
     pageClose() {
       this.showHidePreview = false;
-       this.newTest = true;
-       
-      
-      // setTimeout(() => {
-        
-      //  let title = document.getElementById("element_setting");
-      // title.classList.remove("active");
-     
-      // }, 1);
-      
-      //  this.newTest = false;
-      // setTimeout(() => {
-      //   let newtitle = document.getElementById("element_setting");
-      //   //console.log(newtitle);
-      //   newtitle.classList.remove("active");
-      // }, 1);
+      this.showAllElementNames = true;
     },
     dispalyElement() {
-      this.newTest = true;
+      this.showAllElementNames = true;
     },
     showElementSetting(userId) {
       for (let value of this.newElements) {
-        
         if (value.id == userId) {
           this.newId = userId;
-          this.newTest = false;
+          this.showAllElementNames = false;
         }
-
-       
       }
     },
     deleteElementData(userId) {
@@ -238,7 +228,7 @@ export default {
         .indexOf(userId);
       // //console.log(index);
       this.newElements.splice(index, 1);
-      this.newTest = true;
+      this.showAllElementNames = true;
       // //console.log(this.newElements);
     },
     onClone(item) {
@@ -249,7 +239,7 @@ export default {
           name: item.name,
           id: this.elIndex,
           label: item.label,
-          values: item.values,
+          values: [...item.values],
           defalulValueLabel: item.defalulValueLabel,
         };
         //  this.uID=this.elIndex
@@ -281,49 +271,49 @@ export default {
           container: true,
           prefix: item.prefix,
           isRequired: item.isRequired,
-          label: item.label
+          label: item.label,
         };
       }
-       if (item.name == "Address") {
+      if (item.name == "Address") {
         return {
           type: item.type,
           name: item.name,
           id: this.elIndex,
           isRequired: item.isRequired,
           label: item.label,
-          addressOptions:item.addressOptions
+          addressOptions: item.addressOptions,
         };
       }
-       if (item.name == "Heading") {
+      if (item.name == "Heading") {
         return {
           type: item.type,
           name: item.name,
           id: this.elIndex,
           isRequired: item.isRequired,
           label: item.label,
-          description:item.description
+          description: item.description,
         };
       }
-      if (item.name == "Single Choice") {
+      if (item.name == "Single Selection") {
         return {
           type: item.type,
           name: item.name,
           id: this.elIndex,
           isRequired: item.isRequired,
           label: item.label,
-          values:item.values,
-          isSelected:item.isSelected
+          values: [...item.values],
+          isSelected: item.isSelected,
         };
       }
-      if (item.name == "Multiple Choice") {
+      if (item.name == "Multiple Selection") {
         return {
           type: item.type,
           name: item.name,
           id: this.elIndex,
           isRequired: item.isRequired,
           label: item.label,
-          values:item.values,
-          isSelected:item.isSelected
+          values: [...item.values],
+          isSelected: item.isSelected,
         };
       }
       if (item.name == "Message") {
@@ -333,20 +323,20 @@ export default {
           id: this.elIndex,
           isRequired: item.isRequired,
           label: item.label,
-          values:item.values,
-          isSelected:item.isSelected
+          values: item.values,
+          isSelected: item.isSelected,
         };
       }
-      if (item.name == "Date") {
+      if (item.name == "Date & Time") {
         return {
           type: item.type,
           name: item.name,
           id: this.elIndex,
           isRequired: item.isRequired,
           label: item.label,
-          isTimeActive:item.isTimeActive,
-          timeFormat:item.timeFormat,
-          dateFormat:item.dateFormat
+          isTimeActive: item.isTimeActive,
+          timeFormat: item.timeFormat,
+          dateFormat: item.dateFormat,
         };
       }
     },
@@ -381,7 +371,7 @@ export default {
 .designForm {
   position: relative;
   overflow-y: scroll;
-    height: calc(100vh - 80px);
+  height: calc(100vh - 80px);
 }
 
 /*-------new style----------*/
@@ -441,8 +431,8 @@ export default {
 .desingFormBlockRight {
   width: 68%;
   padding: 10px 0 10px 17px;
-  height: calc(100vh - 89px); 
-    overflow-y: scroll;
+  height: calc(100vh - 89px);
+  overflow-y: scroll;
 }
 .previewForm {
   height: 48px;

@@ -26,16 +26,16 @@
           <div v-else-if="item.name == 'Dropdown'">
             <drop-down-forms :item="item" />
           </div>
-           <div v-else-if="item.name == 'Single Choice'">
+           <div v-else-if="item.name == 'Single Selection'">
             <single-choice-form :item="item" />
           </div>
-           <div v-else-if="item.name == 'Multiple Choice'">
+           <div v-else-if="item.name == 'Multiple Selection'">
             <multiple-choice-form :item="item" />
           </div>
            <div v-else-if="item.name == 'Message'">
             <message-form :item="item" />
           </div>
-           <div v-else-if="item.name == 'Date'">
+           <div v-else-if="item.name == 'Date & Time'">
             <date-form :item="item" />
           </div>
         </div>

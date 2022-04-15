@@ -4,8 +4,8 @@
       <p v-if="item.label">
         <label>{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
-      <p class="instructionStyle" v-if="item.instructions">
-        {{ item.instructions }}
+      <p class="instructionStyle" v-if="item.subHeading">
+        {{ item.subHeading }}
       </p>
       <div class="addressFormData">
         <div class="addressData row">

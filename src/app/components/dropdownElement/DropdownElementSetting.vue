@@ -12,12 +12,12 @@
         <input type="text" v-model="this.newItem.label" />
       </div>
       <div class="inputLabel">
-        <p class="subHeding">instructions</p>
+        <p class="subHeding">subHeading</p>
         <input
           type="text"
           name="nameDesc"
           id="nameDesc"
-          v-model="this.newItem.instructions"
+          v-model="this.newItem.subHeading"
         />
       </div>
       <div class="form-check form-switch requiredStyle">
@@ -148,6 +148,7 @@ export default {
       //    console.log(indexOf);
       //  })
         this.newItem.values.push({value:''});
+        console.log( this.newItem.values);
         console.log(id);
         console.log(this.newElId);
     },

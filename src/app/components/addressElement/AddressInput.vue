@@ -4,8 +4,8 @@
       <p v-if="item.label">
         <label>{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
-      <p class="instructionStyle" v-if="item.instructions">
-        {{ item.instructions }}
+      <p class="instructionStyle" v-if="item.subHeading">
+        {{ item.subHeading }}
       </p>
       <div class="addressData row">
       <div class="selectCountry col-md-6 col-12">
@@ -42,7 +42,7 @@
       </div>
       <show-delete-setting
           @delete-data-id="deleteDataId"
-          @send-data-id="showDataId"
+          @show-data-id="showDataId"
         />
       
     </div>
@@ -91,7 +91,7 @@ export default {
       this.$emit("delete-data-id", this.elementId);
     },
     showDataId() {
-      this.$emit("send-data-id", this.elementId);
+      this.$emit("show-data-id", this.elementId);
       //console.log(this.elementId);
       setTimeout(() => {
         let newtitle = document.getElementById("element_setting");
@@ -174,7 +174,7 @@ select#selecttitle {
   outline: none;
 }
 
-.showElementSettingg,
+.deleteElementSetting,
 .showElementSetting {
   align-items: center;
   background: #49515a;
@@ -195,7 +195,7 @@ select#selecttitle {
   cursor: pointer;
 }
 
-.showElementSettingg::before,
+.deleteElementSetting::before,
 .showElementSetting::before {
   content: "";
   display: flex;
@@ -205,18 +205,18 @@ select#selecttitle {
   filter: invert(1);
   background-size: contain;
 }
-.showElementSettingg::before {
+.deleteElementSetting::before {
   background-image: url(../../../assets/imgs/trash.png);
 }
 .showElementSetting::before {
   background-image: url(../../../assets/imgs/gear.png);
 }
-.showElementSettingg img,
+.deleteElementSetting img,
 .showElementSetting img {
   width: 18px;
   filter: invert(1);
 }
-.showElementSettingg span,
+.deleteElementSetting span,
 .showElementSetting span {
   font-size: 10px;
   /* margin-left: 6px; */
