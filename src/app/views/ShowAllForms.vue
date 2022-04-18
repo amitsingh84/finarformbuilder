@@ -13,6 +13,9 @@
           <div v-else-if="item.name == 'Email Address'">
             <email-address-form :item="item" />
           </div>
+           <div v-else-if="item.name == 'Text Box'">
+            <text-form :item="item" />
+          </div>
           <div v-else-if="item.name == 'Phone Number'">
             <phone-form :item="item"/>
           </div>
@@ -58,6 +61,7 @@ import MessageForm from './viewAllForms/MessageForm.vue';
 import MultipleChoiceForm from './viewAllForms/MultipleChoiceForm.vue';
 import PhoneForm from "./viewAllForms/PhoneForm.vue";
 import SingleChoiceForm from './viewAllForms/SingleChoiceForm.vue';
+import TextForm from './viewAllForms/TextForm.vue';
 export default {
   components: {
     DropDownForms,
@@ -70,6 +74,7 @@ export default {
     MultipleChoiceForm,
     MessageForm,
     DateForm,
+    TextForm,
   },
   props: ["items"],
   methods: {
@@ -80,6 +85,9 @@ export default {
     SubmitData() {
       console.log(this.items);
     },
+  },
+  mounted() {
+    console.log(this.items);
   },
 };
 </script>

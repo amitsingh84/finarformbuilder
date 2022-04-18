@@ -5,7 +5,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: '', component: NewForm },
-        { path: '/form', component: ShowAllForms },
+        { path: '/form', component: ShowAllForms,name:"show-all-forms",props:{ items:"newElements"} },
          
 
 

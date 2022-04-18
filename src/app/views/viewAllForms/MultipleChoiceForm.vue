@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <div class="inputNameStyle inputCheckbox">
+    <div >
+        <div class="inputNameStyle inputCheckbox" :hidden="newItem.hideField">
+          
       <p  >
         <label>{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>

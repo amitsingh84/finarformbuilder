@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="inputNameStyle inputCheckbox">
+    <div class="inputNameStyle inputCheckbox" :hidden="item.hideField">
       <p>
         <label
           >{{ item.label == "radio" ? "Single Selection" : item.label

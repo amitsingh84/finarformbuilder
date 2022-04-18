@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :hidden="item.hideField">
          <div class="nameForm"  :hidden="item.hideField">
           
           <p class="nameLabel" :style="`text-align:${item.align}`">

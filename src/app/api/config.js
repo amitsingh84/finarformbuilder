@@ -38,6 +38,11 @@ export const elements = [
     placeholder:"Email Address"
   },
   {
+    type: "text",
+    name: "Text Box",
+     label:"Text Box",
+  },
+  {
     type: "tel",
     name: "Phone Number",
     container: true,

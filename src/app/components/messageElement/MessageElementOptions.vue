@@ -77,7 +77,7 @@
       </div>
       <div class="optionLabelField">
         <p>Hide field:</p>
-        <input type="checkbox" v-model="this.newItem.hideFeild" />
+        <input type="checkbox" v-model="this.newItem.hideField" />
       </div>
       <div class="optionLabelField">
         <p>Readonly field:</p>

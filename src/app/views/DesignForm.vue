@@ -61,6 +61,12 @@
                 :item="items"
                 :id="newId"
               />
+               <text-element-options
+                @display-element="dispalyElement"
+                v-if="items.name == 'Text Box'"
+                :item="items"
+                :id="newId"
+              />
               <number-element-options
                 @display-element="dispalyElement"
                 v-if="items.name == 'Phone Number'"
@@ -154,6 +160,7 @@ import CheckBoxElementOptions from "../components/checkBox/CheckBoxElementOption
 import RadioBoxElementOptions from "../components/radioBox/RadioBoxElementOptions.vue";
 import MessageElementOptions from "../components/messageElement/MessageElementOptions.vue";
 import DateElementOptions from "../components/dateElement/DateElementOptions.vue";
+import TextElementOptions from '../components/textElement/TextElementOptions.vue';
 export default {
   components: {
     draggable,
@@ -172,6 +179,7 @@ export default {
     RadioBoxElementOptions,
     MessageElementOptions,
     DateElementOptions,
+    TextElementOptions,
   },
   data() {
     return {
@@ -199,7 +207,8 @@ export default {
   methods: {
     showPrview() {
       if (this.newElements.length >= 1) {
-        this.showHidePreview = true;
+       const route=this.$router.resolve({ path:"/form"}); window.open(route.href, '_blank')
+        // this.showHidePreview = true;
         // window.open("/form",'_blank');
       }
       //console.log(this.showHidePreview);
@@ -246,6 +255,13 @@ export default {
         //  //console.log(this.uID);
         //  this.elements.push(this.uID)
       } else if (item.name == "Full Name") {
+        return {
+          name: item.name,
+          id: this.elIndex,
+          label: item.label,
+        };
+      }
+      else if (item.name == "Text Box") {
         return {
           name: item.name,
           id: this.elIndex,
@@ -328,6 +344,18 @@ export default {
         };
       }
       if (item.name == "Date & Time") {
+        return {
+          type: item.type,
+          name: item.name,
+          id: this.elIndex,
+          isRequired: item.isRequired,
+          label: item.label,
+          isTimeActive: item.isTimeActive,
+          timeFormat: item.timeFormat,
+          dateFormat: item.dateFormat,
+        };
+      }
+       if (item.name == "Text Box") {
         return {
           type: item.type,
           name: item.name,

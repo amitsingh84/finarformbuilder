@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :hidden="item.hideField">
     <div class="selectStyle">
       <label>{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
       <p v-if="item.subHeading" class="subHeading">{{ item.subHeading }}</p>

@@ -12,6 +12,9 @@
       <div class="edit_option" v-else-if="item.name == 'Email Address'">
         <email-input :item="item" :elementId="elementId" @show-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
+       <div class="edit_option" v-else-if="item.name == 'Text Box'">
+        <text-input :item="item" :elementId="elementId" @show-data-id="sendDataId" @delete-data-id="deleteDataId"/>
+      </div>
       <div class="edit_option" v-else-if="item.name == 'Phone Number'">
         <number-input :item="item" :elementId="elementId" @show-data-id="sendDataId" @delete-data-id="deleteDataId"/>
       </div>
@@ -50,11 +53,12 @@ import DropdownInput from './dropdownElement/DropdownInput.vue';
 import RadioBoxInput from './radioBox/RadioBoxInput.vue';
 import MessageInput from './messageElement/MessageInput.vue';
 import DateInput from './dateElement/DateInput.vue';
+import TextInput from './textElement/TextInput.vue';
 export default {
   props: ["item", "elementId"],
 
   name: "FormItemEdit",
-  components: { NameInput,   DropdownInput, EmailInput, NumberInput, AddressInput, HeadingInput, CheckBoxInput, RadioBoxInput, MessageInput, DateInput },
+  components: { NameInput,   DropdownInput, EmailInput, NumberInput, AddressInput, HeadingInput, CheckBoxInput, RadioBoxInput, MessageInput, DateInput, TextInput },
   data() {
     return {
       checkId:this.elementId,

@@ -3,8 +3,8 @@
     <div class="closeBtn">
       <img @click="closeBtn" src="../../../assets/imgs/close.png" alt="" />
     </div>
-    <h4>{{item.name}}</h4>
-     <element-properties accordionHeaderId="1">
+    <h4>{{ newItem.name }}</h4>
+    <element-properties accordionHeaderId="1">
       <template v-slot:elementHeading>QUICK SETUP</template>
       <div class="inputLabel">
         <p>Label</p>
@@ -28,58 +28,26 @@
         />
         <p class="form-check-label" for="checkrequired">Required</p>
       </div>
+      <div class="inputLabel">
+        <p>Placeholder Value</p>
+        <input type="text" v-model="this.newItem.placeholder" />
+      </div>
     </element-properties>
-     <element-properties accordionHeaderId="2">
-      <template v-slot:elementHeading>EDIT CHOICES</template>
-
-      <!-- <div class="mb-3 defaultCheckboxtStyle">
-        <p>Defalut Choice</p>
-        <input
-          type="checkbox"
-          name="checkDefault"
-           v-model="this.newItem.needDefault"
-          @click="CheckIfWantDefault"
-        />
-      </div> -->
-      <div class="mb-3 optionSelectionStyle">
-        <div  v-if="newItem.id==item.id">
-          <p>Select Choice</p>
-          <div
-            class="optionSelectBoxStyle"
-            v-for="(item, index) in newItem.values"
-            :key="index"
-          >
-            <div class="inputWithDeleteStyle">
-              <input
-                type="text"
-                v-model="this.newItem.values[index]"
-                :name="item"
-              />
-              <button class="deleteStyle" @click="deleteItem(index, id)">
-                X
-              </button>
-            </div>
-            <input
-              v-if="newItem.needDefault"
-              type="radio"
-              name="default"
-              :value="newItem.values[index]"
-              v-model="this.newItem.defalulValueLabel"
-            />
-          </div>
-          <button class="AddButtonStyle" @click="addFeild(id)">+</button>
+    <element-properties accordionHeaderId="2">
+      <template v-slot:elementHeading>VALIDATION</template>
+      <div class="inputLabel validationStyle">
+        <div>
+          <p>Min no. of characters:</p>
+          <input type="number" v-model="this.newItem.emailMininumChar" />
+        </div>
+        <div>
+          <p>Max no. of characters:</p>
+          <input type="number" v-model="this.newItem.emailMaxChar" />
         </div>
       </div>
-      <div class="mb-3 defaultCheckboxtStyle">
-        <p>Other Choice</p>
-        <input
-          type="checkbox"
-          name="checkDefault"
-         v-model="this.newItem.checkIfOtherChoice"
-        />
-      </div>
     </element-properties>
-     <element-properties accordionHeaderId="4">
+   
+      <element-properties accordionHeaderId="4">
       <template v-slot:elementHeading>OPTIONS</template>
       <div class="optionsLabelStyle">
         <p>Hide field:</p>
@@ -90,11 +58,13 @@
         <input type="checkbox" v-model="this.newItem.readonlyField" />
       </div>
     </element-properties>
+    
+    
   </div>
 </template>
 <script>
-import ElementProperties from '../../slots/ElementProperties.vue';
-"use strict";
+import ElementProperties from "../../slots/ElementProperties.vue";
+("use strict");
 export default {
   components: { ElementProperties },
   data() {
@@ -102,35 +72,42 @@ export default {
       showHideData: false,
       prefix: false,
       newItem: this.item,
-      test: "",
+      instructionsLabel: "",
+      label: "",
+      isRequired: false,
+      defalulValueLabel: "",
+      placeholder: "",
+      emailMaxChar:'',
+      emailMininumChar:'',
+      readonlyField:false,
+      hideField:false
     };
   },
   props: ["id", "item"],
-
+  // watch: {
+  //   tt() {
+  //     this.newItem.label = this.enterLable;
+  //   },
+  // },
   methods: {
-    addFeild() {
-      this.newItem.values.push(this.test);
-    },
     enterLable(e) {
       this.newItem.label = e.target.value;
     },
-    //
-    deleteItem(index, id) {
-      console.log("id", id);
-      if (this.newItem.id == id) {
-        this.newItem.values.splice(index, 1);
-      }
+
+    showPrefix() {
+     
+      this.newItem.prefix = !this.newItem.prefix;
     },
     closeBtn() {
       this.$emit("display-element");
       let title = document.getElementById("element_setting");
       title.classList.remove("active");
-      //console.log("title", title);
+      
     },
     checkRequired() {
       this.newItem.isRequired = !this.newItem.isRequired;
     },
-
+     
     checkAlign(e) {
       console.log(e);
       console.log(this.newItem);
@@ -140,6 +117,12 @@ export default {
 };
 </script>
 <style scoped>
+.optionsLabelStyle p {
+    flex: 1;
+}
+.optionsLabelStyle {
+    display: flex;
+}
 .element_setting h4 {
   text-align: center;
   padding: 10px 0;
@@ -152,15 +135,14 @@ export default {
 .inputLabel p,
 .inputLablAlign p {
   margin-bottom: 5px;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .inputLabel input {
   width: 100%;
   height: 30px;
-  border-radius: 7px;
   border: none;
+  padding-left: 10px;
 }
 
 .inputLabel,
@@ -206,6 +188,12 @@ export default {
   color: #fff;
   display: block;
   transform: translateX(0);
+  height: calc(100vh - 80px);
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.element_setting.active::-webkit-scrollbar {
+  display: none;
 }
 .closeBtn img {
   width: 34px;

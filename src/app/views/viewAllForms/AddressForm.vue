@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :hidden="item.hideField">
     <div class="inputNameStyle">
       <p v-if="item.label">
         <label>{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
