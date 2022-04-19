@@ -1,10 +1,10 @@
 <template>
 
      <div class="buttonStyle">
-         <div class="showElementSetting" @click="showDataId">
+         <div class="showElementSetting" @click="showDataId(elementId)">
             
           </div>
-          <div class="deleteElementSetting" @click="deleteDataId">
+          <div class="deleteElementSetting" @click="deleteDataId(elementId)">
              
           </div>
      </div>
@@ -13,12 +13,13 @@
 export default {
     props: ["item","elementId"],
      methods: {
-     deleteDataId(){
-      this.$emit('delete-data-id',this.elementId)
+     deleteDataId(id){
+       console.log('newIdd',id);
+      this.$emit('delete-data-id',id)
     },
-    showDataId(){
-      console.log(this.elementId);
-      this.$emit('show-data-id',this.elementId)
+    showDataId(id){
+      console.log('newIddds',id);
+      this.$emit('show-data-id',id)
       setTimeout(() => {
         
         let newtitle=document.getElementById('element_setting')

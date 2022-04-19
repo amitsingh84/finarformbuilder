@@ -24,6 +24,8 @@
           <show-delete-setting
             @delete-data-id="deleteDataId"
             @show-data-id="showDataId"
+            :item="item"
+            :elementId="elementId"
           />
         </div>
       </div>
@@ -44,11 +46,11 @@ export default {
     //   this.prefix = !this.prefix;
     //   this.items.prefix = this.prefix;
     // },
-    deleteDataId() {
-      this.$emit("delete-data-id", this.elementId);
+    deleteDataId(id) {
+      this.$emit("delete-data-id", id);
     },
-    showDataId() {
-      this.$emit("show-data-id", this.elementId);
+    showDataId(id) {
+      this.$emit("show-data-id", id);
 
       //console.log(this.elementId);
       setTimeout(() => {
