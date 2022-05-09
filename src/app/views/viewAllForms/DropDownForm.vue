@@ -3,7 +3,7 @@
     <div class="selectStyle">
       <label>{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
       <p v-if="item.subHeading" class="subHeading">{{ item.subHeading }}</p>
-      <select class="form-select" aria-label="Default select example">
+      <select class="form-select" aria-label="Default select example" :disabled="item.readonlyField==true?true:false" :required="item.isRequired==true?true:false">
         <option selected>
           {{
             item.defalulValueLabel == "Select"

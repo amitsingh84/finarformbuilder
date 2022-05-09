@@ -22,6 +22,7 @@
         <show-delete-setting
           @delete-data-id="deleteDataId"
           @show-data-id="showDataId"
+          :showDeletOption="item.delete"
         />
       </div>
     </div>
