@@ -46,15 +46,8 @@
         </div>
       </div>
     </element-properties>
-  <!-- <element-properties accordionHeaderId="3">
-      <template v-slot:elementHeading>PREFILL</template>
-      <div class="inputLabel">
-        <p>Label</p>
-        <input type="text" v-model="this.newItem.label" />
-      </div>
-      
-    </element-properties> -->
-      <element-properties accordionHeaderId="4">
+
+    <element-properties accordionHeaderId="4">
       <template v-slot:elementHeading>OPTIONS</template>
       <div class="optionsLabelStyle">
         <p>Hide field:</p>
@@ -65,19 +58,6 @@
         <input type="checkbox" v-model="this.newItem.readonlyField" />
       </div>
     </element-properties>
-    
-    <!-- <div class="Element_setting_option"> -->
-
-    <!-- <div class="inputLablAlign">
-        <p>Label Align</p>
-        <div>
-          <button @click="checkAlign" value="left">Left</button
-          ><button @click="checkAlign" value="center">Center</button
-          ><button value="right" @click="checkAlign">Right</button>
-        </div>
-      </div> -->
-
-    <!-- </div> -->
   </div>
 </template>
 <script>
@@ -95,10 +75,10 @@ export default {
       isRequired: false,
       defalulValueLabel: "",
       placeholder: "",
-      emailMaxChar:'',
-      emailMininumChar:'',
-      readonlyField:false,
-      hideField:false
+      emailMaxChar: "",
+      emailMininumChar: "",
+      readonlyField: false,
+      hideField: false,
     };
   },
   props: ["id", "item"],
@@ -140,10 +120,10 @@ export default {
 </script>
 <style scoped>
 .optionsLabelStyle p {
-    flex: 1;
+  flex: 1;
 }
 .optionsLabelStyle {
-    display: flex;
+  display: flex;
 }
 .element_setting h4 {
   text-align: center;

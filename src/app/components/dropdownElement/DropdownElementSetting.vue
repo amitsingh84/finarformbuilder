@@ -124,6 +124,7 @@ export default {
   methods: {
     CheckIfWantDefault() {
       this.needDefault = !this.needDefault;
+      this.newItem.needDefault=this.needDefault
       if (this.needDefault == false) {
         this.newItem.defalulValueLabel = "select";
       }

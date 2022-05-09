@@ -7,15 +7,37 @@
           <div class="deleteElementSetting" @click="deleteDataId(elementId)">
              
           </div>
+
+<teleport to='body' v-if="showPopup">
+<div class="popupNotification" >
+  <div class="popupNotificationBlock" @click="hidePopup"></div>
+  <div class="popupNotificationText">
+    <p>You Can't Delete This Element</p>
+  <button class="primarybuttonStyle" style="cursor:pointer" @click="hidePopup">OK</button>
+  </div>
+</div>
+</teleport>
+           
      </div>
 </template>
 <script>
 export default {
-    props: ["item","elementId"],
+    props: ["item","elementId","showDeletOption"],
+    data() {
+      return {
+        hideDelete:this.showDeletOption,
+        showPopup:false
+      }
+    },
      methods: {
      deleteDataId(id){
-       console.log('newIdd',id);
-      this.$emit('delete-data-id',id)
+       if(this.hideDelete){
+        this.showPopup=true
+       }else{
+
+         console.log('newIdd',id);
+        this.$emit('delete-data-id',id)
+       }
     },
     showDataId(id){
       console.log('newIddds',id);
@@ -23,10 +45,19 @@ export default {
       setTimeout(() => {
         
         let newtitle=document.getElementById('element_setting')
-        //console.log(newtitle);
+        console.log(newtitle);
        newtitle.classList.add("active");
       }, 1);
     },
+    hidePopup(){
+this.showPopup=false
+    }
+  },
+  mounted() {
+  //  let phoneId= document.getElementById("level_phone_setting")
+    // let addressId= document.getElementById("level_address_level_setting")
+    // let emailId= document.getElementById("level_email_setting")
+    console.log('t',this.hideDelete);
   },
 }
 </script>

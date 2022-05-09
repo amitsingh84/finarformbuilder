@@ -76,6 +76,11 @@ export default {
     DateForm,
     TextForm,
   },
+  data() {
+    return {
+      userData:[]
+    }
+  },
   props: ["items"],
   methods: {
     closePage() {
@@ -88,7 +93,12 @@ export default {
   },
   mounted() {
     console.log(this.items);
+    console.log(this.userData);
   },
+  created(){
+    console.log(this.$route.params.data)
+    this.userData=this.$route.params.data
+  }
 };
 </script>
 <style scoped>

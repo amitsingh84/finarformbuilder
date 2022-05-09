@@ -7,10 +7,11 @@
         </div>
 
         <div class="">
-          <router-link to="/link"> Link</router-link>
+        <router-link :to=" formId?`/publish/${formId}`:'/'">Link</router-link
+        >
         </div>
         <div class="">
-          <router-link to="/email"> email</router-link>
+          <router-link :to="`/sendmail/${formId}`"> email</router-link>
         </div>
       </div>
     </div>
@@ -18,13 +19,36 @@
 </template>
 
 <script>
-export default {};
+export default {
+   data() {
+    return {
+      selectedComponent: "create-form",
+      title: "",
+      level: "",
+      formType: "",
+      formProtection: "",
+      formId:""
+    };
+  },
+   mounted() {
+    this.title = this.$route.params.title;
+    //  if(this.title=='undefined'){
+    //  this.$router.push("/forms")
+    // }
+    this.formId=this.$route.params.formId
+      this.level = this.$route.params.level;
+      this.formType = this.$route.params.formtype;
+      this.formProtection = this.$route.params.formProtection;
+    console.log(this.$route.path);
+   
+    
+  },
+};
 </script>
 <style scoped>
 .adminSideNav {
   background-color: #192a6b;
   height: calc(100vh - 80px);
-
   left: 0;
   top: 80px;
   width: 17rem;
@@ -50,7 +74,7 @@ export default {};
   width: 80%;
 }
 
-.adminUrlLink a.router-link-exact-active {
+.adminUrlLink a.router-link-active {
   color: #192a6b !important;
   background: #fff;
   position: relative;
@@ -58,7 +82,7 @@ export default {};
 .adminUrlLink a img {
   filter: brightness(100);
 }
-.adminUrlLink a.router-link-exact-active img {
+.adminUrlLink a.router-link-active img {
   filter: unset;
 }
 .adminSideNavUrl img {
@@ -84,7 +108,7 @@ export default {};
   text-decoration: none;
   color: #fff;
 }
-.adminUrlLink a.router-link-exact-active:after {
+.adminUrlLink a.router-link-active:after {
   content: "";
   position: absolute;
   right: 0;

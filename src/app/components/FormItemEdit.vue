@@ -1,12 +1,11 @@
 <template>
   <div class="form_edit_">
+    <div v-if="level">{{level}}</div>
     <div class="row">
       <div class="edit_option" v-if="item.name == 'Dropdown'">
         <Dropdown-input
           :id="'testId' + checkId"
           class="checka"
-         
-           
           :item="item"
           :elementId="elementId"
           @show-data-id="sendDataId"
@@ -19,7 +18,6 @@
            :id="'testId' + checkId"
             class="checka"
           :elementId="elementId"
-          
           @show-data-id="sendDataId"
           @delete-data-id="deleteDataId"
         />
@@ -29,8 +27,7 @@
           :item="item"
            :id="'testId' + checkId"
             class="checka"
-          :elementId="elementId"
-           
+          :elementId="elementId"           
           @show-data-id="sendDataId"
           @delete-data-id="deleteDataId"
         />
@@ -142,7 +139,7 @@ import MessageInput from "./messageElement/MessageInput.vue";
 import DateInput from "./dateElement/DateInput.vue";
 import TextInput from "./textElement/TextInput.vue";
 export default {
-  props: ["item", "elementId"],
+  props: ["item", "elementId","level"],
 
   name: "FormItemEdit",
   components: {

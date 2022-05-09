@@ -3,7 +3,7 @@
       <div class="selectStyle">
         <label>{{ item.label }} <sup v-if="item.isRequired">*</sup></label>
         <p v-if="item.subHeading" class="subHeading">{{item.subHeading}}</p>
-        <select class="form-select" aria-label="Default select example">
+        <select class="form-select" aria-label="Default select example" disabled>
           <option selected >
             {{
               item.defalulValueLabel == "Select"
@@ -16,6 +16,7 @@
             :key="index"
             :value="elementValue.value"
             :hidden="item.defalulValueLabel == elementValue.value"
+            
           >
             {{ elementValue.value }}
           </option>

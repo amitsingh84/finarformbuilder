@@ -2,35 +2,35 @@
   <div>
     <div class="inputNameStyle">
       <p>
-        <label >{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
+        <label>{{ item.label }}<sup v-if="item.isRequired">*</sup></label>
       </p>
-      <p class="instructionStyle">{{item.subHeading}}</p>
+      <p class="instructionStyle">{{ item.subHeading }}</p>
       <div class="inputFullNameRow">
-        
         <input
           class="input cursorPointerStyle"
-          :class="{invalidInputStyle:invalidData=='invalid'}"
+          :class="{ invalidInputStyle: invalidData == 'invalid' }"
           name="Enter Email"
-          :placeholder="!item.placeholder || item.placeholder==''?'Enter Email':item.placeholder"
+          :placeholder="
+            !item.placeholder || item.placeholder == ''
+              ? 'Enter Email'
+              : item.placeholder
+          "
           id="email"
           type="text"
-          :required=item.isRequired
+          :required="item.isRequired"
           @blur="checkValidation"
           readonly
-          
         />
-         
       </div>
-     
+
       <div>
         <show-delete-setting
           @delete-data-id="deleteDataId"
           @show-data-id="showDataId"
+          :showDeletOption="newItem.delete"
         />
       </div>
     </div>
-
-  
   </div>
 </template>
 <script>
@@ -40,38 +40,31 @@ export default {
   components: { ShowDeleteSetting },
   data() {
     return {
-     newItem:this.item,
-     emailValue:'',
-     invalidData:'pending'
-      
+      newItem: this.item,
+      emailValue: "",
+      invalidData: "pending",
     };
   },
-   
+
   props: ["item", "elementId"],
 
   methods: {
-     
     deleteDataId() {
       this.$emit("delete-data-id", this.elementId);
     },
     showDataId() {
       this.$emit("show-data-id", this.elementId);
     },
- checkValidation(){
-   
-   if (this.newItem.emailValue=='') {
-         this.invalidData="invalid"
-    } else {
-      
-        this.invalidData="valid"
-    }
- }
-     
+    checkValidation() {
+      if (this.newItem.emailValue == "") {
+        this.invalidData = "invalid";
+      } else {
+        this.invalidData = "valid";
+      }
+    },
   },
 
-  mounted() {
-     
-  },
+  mounted() {},
 };
 </script>
 <style scoped>
@@ -93,20 +86,20 @@ export default {
 .inputNameStyle {
   border-radius: 7px;
   /* border: 1px solid; */
-   padding: 14px 30px;
+  padding: 14px 30px;
   cursor: move;
   position: relative;
   margin: 4px 0;
   /* padding-bottom: 24px; */
 }
-.buttonStyle{
+.buttonStyle {
   display: none;
 }
- 
-.inputNameStyle:hover{
+
+.inputNameStyle:hover {
   background-color: #bfb6b645;
 }
-.inputNameStyle:hover .buttonStyle{
+.inputNameStyle:hover .buttonStyle {
   display: unset;
 }
 .inputFullNameRow input {

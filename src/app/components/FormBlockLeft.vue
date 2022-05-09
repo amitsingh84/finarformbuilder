@@ -9,10 +9,10 @@ export default {
 }
 </script>
 <style scoped>
-.desingFormBlock  {
+.desingFormBlock  { 
     width: 30%;
   position: absolute;
-  right: 0;
+  right: 0; 
   top: 0;
 }
 </style>

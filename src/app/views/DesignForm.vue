@@ -1,4 +1,5 @@
 <template>
+  <controller-header />
   <div class="designForm">
     <show-all-forms
       :items="newElements"
@@ -11,11 +12,7 @@
           <button v-if="newElements.length" @click="showPrview">Preview</button>
         </div>
         <form-block-right>
-          <div sytle="position: relative;" v-if="!newElements.length">
-            <p class="blankElement">
-              Drag your first question here from the right.
-            </p>
-          </div>
+          <h3 class="text-center mb-4">{{ createFormData.title }}</h3>
           <draggable
             class="content_block"
             :list="newElements"
@@ -33,12 +30,12 @@
                   :elementId="element.id"
                   @show-data-id="showElementSetting"
                   @delete-data-id="deleteElementData"
-                  
-                ></form-item-edit>
+                />
                 <!-- <i class="fa fa-times close" @click="removeAt(index)">Delete</i> -->
               </div>
             </template>
           </draggable>
+        
           <div v-for="items of newElements" :key="items.id">
             <div v-if="items.id == newId">
               <name-element-opttions
@@ -53,7 +50,6 @@
                 :item="items"
                 :id="newId"
                 :newElId="newElements"
-               
               />
               <email-element-opttions
                 @display-element="dispalyElement"
@@ -61,7 +57,7 @@
                 :item="items"
                 :id="newId"
               />
-               <text-element-options
+              <text-element-options
                 @display-element="dispalyElement"
                 v-if="items.name == 'Text Box'"
                 :item="items"
@@ -112,6 +108,7 @@
             </div>
           </div>
         </form-block-right>
+          <div class="previewForm text-center"><button @click="publishForm">Publish</button></div>
       </div>
       <form-block-left>
         <div class="designFormBlockElement">
@@ -127,8 +124,7 @@
           >
             <template #item="{ element }">
               <div class="list-group-item">
-                <span><img src="../../app/assets/imgs/h.png" alt="icon" /></span
-                >{{ element.name }}
+                <p><i :class="element.icon"></i> {{ element.name }}</p>
               </div>
             </template>
           </draggable>
@@ -144,6 +140,7 @@
 <script>
 import draggable from "vuedraggable";
 import { elements } from "../api/config";
+import { levelData } from "../api/config";
 // import ElementsSetting from "../components/ElementsSetting.vue";
 import FormBlockLeft from "../components/FormBlockLeft.vue";
 import FormBlockRight from "../components/FormBlockRight.vue";
@@ -160,7 +157,15 @@ import CheckBoxElementOptions from "../components/checkBox/CheckBoxElementOption
 import RadioBoxElementOptions from "../components/radioBox/RadioBoxElementOptions.vue";
 import MessageElementOptions from "../components/messageElement/MessageElementOptions.vue";
 import DateElementOptions from "../components/dateElement/DateElementOptions.vue";
-import TextElementOptions from '../components/textElement/TextElementOptions.vue';
+import TextElementOptions from "../components/textElement/TextElementOptions.vue";
+import ControllerHeader from "./ControllerHeader.vue";
+import adminService from "../services/adminService"; 
+// import LevelInput from "../components/level/LevelInput.vue";
+// import LevelInputSetting from "../components/level/LevelInputSetting.vue";
+// import LevelNumberSetting from "../components/level/LevelNumberSetting.vue";
+// import LevelNumberInput from "../components/level/LevelNumberInput.vue";
+// import AddressLevelInput from "../components/level/AddressLevelInput.vue";
+// import AddressInputSetting from '../components/level/AddressInputSetting.vue';
 export default {
   components: {
     draggable,
@@ -180,6 +185,13 @@ export default {
     MessageElementOptions,
     DateElementOptions,
     TextElementOptions,
+    ControllerHeader,
+    // LevelInput,
+    // LevelInputSetting,
+    // LevelNumberSetting,
+    // LevelNumberInput,
+    // AddressLevelInput,
+    // AddressInputSetting,
   },
   data() {
     return {
@@ -193,7 +205,14 @@ export default {
       newId: null,
       showHidePreview: false,
       showAllElementNames: true,
-      setActiveElement:true
+      setActiveElement: true,
+      createFormData: this.$route.params,
+      levelId: "",
+      levelItem: {},
+      levelData,
+      // emailId:null,
+      // addressId:null,
+      // phoneId:null
     };
   },
   computed: {
@@ -205,13 +224,60 @@ export default {
     },
   },
   methods: {
+    publishForm(){
+       const body = {
+        formPassword:this.$route.params.formProtection,
+        formTitle:this.$route.params.title,
+        VerificationLevel:this.$route.params.level,
+        IsPrivate:this.$route.params.formtype,
+        formSourceCode:JSON.stringify(this.newElements),
+        // formStatus: null,
+        // formVersion: null,
+      };
+      console.log('test',this.$route);
+      console.log('body',body);
+    //   this.showLoading(true);
+    console.log(body);
+      adminService
+        .addNewForm(body)
+        .then((response) => {
+        //   this.showLoading(false);
+          console.log('res',response);
+          console.log(this.newElements);
+    //        this.$router.push({
+    //          name: "publish-form",
+     
+    // query: { title: body.formTitle, level: body.fomrlevel,formtype:body.formtype,formProtection:body.formPassword,formId:response.data.Id  },
+        
+    //        });
+      this.$router.push(
+        // `/publish/${response.data.Id}`
+         `/publishform/${response.data.Id}`
+      );
+        })
+        .catch((error) => {
+          console.log(error);
+          // this.toast.error("Something went wrong", error.message);
+        });
+      
+    },
+    submitData() {
+      console.log(this.levelData);
+    },
+    //    getImgUrl(pet) {
+    //   var images = require.context('@/assets/imgs/', false, /\.png$/)
+    //   console.log(images('./' + pet + ".png"));
+    //   console.log(pet);
+    //   return require(`@/app/assets/imgs/h.png`)
+    // },
     showPrview() {
-      if (this.newElements.length >= 1) {
-       const route=this.$router.resolve({ path:"/form"}); window.open(route.href, '_blank')
-        // this.showHidePreview = true;
-        // window.open("/form",'_blank');
-      }
-      //console.log(this.showHidePreview);
+      //   if (this.newElements.length >= 1) {
+      //   //  const route=this.$router.resolve({ path:"/form"}); window.open(route.href, '_blank')
+      //    const route=this.$router.push({ name:"show-all-forms",query:{data:this.newElements}}); window.open(route.href, '_blank')
+      this.showHidePreview = true;
+      //     // window.open("/form",'_blank');
+      //   }
+      //   //console.log(this.showHidePreview);
     },
     pageClose() {
       this.showHidePreview = false;
@@ -219,6 +285,12 @@ export default {
     },
     dispalyElement() {
       this.showAllElementNames = true;
+
+      const dataNew = document.getElementsByClassName("checka");
+      for (var i = 0; i < dataNew.length; i++) {
+        dataNew[i].classList.remove("active");
+      }
+      console.log(dataNew);
     },
     showElementSetting(userId) {
       for (let value of this.newElements) {
@@ -228,6 +300,34 @@ export default {
         }
       }
     },
+    // showAddressSetting(id) {
+    //   console.log("id", id);
+    //   // this.levelItem = item;
+    //   this.levelId = id;
+    //   console.log(this.addressId);
+    //   this.addressId.classList.add('active')
+    //   this.emailId.classList.remove('active')
+    //   this.phoneId.classList.remove('active')
+    // },
+    // deletAddressSetting(id) {
+    //   console.log("id", id);
+    //   this.levelId = id;
+
+    // },
+    //     showPhoneSetting(id){
+    //       console.log(id);
+    //       console.log(this.phoneId);
+    //        this.addressId.classList.remove('active')
+    //       this.emailId.classList.remove('active')
+    //       this.phoneId.classList.add('active')
+    //     },
+    //     showEmailSetting(id){
+    //  console.log(id);
+    //       console.log(this.emailId);
+    //        this.addressId.classList.remove('active')
+    //       this.emailId.classList.add('active')
+    //       this.phoneId.classList.remove('active')
+    //     },
     deleteElementData(userId) {
       let index = this.newElements
         .map((x) => {
@@ -260,8 +360,7 @@ export default {
           id: this.elIndex,
           label: item.label,
         };
-      }
-      else if (item.name == "Text Box") {
+      } else if (item.name == "Text Box") {
         return {
           name: item.name,
           id: this.elIndex,
@@ -355,7 +454,7 @@ export default {
           dateFormat: item.dateFormat,
         };
       }
-       if (item.name == "Text Box") {
+      if (item.name == "Text Box") {
         return {
           type: item.type,
           name: item.name,
@@ -368,6 +467,26 @@ export default {
         };
       }
     },
+  },
+  mounted() {
+    console.log("query", this.$route.params);
+    // this.phoneId= document.getElementById("level_phone_setting")
+    // this.addressId= document.getElementById("level_address_level_setting")
+    // this.emailId= document.getElementById("level_email_setting")
+    // console.log(this.phoneId,this.addressId,this.emailId);
+    //  let fetchFormData=JSON.parse(this.createFormData.createFormData)
+    // console.log(fetchFormD);
+    console.log(this.createFormData);
+    if (this.createFormData.level == "level1") {
+      this.newElements.push(this.levelData[0]);
+    } else if (this.createFormData.level == "level2") {
+      this.newElements.push(this.levelData[0]);
+      this.newElements.push(this.levelData[1]);
+    } else if (this.createFormData.level == "level3") {
+      this.newElements.push(this.levelData[0]);
+      this.newElements.push(this.levelData[1]);
+      this.newElements.push(this.levelData[2]);
+    }
   },
 };
 </script>
@@ -385,11 +504,20 @@ export default {
 .content_block {
   height: calc(100vh - 264px);
 }
-.list-group-item img {
-  width: 48px;
+.list-group-item svg {
+  margin-right: 17px;
+  font-size: 30px;
+}
+.list-group-item p {
+  margin-block: 0;
   padding: 12px;
   margin-right: 17px;
-  filter: invert(1);
+  font-size: 19px;
+  display: flex;
+  align-items: center;
+}
+.list-group-item span {
+  /* display:inline-block; */
 }
 .list-group-item {
   background: #474781;

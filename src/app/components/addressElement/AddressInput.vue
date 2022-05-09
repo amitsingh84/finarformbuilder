@@ -40,9 +40,10 @@
       </select>
       </div>
       </div>
-      <show-delete-setting
+      <show-delete-setting :item="item" :elementId="elementId"
           @delete-data-id="deleteDataId"
           @show-data-id="showDataId"
+          :showDeletOption="item.delete"
         />
       
     </div>
@@ -95,18 +96,14 @@ export default {
       //console.log(this.elementId);
       setTimeout(() => {
         let newtitle = document.getElementById("element_setting");
-        //console.log(newtitle);
+        console.log(newtitle);
         newtitle.classList.add("active");
       }, 1);
     },
     alignData() {
       console.log("text-align:left", this.item.align);
     },
-    // showProperties(){
-    //   // alert(this.id)
-    //   this.$emit('show-element-setting',this.id)
-    //   // this.showElementSettings=!this.showElementSettings
-    // }
+     
   },
 
   mounted() {
